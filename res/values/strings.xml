@@ -2,5 +2,7 @@
 <resources>
 
     <string name="app_name">SimpleARBrowser</string>
-
+     <string name="textBuscar">Buscar</string>
+    <string name="botonLista">Lista</string>
+    <string name="botonBuscar">Buscar</string>
 </resources>

@@ -1,9 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:test="http://schemas.android.com/apk/res/com.wikitude.architect"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical" >
- <com.wikitude.architect.ArchitectView android:id="@+id/architectView" android:layout_width="fill_parent" android:layout_height="fill_parent">
+ <com.wikitude.architect.ArchitectView android:id="@+id/architectView" android:layout_width="fill_parent" android:layout_height="wrap_content">
 </com.wikitude.architect.ArchitectView>
-</LinearLayout>
+
+ <Button 
+     android:id="@+id/botonLista"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:text="@string/botonLista"/>
+ 
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true" 
+    android:layout_toRightOf="@id/botonLista"
+    android:text="@string/textBuscar"
+    android:id="@+id/textBuscar"
+    android:ems="10"
+    android:inputType="text"
+    />
+
+<Button 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@id/textBuscar"
+    android:layout_alignParentBottom="true"
+    android:text="@string/botonBuscar"/>
+
+<SeekBar
+    android:id="@+id/seekBar1"
+    android:layout_width="match_parent"
+    android:progress="50"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@+id/textBuscar"
+    android:layout_alignRight="@+id/textBuscar"
+    android:layout_marginTop="40dp" />
+
+</RelativeLayout>
