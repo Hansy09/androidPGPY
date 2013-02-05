@@ -12,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
@@ -87,8 +88,8 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
         
         //in order to inform the ARchitect framework about the user's location Androids LocationManager is used in this case
         //NOT USED IN THIS EXAMPLE
-        //locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        //locManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 0, 0, this);
+        locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        locManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 0, 0, this);
      }
     
     @Override
@@ -191,7 +192,8 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
 	 */
 	private void loadSampleWorld() throws IOException {
 		this.architectView.load("tutorial1.html");
-
+		Toast.makeText(this, "cargados", Toast.LENGTH_LONG).show();
+		System.out.println("cargados!!");
 		JSONArray array = new JSONArray();
 		poiBeanList = new ArrayList<PoiBean>();
 		try {
@@ -225,6 +227,7 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
 		//inform ArchitectView about location changes
 		if(this.architectView != null){
 			Toast.makeText(this, "Te moviste!!", Toast.LENGTH_LONG).show();
+			System.out.println("Me movi!!");
 			this.architectView.setLocation((float)(loc.getLatitude()), (float)(loc.getLongitude()), loc.getAccuracy());
 		}
 	}

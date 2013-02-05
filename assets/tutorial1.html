@@ -58,6 +58,10 @@
         <script>
             // Tutorial code using the ARchitect Javascript library
             
+            
+            
+            
+            
             // Create new images, which will be loaded right away
             firstImage = new AR.ImageResource("marker1.png", {onError: errorLoadingImage});
             secondImage = new AR.ImageResource("marker2.png", {onError: errorLoadingImage});
@@ -203,6 +207,19 @@
                     selectedObject = null;
                 }
             }
+            var myGeoLocation = null;
+ 
+function locationChanged(lat, lon, alt, acc) { 
+        myGeoLocation = new AR.GeoLocation(lat,lon);
+        document.getElementById("statusElement").innerHTML='Me movi a lat '+lat+' lon '+lon;
+}
+AR.context.onLocationChanged = locationChanged;
+ 
+            
+          //  AR.context.onLocationChanged = function(lat, lon, alt, acc) {
+    
+    //document.getElementById("statusElement").innerHTML='Me movi a lat'+lat+' lon '+lon;
+//}
             
             </script>
         
