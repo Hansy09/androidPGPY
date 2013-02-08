@@ -34,6 +34,8 @@
             android:name=".PoiDetailActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
+        <service android:name="ServerService" >
+        </service>
     </application>
 
 </manifest>

@@ -138,29 +138,36 @@
                 
                 for(var i = 0; i < jsonObject.length; i++)
                 {
+                    //var poidrawables = new Array();
+                    //var label = new AR.Label(jsonObject[i].name,1.0, {offsetY : -1.5,
+                      //                       triggers: { 
+                      //                       onClick:
+                      //                       createClickTrigger(jsonObject[i].id)},
+                      //                       style : {textColor : '#FFC100',backgroundColor : '#FFFFFF80'}});
                     var poidrawables = new Array();
-                    var label = new AR.Label(jsonObject[i].name,1.0, {offsetY : -1.5,
+                    var label = new AR.Label(jsonObject[i].nombre,1.0, {offsetY : -1.5,
                                              triggers: { 
                                              onClick:
                                              createClickTrigger(jsonObject[i].id)},
                                              style : {textColor : '#FFC100',backgroundColor : '#FFFFFF80'}});
                     
                     jsonObject[i].arLabel = label;
+                    jsonObject[i].arLabel = label;
                     
                     var poiImage;
-                    if(jsonObject[i].type == 1) 
-                    {
-                        poiImage = firstImage;
-                    }
-                    else if(jsonObject[i].type == 2)
-                    {
-                        poiImage = secondImage;
-                    }
-                    else
-                    {
-                        poiImage = thirdImage;
-                    }
-                    
+                    //if(jsonObject[i].type == 1) 
+                    //{
+                    //    poiImage = firstImage;
+                    //}
+                    //else if(jsonObject[i].type == 2)
+                    //{
+                    //    poiImage = secondImage;
+                    //}
+                    //else
+                    //{
+                    //    poiImage = thirdImage;
+                    //}
+                     poiImage = thirdImage;
                     
                     var img = new AR.ImageDrawable(poiImage, 2.0,
                                                    {triggers: { 
@@ -173,7 +180,7 @@
                     
                     poidrawables.push(label);
                     poidrawables.push(img);
-                    geoLoc = new AR.GeoLocation(jsonObject[i].Point.latitude,jsonObject[i].Point.longitude,jsonObject[i].Point.altitude);
+                    geoLoc = new AR.GeoLocation(jsonObject[i].posicion.latitud,jsonObject[i].posicion.longitud,jsonObject[i].posicion.altitud);
                     jsonObject[i].poiObj = new AR.GeoObject(geoLoc, {drawables: {cam: poidrawables}});
                 }
                 
@@ -216,10 +223,10 @@ function locationChanged(lat, lon, alt, acc) {
 AR.context.onLocationChanged = locationChanged;
  
             
-          //  AR.context.onLocationChanged = function(lat, lon, alt, acc) {
+            AR.context.onLocationChanged = function(lat, lon, alt, acc) {
     
-    //document.getElementById("statusElement").innerHTML='Me movi a lat'+lat+' lon '+lon;
-//}
+    document.getElementById("statusElement").innerHTML='Me movi a lat'+lat+' lon '+lon;
+}
             
             </script>
         

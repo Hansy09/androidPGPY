@@ -10,6 +10,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,9 +20,13 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Messenger;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.wikitude.architect.ArchitectUrlListener;
 import com.wikitude.architect.ArchitectView;
 
@@ -47,7 +52,7 @@ import com.wikitude.architect.ArchitectView;
  * 	Please also have a look at the application's Manifest and layout xml-file to see the permissions and requirements 
  * 	an activity using the SDK has to possess. (REF: ARchitect Documentation)		  	  
  */
-public class SimpleARBrowserActivity extends Activity implements ArchitectUrlListener, LocationListener{
+public class SimpleARBrowserActivity extends Activity implements ArchitectUrlListener, LocationListener, VisorInterface{
 	
 	private static final String TAG = SimpleARBrowserActivity.class.getSimpleName();
 	
@@ -62,6 +67,31 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
 	private LocationManager locManager;
 	private Location loc;
 	private List<PoiBean> poiBeanList;
+	
+	
+	private Handler handler = new Handler() {
+	    public void handleMessage(Message message) {
+	      Object path = message.obj;
+	     
+	      if (message.arg1 == RESULT_OK && path != null) {
+	    	  JSONObject jsonObj;
+			try {
+				jsonObj = new JSONObject(path.toString());
+				Toast.makeText(SimpleARBrowserActivity.this,
+			            "Server" + jsonObj.getString("codigo"), Toast.LENGTH_LONG)
+			            .show();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        
+	      } else {
+	        Toast.makeText(SimpleARBrowserActivity.this, "Download failed.",
+	            Toast.LENGTH_LONG).show();
+	      }
+
+	    };
+	  };
 	
     /** Called when the activity is first created. */
     @Override
@@ -103,12 +133,15 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
     	//register this activity as handler of "architectsdk://" urls
     	this.architectView.registerUrlListener(this);
     	
-    	try {
-			loadSampleWorld();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	ControladorPDIs controlador = ControladorPDIs.getInstance();
+    	controlador.filtrarPDIsCercanos(1,this);	
+    		/*Intent intent = new Intent(this, WebService.class);
+    	    // Create a new Messenger for the communication back
+    	    Messenger messenger = new Messenger(handler);
+    	    intent.putExtra("MESSENGER", messenger);
+    	    startService(intent);
+			loadSampleWorld();*/
+		
 
     }
     
@@ -190,14 +223,18 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
 	 * and converts them into a jsonstring that can be sent to the framework
 	 * @throws IOException exception thrown while loading an Architect world
 	 */
-	private void loadSampleWorld() throws IOException {
-		this.architectView.load("tutorial1.html");
-		Toast.makeText(this, "cargados", Toast.LENGTH_LONG).show();
-		System.out.println("cargados!!");
-		JSONArray array = new JSONArray();
-		poiBeanList = new ArrayList<PoiBean>();
+	public void loadSampleWorld() {
 		try {
-			for (int i = 0; i < 50; i++) {
+			this.architectView.load("tutorial1.html");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Hubo un error de html");
+		}
+		ControladorPDIs controlador = ControladorPDIs.getInstance();
+		//controlador.filtrarPDIsCercanos(200);
+		
+			/*for (int i = 0; i < 50; i++) {
 				double[] location = createRandLocation();
 				PoiBean bean = new PoiBean(
 						""+i,
@@ -205,13 +242,10 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
 						"Probably one of the best POIs you have ever seen. This is the description of Poi #"
 								+ i, (int) (Math.random() * 3), location[0], location[1], location[2]);
 				array.put(bean.toJSONObject());
-				poiBeanList.add(bean);
-			}	
-		this.architectView.callJavascript("newData(" + array.toString() + ");");
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+				poiBeanList.add(bean);*/
+		System.out.println("Funciona: "+controlador.getPuntosDeInteresJArray());
+		this.architectView.callJavascript("newData(" + controlador.getPuntosDeInteresJArray() + ");");
+		
 	}
 
 	/**
@@ -226,8 +260,6 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
 		
 		//inform ArchitectView about location changes
 		if(this.architectView != null){
-			Toast.makeText(this, "Te moviste!!", Toast.LENGTH_LONG).show();
-			System.out.println("Me movi!!");
 			this.architectView.setLocation((float)(loc.getLatitude()), (float)(loc.getLongitude()), loc.getAccuracy());
 		}
 	}
