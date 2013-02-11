@@ -2,7 +2,12 @@
 <resources>
 
     <string name="app_name">SimpleARBrowser</string>
-     <string name="textBuscar">Buscar</string>
+    <string name="textBuscar">Buscar</string>
     <string name="botonLista">Lista</string>
     <string name="botonBuscar">Buscar</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Opciones</string>
+    <string name="title_activity_busqueda_simple">Busqueda Simple</string>
+    <string name="title_activity_visualizar_lista">Visualizar en Lista</string>
+
 </resources>

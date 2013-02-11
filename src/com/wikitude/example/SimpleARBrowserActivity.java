@@ -18,7 +18,11 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.wikitude.architect.ArchitectUrlListener;
@@ -49,6 +53,8 @@ import com.wikitude.architect.ArchitectView;
 public class SimpleARBrowserActivity extends Activity implements ArchitectUrlListener, LocationListener{
 	
 	private static final String TAG = SimpleARBrowserActivity.class.getSimpleName();
+	public final static String MENSAJE_BUSQUEDA = "com.wikitude.example.MESSAGE";
+	public final static String LISTA_PDI = "com.wikitude.example.listapdi";
 	
 	private final static float  TEST_LATITUDE =  47.77318f;
 	private final static float  TEST_LONGITUDE = 13.069730f;
@@ -140,6 +146,28 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
     	if(this.architectView != null)
     		this.architectView.onLowMemory();
     }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+    	getMenuInflater().inflate(R.menu.visor_menu, menu);
+    	return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+
+        switch (itemId) {
+                case R.id.menu_Lista:
+                	this.visualizarLista();
+                        break;
+                case R.id.menu_BusqAv:
+                        //Insertar cosas
+                        break;
+
+                }
+        return super.onOptionsItemSelected(item);
+    }
 
     /**
      * <p>
@@ -224,7 +252,7 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
 		
 		//inform ArchitectView about location changes
 		if(this.architectView != null){
-			Toast.makeText(this, "Te moviste!!", Toast.LENGTH_LONG).show();
+			//Toast.makeText(this, "Te moviste!!", Toast.LENGTH_LONG).show();
 			this.architectView.setLocation((float)(loc.getLatitude()), (float)(loc.getLongitude()), loc.getAccuracy());
 		}
 	}
@@ -247,5 +275,19 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
 		
 	}
 	
+	public void realizarBusqueda(View view){
+		Intent intent = new Intent(this, BusquedaSimpleActivity.class);
+		EditText editText = (EditText) findViewById(R.id.textBuscar);
+		String message = editText.getText().toString();
+		intent.putExtra(MENSAJE_BUSQUEDA, message);
+		startActivity(intent);
+	}
+	
+	public void visualizarLista(){
+		Intent intent = new Intent(this, ListaPDIsActivity.class);
+		//intent.putStringArrayListExtra(LISTA_PDI, poiBeanList);
+		startActivity(intent);
+		
+	}
 	
 }
