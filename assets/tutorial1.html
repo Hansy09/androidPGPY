@@ -102,8 +102,8 @@
                 {
                     // hide the bubble
                     document.getElementById("footer").style.display = 'block';
-                    document.getElementById("poiName").innerHTML=jsonObject[id].name;
-                    document.getElementById("poiDesc").innerHTML=jsonObject[id].description.substring(0,25);
+                    document.getElementById("poiName").innerHTML=jsonObject[id].nombre;
+                    document.getElementById("poiDesc").innerHTML=jsonObject[id].descripcion.substring(0,25);
                     document.getElementById("footer").onclick= generateOnPoiBubbleClickFunc(id);
                     
                     // reset the previous selected poi
@@ -133,7 +133,7 @@
             //receives json-data as string and processes the contained information
             function newData(jsonData){
                 jsonObject = jsonData;
-                document.getElementById("statusElement").innerHTML='Loading JSON objects';
+                
                 
                 
                 for(var i = 0; i < jsonObject.length; i++)
@@ -151,7 +151,6 @@
                                              createClickTrigger(jsonObject[i].id)},
                                              style : {textColor : '#FFC100',backgroundColor : '#FFFFFF80'}});
                     
-                    jsonObject[i].arLabel = label;
                     jsonObject[i].arLabel = label;
                     
                     var poiImage;
@@ -184,7 +183,7 @@
                     jsonObject[i].poiObj = new AR.GeoObject(geoLoc, {drawables: {cam: poidrawables}});
                 }
                 
-                document.getElementById("statusElement").innerHTML='JSON objects loaded';	
+               	
                 
                 
             }
@@ -221,12 +220,7 @@ function locationChanged(lat, lon, alt, acc) {
         document.getElementById("statusElement").innerHTML='Me movi a lat '+lat+' lon '+lon;
 }
 AR.context.onLocationChanged = locationChanged;
- 
-            
-            AR.context.onLocationChanged = function(lat, lon, alt, acc) {
-    
-    document.getElementById("statusElement").innerHTML='Me movi a lat'+lat+' lon '+lon;
-}
+
             
             </script>
         

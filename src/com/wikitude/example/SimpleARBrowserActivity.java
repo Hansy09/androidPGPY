@@ -3,14 +3,10 @@ package com.wikitude.example;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,13 +16,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Messenger;
 import android.view.WindowManager;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
 import com.wikitude.architect.ArchitectUrlListener;
 import com.wikitude.architect.ArchitectView;
 
@@ -67,31 +58,8 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
 	private LocationManager locManager;
 	private Location loc;
 	private List<PoiBean> poiBeanList;
+	private ControladorPDIs controlador = ControladorPDIs.getInstance();
 	
-	
-	private Handler handler = new Handler() {
-	    public void handleMessage(Message message) {
-	      Object path = message.obj;
-	     
-	      if (message.arg1 == RESULT_OK && path != null) {
-	    	  JSONObject jsonObj;
-			try {
-				jsonObj = new JSONObject(path.toString());
-				Toast.makeText(SimpleARBrowserActivity.this,
-			            "Server" + jsonObj.getString("codigo"), Toast.LENGTH_LONG)
-			            .show();
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        
-	      } else {
-	        Toast.makeText(SimpleARBrowserActivity.this, "Download failed.",
-	            Toast.LENGTH_LONG).show();
-	      }
-
-	    };
-	  };
 	
     /** Called when the activity is first created. */
     @Override
@@ -118,8 +86,9 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
         
         //in order to inform the ARchitect framework about the user's location Androids LocationManager is used in this case
         //NOT USED IN THIS EXAMPLE
-        locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+      locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         locManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 0, 0, this);
+
      }
     
     @Override
@@ -132,15 +101,8 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
     	
     	//register this activity as handler of "architectsdk://" urls
     	this.architectView.registerUrlListener(this);
-    	
-    	ControladorPDIs controlador = ControladorPDIs.getInstance();
-    	controlador.filtrarPDIsCercanos(1,this);	
-    		/*Intent intent = new Intent(this, WebService.class);
-    	    // Create a new Messenger for the communication back
-    	    Messenger messenger = new Messenger(handler);
-    	    intent.putExtra("MESSENGER", messenger);
-    	    startService(intent);
-			loadSampleWorld();*/
+
+
 		
 
     }
@@ -229,21 +191,7 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Hubo un error de html");
 		}
-		ControladorPDIs controlador = ControladorPDIs.getInstance();
-		//controlador.filtrarPDIsCercanos(200);
-		
-			/*for (int i = 0; i < 50; i++) {
-				double[] location = createRandLocation();
-				PoiBean bean = new PoiBean(
-						""+i,
-						"POI #" + i,
-						"Probably one of the best POIs you have ever seen. This is the description of Poi #"
-								+ i, (int) (Math.random() * 3), location[0], location[1], location[2]);
-				array.put(bean.toJSONObject());
-				poiBeanList.add(bean);*/
-		System.out.println("Funciona: "+controlador.getPuntosDeInteresJArray());
 		this.architectView.callJavascript("newData(" + controlador.getPuntosDeInteresJArray() + ");");
 		
 	}
@@ -261,6 +209,10 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
 		//inform ArchitectView about location changes
 		if(this.architectView != null){
 			this.architectView.setLocation((float)(loc.getLatitude()), (float)(loc.getLongitude()), loc.getAccuracy());
+			double longitud= loc.getLongitude();
+	    	double latitud= loc.getLatitude();
+	        
+	    	controlador.filtrarPDIsCercanos(longitud,latitud,40 ,this);	
 		}
 	}
 
