@@ -21,21 +21,28 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name" >
         <activity
-            android:name=".SimpleARBrowserActivity"
-            android:label="@string/app_name" android:configChanges="orientation"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+            android:name="com.wikitude.example.SimpleARBrowserActivity"
+            android:configChanges="orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
-            android:name=".PoiDetailActivity"
+            android:name="com.wikitude.example.PoiDetailActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
-        <service android:name="ServerService" >
+
+        <service android:name="com.wikitude.example.ServerService" >
         </service>
+
+        <activity
+            android:name="com.wikitude.example.PDIDetalle"
+            android:label="@string/title_activity_pdidetalle" >
+        </activity>
     </application>
 
 </manifest>

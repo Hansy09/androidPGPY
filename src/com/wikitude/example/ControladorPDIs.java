@@ -25,14 +25,14 @@ public class ControladorPDIs {
 
 	}
 
-	public void filtrarPDIsCercanos(double longitud, double latitud, double distanciaMax, VisorInterface visor) {
-		daoPDIs.buscarDentroDeRangoMax(longitud,latitud, distanciaMax, visor);
+	public void filtrarPDIsCercanos(Posicion posicion, double distanciaMax, VisorInterface visor) {
+		daoPDIs.buscarDentroDeRangoMax(posicion, distanciaMax, visor);
 	}
 	
 
-	public void filtrarPDIsPorCategorias(double longitud, double latitud, double distanciaMax,
-			ArrayList<String> categorias, VisorInterface visor) {
-		daoPDIs.buscarPDIsPorCategoria(longitud,latitud, distanciaMax,categorias,visor);
+	public void filtrarPDIsPorCategorias(Posicion posicion, double distanciaMax,
+			String clave, String categoria, VisorInterface visor) {
+		daoPDIs.buscarPDIsPorCategoria(posicion, distanciaMax, clave, categoria,visor);
 	}
 
 	public ArrayList<PuntoDeInteres> obtenerPDIs() {

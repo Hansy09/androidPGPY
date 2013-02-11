@@ -44,8 +44,8 @@ public class Posicion {
 		return longitud;
 	}
 
-	public void setLongitud(double longititud) {
-		this.longitud = longititud;
+	public void setLongitud(double longitud) {
+		this.longitud = longitud;
 	}
 
 	@SerializedName("latitud")
