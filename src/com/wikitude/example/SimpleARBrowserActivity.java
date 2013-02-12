@@ -15,7 +15,11 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.Toast;
 import com.wikitude.architect.ArchitectUrlListener;
 import com.wikitude.architect.ArchitectView;
@@ -239,6 +243,13 @@ public class SimpleARBrowserActivity extends Activity implements
 				Posicion posicion = new Posicion();
 				posicion.setLongitud(longitudActual);
 				posicion.setLatitud(latitudActual);
+		
+		//inform ArchitectView about location changes
+		if(this.architectView != null){
+			//Toast.makeText(this, "Te moviste!!", Toast.LENGTH_LONG).show();
+			this.architectView.setLocation((float)(loc.getLatitude()), (float)(loc.getLongitude()), loc.getAccuracy());
+		}
+	}
 				
 				controlador.filtrarPDIsCercanos(posicion, 40, this);
 			}
