@@ -18,11 +18,14 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
 
 import com.wikitude.architect.ArchitectUrlListener;
@@ -55,6 +58,7 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
 	private static final String TAG = SimpleARBrowserActivity.class.getSimpleName();
 	public final static String MENSAJE_BUSQUEDA = "com.wikitude.example.MESSAGE";
 	public final static String LISTA_PDI = "com.wikitude.example.listapdi";
+	private double distanciaSeleccionada = 4500;
 	
 	private final static float  TEST_LATITUDE =  47.77318f;
 	private final static float  TEST_LONGITUDE = 13.069730f;
@@ -67,6 +71,7 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
 	private LocationManager locManager;
 	private Location loc;
 	private List<PoiBean> poiBeanList;
+	private SeekBar seekbarRango;
 	
     /** Called when the activity is first created. */
     @Override
@@ -95,9 +100,32 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
         //NOT USED IN THIS EXAMPLE
         //locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         //locManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 0, 0, this);
+        
+        seekbarRango = (SeekBar) findViewById(R.id.seekBarRango);
+        
+        seekbarRango.setOnSeekBarChangeListener( new OnSeekBarChangeListener()
+        {
+        public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser)
+        {
+        	// TODO Auto-generated method stub
+         }
+
+        public void onStartTrackingTouch(SeekBar seekBar)
+        {
+          // TODO Auto-generated method stub
+        }
+
+        public void onStopTrackingTouch(SeekBar seekBar)
+        {
+        	ajustarRango(seekBar.getProgress());
+        	calcularNuevoRango();
+        	Log.d("probando al soltar", "SeekBar: "+seekBar.getProgress());   	
+          }
+        });
      }
-    
-    @Override
+   
+
+	@Override
     protected void onPostCreate(Bundle savedInstanceState) {
     	super.onPostCreate(savedInstanceState);
     	
@@ -290,4 +318,18 @@ public class SimpleARBrowserActivity extends Activity implements ArchitectUrlLis
 		
 	}
 	
+	public void ajustarRango(int rangoBarra){
+		if(rangoBarra==0)
+			distanciaSeleccionada= 50;
+		else distanciaSeleccionada = rangoBarra*150;
+	}
+	
+	public double obtenerdistanciaSeleccionada(){
+		return distanciaSeleccionada;
+	}
+	
+	public double calcularNuevoRango(){
+		Log.d("calculando distancia", "Distancia Seleccionada: "+obtenerdistanciaSeleccionada());
+		return obtenerdistanciaSeleccionada();
+	}
 }

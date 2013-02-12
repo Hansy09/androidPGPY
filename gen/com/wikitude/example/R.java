@@ -20,7 +20,7 @@ public final class R {
         public static final int menu_BusqAv=0x7f06000c;
         public static final int menu_Lista=0x7f06000b;
         public static final int menu_settings=0x7f06000a;
-        public static final int seekBar1=0x7f060002;
+        public static final int seekBarRango=0x7f060002;
         public static final int textBuscar=0x7f060001;
         public static final int textView1=0x7f060005;
         public static final int textView2=0x7f060008;
