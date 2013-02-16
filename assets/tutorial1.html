@@ -58,10 +58,6 @@
         <script>
             // Tutorial code using the ARchitect Javascript library
             
-            
-            
-            
-            
             // Create new images, which will be loaded right away
             firstImage = new AR.ImageResource("marker1.png", {onError: errorLoadingImage});
             secondImage = new AR.ImageResource("marker2.png", {onError: errorLoadingImage});
@@ -102,8 +98,8 @@
                 {
                     // hide the bubble
                     document.getElementById("footer").style.display = 'block';
-                    document.getElementById("poiName").innerHTML=jsonObject[id].nombre;
-                    document.getElementById("poiDesc").innerHTML=jsonObject[id].descripcion.substring(0,25);
+                    document.getElementById("poiName").innerHTML=jsonObject[id].name;
+                    document.getElementById("poiDesc").innerHTML=jsonObject[id].description.substring(0,25);
                     document.getElementById("footer").onclick= generateOnPoiBubbleClickFunc(id);
                     
                     // reset the previous selected poi
@@ -133,19 +129,13 @@
             //receives json-data as string and processes the contained information
             function newData(jsonData){
                 jsonObject = jsonData;
-                
+                document.getElementById("statusElement").innerHTML='Loading JSON objects';
                 
                 
                 for(var i = 0; i < jsonObject.length; i++)
                 {
-                    //var poidrawables = new Array();
-                    //var label = new AR.Label(jsonObject[i].name,1.0, {offsetY : -1.5,
-                      //                       triggers: { 
-                      //                       onClick:
-                      //                       createClickTrigger(jsonObject[i].id)},
-                      //                       style : {textColor : '#FFC100',backgroundColor : '#FFFFFF80'}});
                     var poidrawables = new Array();
-                    var label = new AR.Label(jsonObject[i].nombre,1.0, {offsetY : -1.5,
+                    var label = new AR.Label(jsonObject[i].name,1.0, {offsetY : -1.5,
                                              triggers: { 
                                              onClick:
                                              createClickTrigger(jsonObject[i].id)},
@@ -154,19 +144,19 @@
                     jsonObject[i].arLabel = label;
                     
                     var poiImage;
-                    //if(jsonObject[i].type == 1) 
-                    //{
-                    //    poiImage = firstImage;
-                    //}
-                    //else if(jsonObject[i].type == 2)
-                    //{
-                    //    poiImage = secondImage;
-                    //}
-                    //else
-                    //{
-                    //    poiImage = thirdImage;
-                    //}
-                     poiImage = thirdImage;
+                    if(jsonObject[i].type == 1) 
+                    {
+                        poiImage = firstImage;
+                    }
+                    else if(jsonObject[i].type == 2)
+                    {
+                        poiImage = secondImage;
+                    }
+                    else
+                    {
+                        poiImage = thirdImage;
+                    }
+                    
                     
                     var img = new AR.ImageDrawable(poiImage, 2.0,
                                                    {triggers: { 
@@ -179,11 +169,11 @@
                     
                     poidrawables.push(label);
                     poidrawables.push(img);
-                    geoLoc = new AR.GeoLocation(jsonObject[i].posicion.latitud,jsonObject[i].posicion.longitud,jsonObject[i].posicion.altitud);
+                    geoLoc = new AR.GeoLocation(jsonObject[i].Point.latitude,jsonObject[i].Point.longitude,jsonObject[i].Point.altitude);
                     jsonObject[i].poiObj = new AR.GeoObject(geoLoc, {drawables: {cam: poidrawables}});
                 }
                 
-               	
+                document.getElementById("statusElement").innerHTML='JSON objects loaded';	
                 
                 
             }
@@ -213,14 +203,6 @@
                     selectedObject = null;
                 }
             }
-            var myGeoLocation = null;
- 
-function locationChanged(lat, lon, alt, acc) { 
-        myGeoLocation = new AR.GeoLocation(lat,lon);
-        document.getElementById("statusElement").innerHTML='Me movi a lat '+lat+' lon '+lon;
-}
-AR.context.onLocationChanged = locationChanged;
-
             
             </script>
         

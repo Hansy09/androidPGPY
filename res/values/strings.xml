@@ -2,31 +2,5 @@
 <resources>
 
     <string name="app_name">SimpleARBrowser</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
-    <string name="title_activity_pdidetalle">PDIDetalle</string>
-    <string name="pdiTitle">Titulo</string>
-    <string name="pdiCategoria">Categoria: </string>
-    <string name="pdiDescripcion">Descripcion: </string>
-    <string name="pdiDireccion">Direccion: </string>
-    <string name="pdiTelefono">Telefono: </string>
-    <string name="pdiUrl">Url: </string>
-    <string name="pdiEmail">Correo Electronico: </string>
-    <string name="pdiDistancia">Distancia: </string>
-    <string name="pdiAnuncio">Distancia: </string>
-    <string name="categoria">categoria </string>
-    <string name="descripcion">descripcion </string>
-    <string name="direccion">direccion </string>
-    <string name="telefono">telefono </string>
-    <string name="url">url </string>
-    <string name="email">email </string>
-    <string name="distancia">distancia </string>
-    <string name="textBuscar">Buscar</string>
-    <string name="botonLista">Lista</string>
-    <string name="botonBuscar">Buscar</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Opciones</string>
-    <string name="title_activity_busqueda_simple">Busqueda Simple</string>
-    <string name="title_activity_visualizar_lista">Visualizar en Lista</string>
 
 </resources>
