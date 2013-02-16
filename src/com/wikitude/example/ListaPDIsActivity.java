@@ -21,39 +21,25 @@ import android.widget.ListView;
  */
 public class ListaPDIsActivity extends ListActivity {
 
-	private ArrayList<PoiBean> pdiLista;
-	private final static float TEST_LATITUDE = 47.77318f;
-	private final static float TEST_LONGITUDE = 13.069730f;
-	private final static float TEST_ALTITUDE = 150;
-	String listaPDI[] = new String[50];
+	 ControladorPDIs controlador= ControladorPDIs.getInstance();
+	 ArrayList<PuntoDeInteres> puntosDeInteres=controlador.getPuntosDeInteres();
+	String listaPDI[] = new String[puntosDeInteres.size()];
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		pdiLista = new ArrayList<PoiBean>();
-		for (int i = 0; i < 50; i++) {
-			double[] location = createRandLocation();
-			PoiBean bean = new PoiBean(
-					"" + i,
-					"POI #" + i,
-					"Probably one of the best POIs you have ever seen. This is the description of Poi #"
-							+ i, (int) (Math.random() * 3), location[0],
-					location[1], location[2]);
-			pdiLista.add(bean);
-			listaPDI[i] = pdiLista.get(i).getName();
+		for (int i = 0; i < puntosDeInteres.size(); i++) {
+			listaPDI[i] = puntosDeInteres.get(i).getNombre();
 		}
-		setListAdapter(new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, listaPDI));
+		setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaPDI));
 	}
 
 	@Override
-	protected void onListItemClick(ListView list, View view, int position,
-			long id) {
+	protected void onListItemClick(ListView list, View view, int position,long id) {
 		super.onListItemClick(list, view, position, id);
-		PoiBean bean = pdiLista.get(position);
+		PuntoDeInteres pdi = puntosDeInteres.get(position);
 		Intent intent = new Intent(this, PoiDetailActivity.class);
-		intent.putExtra("POI_NAME", bean.getName());
-		intent.putExtra("POI_DESC", bean.getDescription());
+		intent.putExtra("id", pdi.getId());
 		this.startActivity(intent);
 	}
 
@@ -64,11 +50,5 @@ public class ListaPDIsActivity extends ListActivity {
 		return true;
 	}
 
-	private double[] createRandLocation() {
-
-		return new double[] { TEST_LATITUDE + ((Math.random() - 0.5) / 500),
-				TEST_LONGITUDE + ((Math.random() - 0.5) / 500),
-				TEST_ALTITUDE + ((Math.random() - 0.5) * 10) };
-	}
-
+	
 }
