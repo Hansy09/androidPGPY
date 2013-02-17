@@ -57,8 +57,6 @@ public class SimpleARBrowserActivity extends Activity implements
 
 	private ArchitectView architectView;
 	private LocationManager locManager;
-	private Location loc;
-	private List<PoiBean> poiBeanList;
 	private ControladorPDIs controlador = ControladorPDIs.getInstance();
 
 	/** Called when the activity is first created. */
@@ -240,7 +238,7 @@ public class SimpleARBrowserActivity extends Activity implements
 				posicion.setLongitud(longitudActual);
 				posicion.setLatitud(latitudActual);
 				
-				controlador.filtrarPDIsCercanos(posicion, 40, this);
+				controlador.filtrarPDIsCercanos(posicion, 15, this);
 			}
 			
 		}
