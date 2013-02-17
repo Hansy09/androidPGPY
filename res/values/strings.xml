@@ -21,6 +21,9 @@
     <string name="url">url </string>
     <string name="email">email </string>
     <string name="distancia">distancia </string>
+    <string name="botonBuscar">Buscar</string>
+    <string name="title_activity_busqueda_simple">Busqueda Simple</string>
+    <string name="title_activity_visualizar_lista">Visualizar en Lista</string>
     
 
 </resources>

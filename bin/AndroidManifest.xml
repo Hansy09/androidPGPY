@@ -35,13 +35,21 @@
             android:name="com.wikitude.example.PoiDetailActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
-
-        <service android:name="com.wikitude.example.ServerService" >
-        </service>
-
+         <activity
+            android:name="com.wikitude.example.BusquedaSimpleActivity"
+            android:label="@string/title_activity_busqueda_simple"
+            android:parentActivityName="com.wikitude.example.SimpleARBrowserActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wikitude.example.SimpleARBrowserActivity" />
+        </activity>
         <activity
             android:name="com.wikitude.example.PDIDetalle"
             android:label="@string/title_activity_pdidetalle" >
+        </activity>
+        <activity
+            android:name="com.wikitude.example.ListaPDIsActivity"
+            android:label="@string/title_activity_visualizar_lista" >
         </activity>
     </application>
 

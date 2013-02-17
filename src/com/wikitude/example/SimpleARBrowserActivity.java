@@ -15,7 +15,14 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
 import com.wikitude.architect.ArchitectUrlListener;
 import com.wikitude.architect.ArchitectView;
@@ -58,6 +65,8 @@ public class SimpleARBrowserActivity extends Activity implements
 	private ArchitectView architectView;
 	private LocationManager locManager;
 	private ControladorPDIs controlador = ControladorPDIs.getInstance();
+	private SeekBar seekbarRango=null;
+	private double distanciaSeleccionada = 4500;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -91,6 +100,28 @@ public class SimpleARBrowserActivity extends Activity implements
 		locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,
 				this);
+		
+seekbarRango = (SeekBar) findViewById(R.id.seekBarRango);
+        
+        seekbarRango.setOnSeekBarChangeListener( new OnSeekBarChangeListener()
+        {
+        public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser)
+        {
+        	// TODO Auto-generated method stub
+         }
+
+        public void onStartTrackingTouch(SeekBar seekBar)
+        {
+          // TODO Auto-generated method stub
+        }
+
+        public void onStopTrackingTouch(SeekBar seekBar)
+        {
+        	ajustarRango(seekBar.getProgress());
+        	calcularNuevoRango();
+        	Log.d("probando al soltar", "SeekBar: "+seekBar.getProgress());   	
+          }
+        });
 
 	}
 
@@ -138,7 +169,29 @@ public class SimpleARBrowserActivity extends Activity implements
 		if (this.architectView != null)
 			this.architectView.onLowMemory();
 	}
+	
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu){
+    	getMenuInflater().inflate(R.menu.visor_menu, menu);
+    	return true;
+    }
 
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+
+        switch (itemId) {
+                case R.id.menu_Lista:
+                	this.visualizarLista();
+                        break;
+                case R.id.menu_BusqAv:
+                        //Insertar cosas
+                        break;
+
+                }
+        return super.onOptionsItemSelected(item);
+    }
+	
 	/**
 	 * <p>
 	 * interface method of {@link ArchitectUrlListener} class called when an url
@@ -208,13 +261,7 @@ public class SimpleARBrowserActivity extends Activity implements
 
 	}
 
-	public void busquedaPDI() {
-
-	}
-
-	public void calcularNuevoRango() {
-
-	}
+	
 
 	/**
 	 * listener method called when the location of the user has changed used for
@@ -260,6 +307,36 @@ public class SimpleARBrowserActivity extends Activity implements
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void realizarBusqueda(View view){
+		Intent intent = new Intent(this, BusquedaSimpleActivity.class);
+		EditText editText = (EditText) findViewById(R.id.textBuscar);
+		String message = editText.getText().toString();
+		intent.putExtra("clave", message);
+		startActivity(intent);
+	}
+	
+	public void visualizarLista(){
+		Intent intent = new Intent(this, ListaPDIsActivity.class);
+		//intent.putStringArrayListExtra(LISTA_PDI, poiBeanList);
+		startActivity(intent);
+		
+	}
+	
+	public void ajustarRango(int rangoBarra){
+		if(rangoBarra==0)
+			distanciaSeleccionada= (50)/1000;
+		else distanciaSeleccionada = (rangoBarra*150)/1000;
+	}
+	
+	public double obtenerdistanciaSeleccionada(){
+		return distanciaSeleccionada;
+	}
+	
+	public double calcularNuevoRango(){
+		Log.d("calculando distancia", "Distancia Seleccionada: "+obtenerdistanciaSeleccionada());
+		return obtenerdistanciaSeleccionada();
 	}
 
 }

@@ -21,7 +21,7 @@ import android.widget.ListView;
  */
 public class ListaPDIsActivity extends ListActivity {
 
-	private ArrayList<PoiBean> pdiLista;
+	private ArrayList<PuntoDeInteres> pdiLista=null;
 	private final static float TEST_LATITUDE = 47.77318f;
 	private final static float TEST_LONGITUDE = 13.069730f;
 	private final static float TEST_ALTITUDE = 150;
@@ -30,17 +30,10 @@ public class ListaPDIsActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		pdiLista = new ArrayList<PoiBean>();
-		for (int i = 0; i < 50; i++) {
-			double[] location = createRandLocation();
-			PoiBean bean = new PoiBean(
-					"" + i,
-					"POI #" + i,
-					"Probably one of the best POIs you have ever seen. This is the description of Poi #"
-							+ i, (int) (Math.random() * 3), location[0],
-					location[1], location[2]);
-			pdiLista.add(bean);
-			listaPDI[i] = pdiLista.get(i).getName();
+		ControladorPDIs controlador = ControladorPDIs.getInstance();
+		pdiLista = controlador.getPuntosDeInteres();
+		for (int i = 0; i < pdiLista.size(); i++) {
+			listaPDI[i] = pdiLista.get(i).getNombre();
 		}
 		setListAdapter(new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, listaPDI));
@@ -50,11 +43,11 @@ public class ListaPDIsActivity extends ListActivity {
 	protected void onListItemClick(ListView list, View view, int position,
 			long id) {
 		super.onListItemClick(list, view, position, id);
-		PoiBean bean = pdiLista.get(position);
-		Intent intent = new Intent(this, PoiDetailActivity.class);
-		intent.putExtra("POI_NAME", bean.getName());
-		intent.putExtra("POI_DESC", bean.getDescription());
+		PuntoDeInteres pdi = pdiLista.get(position);
+		Intent intent = new Intent(this, PDIDetalle.class);
+		intent.putExtra("id", String.valueOf(pdi.getId()));
 		this.startActivity(intent);
+		
 	}
 
 	@Override

@@ -17,9 +17,13 @@ public final class R {
     public static final class id {
         public static final int architectView=0x7f060010;
         public static final int imageView1=0x7f060001;
-        public static final int linearLayout1=0x7f060011;
-        public static final int linearLayout2=0x7f060013;
-        public static final int menu_settings=0x7f060015;
+        public static final int linearLayout1=0x7f060013;
+        public static final int linearLayout2=0x7f060015;
+        public static final int menu_BusqAv=0x7f060019;
+        public static final int menu_Lista=0x7f060018;
+        public static final int menu_settings=0x7f060017;
+        public static final int seekBarRango=0x7f060012;
+        public static final int textBuscar=0x7f060011;
         public static final int textView1=0x7f060000;
         public static final int textView10=0x7f060002;
         public static final int textView11=0x7f06000b;
@@ -35,8 +39,8 @@ public final class R {
         public static final int textView7=0x7f06000d;
         public static final int textView8=0x7f060003;
         public static final int textView9=0x7f06000c;
-        public static final int tvPoiDesc=0x7f060014;
-        public static final int tvPoiName=0x7f060012;
+        public static final int tvPoiDesc=0x7f060016;
+        public static final int tvPoiName=0x7f060014;
     }
     public static final class layout {
         public static final int activity_busqueda_simple=0x7f030000;
@@ -46,10 +50,14 @@ public final class R {
         public static final int poi_detail=0x7f030004;
     }
     public static final class menu {
-        public static final int activity_pdidetalle=0x7f050000;
+        public static final int activity_busqueda_simple=0x7f050000;
+        public static final int activity_pdidetalle=0x7f050001;
+        public static final int activity_visualizar_lista=0x7f050002;
+        public static final int visor_menu=0x7f050003;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
+        public static final int botonBuscar=0x7f040014;
         public static final int categoria=0x7f04000d;
         public static final int descripcion=0x7f04000e;
         public static final int direccion=0x7f04000f;
@@ -67,7 +75,9 @@ public final class R {
         public static final int pdiTitle=0x7f040004;
         public static final int pdiUrl=0x7f040009;
         public static final int telefono=0x7f040010;
+        public static final int title_activity_busqueda_simple=0x7f040015;
         public static final int title_activity_pdidetalle=0x7f040003;
+        public static final int title_activity_visualizar_lista=0x7f040016;
         public static final int url=0x7f040011;
     }
 }

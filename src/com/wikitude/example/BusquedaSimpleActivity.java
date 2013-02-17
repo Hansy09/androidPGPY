@@ -24,7 +24,7 @@ public class BusquedaSimpleActivity extends Activity {
 		// Get the message from the intent
 		Intent intent = getIntent();
 		String fraseBuscar = intent
-				.getStringExtra(SimpleARBrowserActivity.MENSAJE_BUSQUEDA);
+				.getStringExtra("clave");
 		TextView textView = new TextView(this);
 		textView.setTextSize(20);
 		textView.setText("Buscando: " + fraseBuscar);

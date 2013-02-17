@@ -23,6 +23,7 @@ public class RespuestaHandler extends JsonHttpResponseHandler{
 	 public void onSuccess(JSONObject jObject){ 
 		
 		try {
+			
 			String tipoRespuesta=jObject.get("codigo").toString();
 			if(tipoRespuesta.equals("100")){
 				Gson gson = new Gson();
@@ -54,6 +55,6 @@ public class RespuestaHandler extends JsonHttpResponseHandler{
 	 }   
 	 @Override
 	 public void onFailure(Throwable arg0){
-		 System.out.println("Se jodio el handler : "+arg0);
+		 System.out.println("Se jodio el handler : "+arg0+" aqui termina el error");
 	 }
 }
