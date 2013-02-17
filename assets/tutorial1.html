@@ -129,16 +129,41 @@
                 }
             }
             
+            if (typeof(Number.prototype.toRad) === "undefined") {
+  Number.prototype.toRad = function() {
+    return this * Math.PI / 180;
+  }
+}
+
+ function dist(lat1,lon1,lat2,lon2){
+	var R = 6371; // km
+	var dLat = (lat2-lat1).toRad();
+	var dLon = (lon2-lon1).toRad();
+	var lat1 = lat1.toRad();
+	var lat2 = lat2.toRad();
+	
+	var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+	        Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+	var d = R * c;
+	return d;
+ }
+            
+            
             //function called from the native app fia callJavascript method
             //receives json-data as string and processes the contained information
-            function newData(jsonData){
+            function newData(jsonData,lat1,lon1,distanciaPermitida){
                 jsonObject = jsonData;
                 
                 
                 
                 for(var i = 0; i < jsonObject.length; i++)
                 {
-                    //var poidrawables = new Array();
+                distancia = dist(lat1, lon1, jsonObject[i].posicion.latitud, jsonObject[i].posicion.longitud);
+                
+                if(distancia<=distanciaPermitida){
+                alert("sale"+i);
+                	//var poidrawables = new Array();
                     //var label = new AR.Label(jsonObject[i].name,1.0, {offsetY : -1.5,
                       //                       triggers: { 
                       //                       onClick:
@@ -181,13 +206,19 @@
                     poidrawables.push(img);
                     geoLoc = new AR.GeoLocation(jsonObject[i].posicion.latitud,jsonObject[i].posicion.longitud,jsonObject[i].posicion.altitud);
                     jsonObject[i].poiObj = new AR.GeoObject(geoLoc, {drawables: {cam: poidrawables}});
+                    
+                }
+                    
                 }
                 
                	
                 
                 
             }
-            
+           
+           
+           
+           
             // Called if loading of the image fails.
             function errorLoadingImage() {
                 // set error message on HUD

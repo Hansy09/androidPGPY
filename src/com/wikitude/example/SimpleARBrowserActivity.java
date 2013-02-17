@@ -65,8 +65,8 @@ public class SimpleARBrowserActivity extends Activity implements
 	private ArchitectView architectView;
 	private LocationManager locManager;
 	private ControladorPDIs controlador = ControladorPDIs.getInstance();
-	private SeekBar seekbarRango=null;
-	private double distanciaSeleccionada = 4500;
+	private SeekBar seekbarRango = null;
+	private double distanciaSeleccionada = 7.5;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -100,28 +100,27 @@ public class SimpleARBrowserActivity extends Activity implements
 		locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,
 				this);
-		
-seekbarRango = (SeekBar) findViewById(R.id.seekBarRango);
-        
-        seekbarRango.setOnSeekBarChangeListener( new OnSeekBarChangeListener()
-        {
-        public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser)
-        {
-        	// TODO Auto-generated method stub
-         }
 
-        public void onStartTrackingTouch(SeekBar seekBar)
-        {
-          // TODO Auto-generated method stub
-        }
+		seekbarRango = (SeekBar) findViewById(R.id.seekBarRango);
 
-        public void onStopTrackingTouch(SeekBar seekBar)
-        {
-        	ajustarRango(seekBar.getProgress());
-        	calcularNuevoRango();
-        	Log.d("probando al soltar", "SeekBar: "+seekBar.getProgress());   	
-          }
-        });
+		seekbarRango.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				// TODO Auto-generated method stub
+			}
+
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+			}
+
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				ajustarRango(seekBar.getProgress());
+				calcularNuevoRango();
+				architectView.clearAnimation();
+				loadSampleWorld();
+				Log.d("probando al soltar", "SeekBar: " + seekBar.getProgress());
+			}
+		});
 
 	}
 
@@ -169,29 +168,29 @@ seekbarRango = (SeekBar) findViewById(R.id.seekBarRango);
 		if (this.architectView != null)
 			this.architectView.onLowMemory();
 	}
-	
-	@Override
-    public boolean onCreateOptionsMenu(Menu menu){
-    	getMenuInflater().inflate(R.menu.visor_menu, menu);
-    	return true;
-    }
 
 	@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int itemId = item.getItemId();
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.visor_menu, menu);
+		return true;
+	}
 
-        switch (itemId) {
-                case R.id.menu_Lista:
-                	this.visualizarLista();
-                        break;
-                case R.id.menu_BusqAv:
-                        //Insertar cosas
-                        break;
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int itemId = item.getItemId();
 
-                }
-        return super.onOptionsItemSelected(item);
-    }
-	
+		switch (itemId) {
+		case R.id.menu_Lista:
+			this.visualizarLista();
+			break;
+		case R.id.menu_BusqAv:
+			// Insertar cosas
+			break;
+
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
 	/**
 	 * <p>
 	 * interface method of {@link ArchitectUrlListener} class called when an url
@@ -216,13 +215,14 @@ seekbarRango = (SeekBar) findViewById(R.id.seekBarRango);
 		}
 
 		// get the corresponding poi bean for the given id
-		/*PoiBean bean = poiBeanList.get(Integer.parseInt(id));
-		// start a new intent for displaying the content of the bean
-		Intent intent = new Intent(this, PoiDetailActivity.class);
-		intent.putExtra("POI_NAME", bean.getName());
-		intent.putExtra("POI_DESC", bean.getDescription());
-		this.startActivity(intent);*/
-		
+		/*
+		 * PoiBean bean = poiBeanList.get(Integer.parseInt(id)); // start a new
+		 * intent for displaying the content of the bean Intent intent = new
+		 * Intent(this, PoiDetailActivity.class); intent.putExtra("POI_NAME",
+		 * bean.getName()); intent.putExtra("POI_DESC", bean.getDescription());
+		 * this.startActivity(intent);
+		 */
+
 		Intent intent = new Intent(this, PDIDetalle.class);
 		intent.putExtra("id", id);
 		this.startActivity(intent);
@@ -257,11 +257,10 @@ seekbarRango = (SeekBar) findViewById(R.id.seekBarRango);
 			e.printStackTrace();
 		}
 		this.architectView.callJavascript("newData("
-				+ controlador.getPuntosDeInteresJArray() + ");");
+				+ controlador.getPuntosDeInteresJArray() + "," + latitudActual
+				+ "," + longitudActual + "," + distanciaSeleccionada + ");");
 
 	}
-
-	
 
 	/**
 	 * listener method called when the location of the user has changed used for
@@ -278,16 +277,17 @@ seekbarRango = (SeekBar) findViewById(R.id.seekBarRango);
 		if (this.architectView != null) {
 			this.architectView.setLocation((float) (loc.getLatitude()),
 					(float) (loc.getLongitude()), loc.getAccuracy());
-			if(this.latitudActual!=loc.getLatitude() || this.longitudActual!=loc.getLongitude()){
+			if (this.latitudActual != loc.getLatitude()
+					|| this.longitudActual != loc.getLongitude()) {
 				longitudActual = loc.getLongitude();
 				latitudActual = loc.getLatitude();
 				Posicion posicion = new Posicion();
 				posicion.setLongitud(longitudActual);
 				posicion.setLatitud(latitudActual);
-				
+
 				controlador.filtrarPDIsCercanos(posicion, 15, this);
 			}
-			
+
 		}
 	}
 
@@ -308,34 +308,37 @@ seekbarRango = (SeekBar) findViewById(R.id.seekBarRango);
 		// TODO Auto-generated method stub
 
 	}
-	
-	public void realizarBusqueda(View view){
+
+	public void realizarBusqueda(View view) {
 		Intent intent = new Intent(this, BusquedaSimpleActivity.class);
 		EditText editText = (EditText) findViewById(R.id.textBuscar);
 		String message = editText.getText().toString();
 		intent.putExtra("clave", message);
 		startActivity(intent);
 	}
-	
-	public void visualizarLista(){
+
+	public void visualizarLista() {
 		Intent intent = new Intent(this, ListaPDIsActivity.class);
-		//intent.putStringArrayListExtra(LISTA_PDI, poiBeanList);
+		// intent.putStringArrayListExtra(LISTA_PDI, poiBeanList);
 		startActivity(intent);
+
+	}
+
+	public void ajustarRango(int rangoBarra) {
+		if (rangoBarra == 0)
+			distanciaSeleccionada = 50/1000;
+		else
+			distanciaSeleccionada = (rangoBarra * 150) / 1000;
 		
 	}
-	
-	public void ajustarRango(int rangoBarra){
-		if(rangoBarra==0)
-			distanciaSeleccionada= (50)/1000;
-		else distanciaSeleccionada = (rangoBarra*150)/1000;
-	}
-	
-	public double obtenerdistanciaSeleccionada(){
+
+	public double obtenerdistanciaSeleccionada() {
 		return distanciaSeleccionada;
 	}
-	
-	public double calcularNuevoRango(){
-		Log.d("calculando distancia", "Distancia Seleccionada: "+obtenerdistanciaSeleccionada());
+
+	public double calcularNuevoRango() {
+		Log.d("calculando distancia", "Distancia Seleccionada: "
+				+ obtenerdistanciaSeleccionada());
 		return obtenerdistanciaSeleccionada();
 	}
 
