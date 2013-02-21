@@ -5,6 +5,11 @@ import org.json.JSONObject;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Clase que representa la posicion gps de un punto de interes
+ * @author Hansy
+ *
+ */
 public class Posicion {
 
 	public JSONObject toJSONString() throws JSONException {
@@ -15,14 +20,6 @@ public class Posicion {
 		return object;
 	}
 
-	public void fromJSONString() throws JSONException {
-		/*
-		 * JSONObject object = new JSONObject(); object.put("latitud",
-		 * this.latitud); object.put("longitud", this.longitud);
-		 * object.put("altitud", this.altitud);
-		 */
-
-	}
 
 	public double getLatitud() {
 		return latitud;

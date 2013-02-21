@@ -1,11 +1,7 @@
 package com.wikitude.example;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import android.R.array;
 import android.os.Bundle;
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.view.Menu;
@@ -21,11 +17,7 @@ import android.widget.ListView;
  */
 public class ListaPDIsActivity extends ListActivity {
 
-	private ArrayList<PuntoDeInteres> pdiLista=null;
-	private final static float TEST_LATITUDE = 47.77318f;
-	private final static float TEST_LONGITUDE = 13.069730f;
-	private final static float TEST_ALTITUDE = 150;
-	String listaPDI[] = new String[50];
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +49,6 @@ public class ListaPDIsActivity extends ListActivity {
 		return true;
 	}
 
-	private double[] createRandLocation() {
-
-		return new double[] { TEST_LATITUDE + ((Math.random() - 0.5) / 500),
-				TEST_LONGITUDE + ((Math.random() - 0.5) / 500),
-				TEST_ALTITUDE + ((Math.random() - 0.5) * 10) };
-	}
-
+	private ArrayList<PuntoDeInteres> pdiLista=null;
+	private String listaPDI[] = new String[50];
 }

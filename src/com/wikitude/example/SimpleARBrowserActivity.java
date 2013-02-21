@@ -62,8 +62,8 @@ public class SimpleARBrowserActivity extends Activity implements
 
 	private String apiKey = "n+DtduXJkBa4hwW4Yhfhl6VjAbR0s8Bu+cLAvUYkENtRNfOIL96dDpAK1saHrVCG8D2IR2elw/AZda7r+Z9Gi9OhV/p+4qrNDctU0FRJipzBmGAC7A3Ro74mTk3uvPBv4RKF62H1e5bQbBpw669Jm+1ML9i1aEa9XBTtVrKtaNxTYWx0ZWRfXz3NUfI/Oou3sPI6XQQqnn8jxfaY39n7P/WT3wUj6AHLQa44pS5bVkk+YIUYiu5lrn2DFtG6wNQPk1KgOngpWihJH4IH3xstZl/CJHd6xPI279toJrakn5FWdL3LtDObTtWFI5qCuJttCRiWiZ/hd1lLx7BYyDTxhXCotN+ph5keUquN/cKNQjSJ/AnlvBcDV7NMmqBmBFzi2wJhte1WHnr80OjAw1oBPVT2+uUSCJxX5UyHygGx9qbvFgFVHclrXdalGqOwqQNauKiZF5QslSMfMYgFdWOvQgjDN1RbfTkUaaHJrW36nz2pz2JH2rVlQNN6P6EZZcOViF7H0L4MMQtm3+EqNE/4QEcW/Ir5e6hOzEeXZUx9LlRe8tIoxf50HhR8RfHKmjY0D9bDtVEDQyGD7NjPVJL+fddoEvTlrP5O5TaUSYC3BEd8uXTMxpUFVMfaEezbRQ/lcAF96gSmbkY1DHwgExsqiHs81Czbmfu+GOj6S2mnVDxnBsUF9ZXhg6+GM+0Uqfyk";
 
-	private ArchitectView architectView;
-	private LocationManager locManager;
+	private ArchitectView architectView=null;
+	private LocationManager locManager=null;
 	private ControladorPDIs controlador = ControladorPDIs.getInstance();
 	private SeekBar seekbarRango = null;
 	private double distanciaSeleccionada = 7.5;
@@ -229,17 +229,6 @@ public class SimpleARBrowserActivity extends Activity implements
 		return true;
 	}
 
-	/**
-	 * method for creating random locations in the vicinity of the user
-	 * 
-	 * @return array with lat and lon values as doubles
-	 */
-	private double[] createRandLocation() {
-
-		return new double[] { TEST_LATITUDE + ((Math.random() - 0.5) / 500),
-				TEST_LONGITUDE + ((Math.random() - 0.5) / 500),
-				TEST_ALTITUDE + ((Math.random() - 0.5) * 10) };
-	}
 
 	/**
 	 * loads a sample architect world and creates a definable amount of pois in
@@ -277,8 +266,8 @@ public class SimpleARBrowserActivity extends Activity implements
 		if (this.architectView != null) {
 			this.architectView.setLocation((float) (loc.getLatitude()),
 					(float) (loc.getLongitude()), loc.getAccuracy());
-			if (this.latitudActual != loc.getLatitude()
-					|| this.longitudActual != loc.getLongitude()) {
+			if (SimpleARBrowserActivity.latitudActual != loc.getLatitude()
+					|| SimpleARBrowserActivity.longitudActual != loc.getLongitude()) {
 				longitudActual = loc.getLongitude();
 				latitudActual = loc.getLatitude();
 				Posicion posicion = new Posicion();
@@ -326,9 +315,9 @@ public class SimpleARBrowserActivity extends Activity implements
 
 	public void ajustarRango(int rangoBarra) {
 		if (rangoBarra == 0)
-			distanciaSeleccionada = 50/1000;
+			distanciaSeleccionada = .05;
 		else
-			distanciaSeleccionada = (rangoBarra * 150) / 1000;
+			distanciaSeleccionada = (rangoBarra * .15);
 		
 	}
 

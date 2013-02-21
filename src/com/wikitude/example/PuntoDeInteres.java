@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Clase que representa un punto de interes
+ * @author Hansy
+ *
+ */
 public class PuntoDeInteres {
-
-	
 
 	public int getId() {
 		return id;

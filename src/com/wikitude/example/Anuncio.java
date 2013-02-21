@@ -1,8 +1,9 @@
 package com.wikitude.example;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
+/**
+ * Clase que representa un anuncio
+ * @author Hansy
+ *
+ */
 public class Anuncio {
 
 	

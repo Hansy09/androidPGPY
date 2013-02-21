@@ -8,6 +8,11 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * Activity que muestra los datos completos del punto de interes seleccionado
+ * @author Hansy
+ *
+ */
 public class PDIDetalle extends Activity {
 
 	@Override
@@ -16,7 +21,6 @@ public class PDIDetalle extends Activity {
 		setContentView(R.layout.activity_pdidetalle);
 		String idS = this.getIntent().getExtras().getString("id");
 		int id = Integer.parseInt(idS);
-		String urlImagen="http://arquidiocesiscali.org/apc-aa-files/38373837383738733837383773383738/aguaparque.JPG";
 		ControladorPDIs controlador= ControladorPDIs.getInstance();
 		ArrayList<PuntoDeInteres> puntosDeInteres=controlador.getPuntosDeInteres();
 		PuntoDeInteres pdi= null;

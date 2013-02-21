@@ -11,7 +11,11 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-
+/**
+ * Clase que controla la iterracion de los activities con el gestor del servidor
+ * @author Hansy
+ *
+ */
 public class ControladorPDIs {
 
 	private ControladorPDIs() {
