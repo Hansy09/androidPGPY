@@ -24,6 +24,13 @@
     <string name="botonBuscar">Buscar</string>
     <string name="title_activity_busqueda_simple">Busqueda Simple</string>
     <string name="title_activity_visualizar_lista">Visualizar en Lista</string>
+    <string name="busquedaAvanzada">Busqueda Avanzada</string>
+    <string name="buscarPor">Buscar por:</string>
+    <string name="porNombre">Nombre</string>
+    <string name="porDescripcion">Descripción</string>
+    <string name="porCategoria">Categoria</string>
+    <string name="porDireccion ">Dirección</string>
+    <string name="BusquedaAvanzada">Busqueda Avanzada</string>
     
 
 </resources>

@@ -56,8 +56,11 @@ public final class R {
         public static final int visor_menu=0x7f050003;
     }
     public static final class string {
+        public static final int BusquedaAvanzada=0x7f04001d;
         public static final int app_name=0x7f040000;
         public static final int botonBuscar=0x7f040014;
+        public static final int buscarPor=0x7f040018;
+        public static final int busquedaAvanzada=0x7f040017;
         public static final int categoria=0x7f04000d;
         public static final int descripcion=0x7f04000e;
         public static final int direccion=0x7f04000f;
@@ -74,6 +77,10 @@ public final class R {
         public static final int pdiTelefono=0x7f040008;
         public static final int pdiTitle=0x7f040004;
         public static final int pdiUrl=0x7f040009;
+        public static final int porCategoria=0x7f04001b;
+        public static final int porDescripcion=0x7f04001a;
+        public static final int porDireccion =0x7f04001c;
+        public static final int porNombre=0x7f040019;
         public static final int telefono=0x7f040010;
         public static final int title_activity_busqueda_simple=0x7f040015;
         public static final int title_activity_pdidetalle=0x7f040003;

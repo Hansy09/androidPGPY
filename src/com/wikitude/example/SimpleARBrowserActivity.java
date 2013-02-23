@@ -186,7 +186,6 @@ public class SimpleARBrowserActivity extends Activity implements
 		case R.id.menu_BusqAv:
 			// Insertar cosas
 			break;
-
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -310,7 +309,6 @@ public class SimpleARBrowserActivity extends Activity implements
 		Intent intent = new Intent(this, ListaPDIsActivity.class);
 		// intent.putStringArrayListExtra(LISTA_PDI, poiBeanList);
 		startActivity(intent);
-
 	}
 
 	public void ajustarRango(int rangoBarra) {
