@@ -156,19 +156,11 @@
                 jsonObject = jsonData;
                 
                 
-                
                 for(var i = 0; i < jsonObject.length; i++)
                 {
                 distancia = dist(lat1, lon1, jsonObject[i].posicion.latitud, jsonObject[i].posicion.longitud);
                 
                 if(distancia<=distanciaPermitida){
-                
-                	//var poidrawables = new Array();
-                    //var label = new AR.Label(jsonObject[i].name,1.0, {offsetY : -1.5,
-                      //                       triggers: { 
-                      //                       onClick:
-                      //                       createClickTrigger(jsonObject[i].id)},
-                      //                       style : {textColor : '#FFC100',backgroundColor : '#FFFFFF80'}});
                     var poidrawables = new Array();
                     var label = new AR.Label(jsonObject[i].nombre,1.0, {offsetY : -1.5,
                                              triggers: { 
@@ -179,18 +171,6 @@
                     jsonObject[i].arLabel = label;
                     
                     var poiImage;
-                    //if(jsonObject[i].type == 1) 
-                    //{
-                    //    poiImage = firstImage;
-                    //}
-                    //else if(jsonObject[i].type == 2)
-                    //{
-                    //    poiImage = secondImage;
-                    //}
-                    //else
-                    //{
-                    //    poiImage = thirdImage;
-                    //}
                      poiImage = thirdImage;
                     
                     var img = new AR.ImageDrawable(poiImage, 2.0,
@@ -209,9 +189,7 @@
                     
                 }
                     
-                }
-                
-               	
+                }            	
                 
                 
             }

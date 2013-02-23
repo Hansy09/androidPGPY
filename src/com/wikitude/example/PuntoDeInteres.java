@@ -98,6 +98,9 @@ public class PuntoDeInteres {
 	public void setListaAnuncios(ArrayList<Anuncio> anuncios) {
 		this.listaAnuncios = anuncios;
 	}
+	public void imprimir(){
+		System.out.println("Los datos del PDI son: id "+id+",  nombre"+nombre+",  categoria"+categoria+", direccion  "+direccion+",  telefono "+telefono+", url "+url+",  imagen "+imagen+",  descripcion "+descripcion+", ");
+	}
 
 	@SerializedName("id")
 	public int id = 0;
