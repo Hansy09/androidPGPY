@@ -89,17 +89,19 @@ public class SimpleARBrowserActivity extends Activity implements
 		// set the devices' volume control to music to be able to change the
 		// volume of possible soundfiles to play
 		this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
-		this.architectView = (ArchitectView) this
-				.findViewById(R.id.architectView);
-		// onCreate method for setting the license key for the SDK
-		architectView.onCreate(apiKey);
+		
 
 		// in order to inform the ARchitect framework about the user's location
 		// Androids LocationManager is used in this case
 		// NOT USED IN THIS EXAMPLE
 		locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,
+		locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 15, 0,
 				this);
+
+		this.architectView = (ArchitectView) this
+				.findViewById(R.id.architectView);
+		// onCreate method for setting the license key for the SDK
+		architectView.onCreate(apiKey);
 
 		seekbarRango = (SeekBar) findViewById(R.id.seekBarRango);
 
