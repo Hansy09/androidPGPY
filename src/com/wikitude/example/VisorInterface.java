@@ -8,5 +8,6 @@ package com.wikitude.example;
 public interface VisorInterface {
 	
 	public void loadSampleWorld( );
+	public void mostrarMensaje(String mensaje);
 	
 }

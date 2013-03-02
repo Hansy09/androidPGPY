@@ -1,12 +1,9 @@
 package com.wikitude.example;
-import android.app.Activity;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -57,9 +54,8 @@ public class RespuestaHandler extends JsonHttpResponseHandler{
 	 }   
 	 @Override
 	 public void onFailure(Throwable arg0){
-		 System.out.println("Se jodio el handler : "+arg0+" aqui termina el error");
-		 Toast.makeText(((Activity)activity), "No hay servidor",
-					Toast.LENGTH_LONG).show();
+		 activity.mostrarMensaje("No se pudo realizar la conexion al servidor");
+		 
 	 }
 	 private VisorInterface activity=null;
 }

@@ -35,7 +35,7 @@ public class PDIDetalle extends Activity {
 			((TextView) this.findViewById(R.id.textView5)).setText(pdi.getDescripcion());
 			((TextView) this.findViewById(R.id.textView7)).setText(pdi.getDireccion());
 			((TextView) this.findViewById(R.id.textView9)).setText(pdi.getTelefono());
-			((TextView) this.findViewById(R.id.textView11)).setText(pdi.getUrl());
+			((TextView) this.findViewById(R.id.textView2)).setText(pdi.getUrl());
 			((TextView) this.findViewById(R.id.textView13)).setText(pdi.getEmail());
 			int loader = R.drawable.loading;
 			 

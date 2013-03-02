@@ -49,7 +49,7 @@ import com.wikitude.architect.ArchitectView;
  *        SDK has to possess. (REF: ARchitect Documentation)
  */
 public class SimpleARBrowserActivity extends Activity implements
-		ArchitectUrlListener, LocationListener, VisorInterface {
+		ArchitectUrlListener, LocationListener, VisorInterface, ToastInterface {
 
 	private static final String TAG = SimpleARBrowserActivity.class
 			.getSimpleName();
@@ -57,8 +57,7 @@ public class SimpleARBrowserActivity extends Activity implements
 	private final static float TEST_LATITUDE = 47.77318f;
 	private final static float TEST_LONGITUDE = 13.069730f;
 	private final static float TEST_ALTITUDE = 150;
-	private  double longitudActual = 13.069730f;
-	private  double latitudActual = 47.77318f;
+	
 
 	private String apiKey = "n+DtduXJkBa4hwW4Yhfhl6VjAbR0s8Bu+cLAvUYkENtRNfOIL96dDpAK1saHrVCG8D2IR2elw/AZda7r+Z9Gi9OhV/p+4qrNDctU0FRJipzBmGAC7A3Ro74mTk3uvPBv4RKF62H1e5bQbBpw669Jm+1ML9i1aEa9XBTtVrKtaNxTYWx0ZWRfXz3NUfI/Oou3sPI6XQQqnn8jxfaY39n7P/WT3wUj6AHLQa44pS5bVkk+YIUYiu5lrn2DFtG6wNQPk1KgOngpWihJH4IH3xstZl/CJHd6xPI279toJrakn5FWdL3LtDObTtWFI5qCuJttCRiWiZ/hd1lLx7BYyDTxhXCotN+ph5keUquN/cKNQjSJ/AnlvBcDV7NMmqBmBFzi2wJhte1WHnr80OjAw1oBPVT2+uUSCJxX5UyHygGx9qbvFgFVHclrXdalGqOwqQNauKiZF5QslSMfMYgFdWOvQgjDN1RbfTkUaaHJrW36nz2pz2JH2rVlQNN6P6EZZcOViF7H0L4MMQtm3+EqNE/4QEcW/Ir5e6hOzEeXZUx9LlRe8tIoxf50HhR8RfHKmjY0D9bDtVEDQyGD7NjPVJL+fddoEvTlrP5O5TaUSYC3BEd8uXTMxpUFVMfaEezbRQ/lcAF96gSmbkY1DHwgExsqiHs81Czbmfu+GOj6S2mnVDxnBsUF9ZXhg6+GM+0Uqfyk";
 
@@ -95,7 +94,7 @@ public class SimpleARBrowserActivity extends Activity implements
 		// Androids LocationManager is used in this case
 		// NOT USED IN THIS EXAMPLE
 		locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 15, 0,
+		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5, 0,
 				this);
 
 		this.architectView = (ArchitectView) this
@@ -185,6 +184,9 @@ public class SimpleARBrowserActivity extends Activity implements
 		case R.id.menu_Lista:
 			this.visualizarLista();
 			break;
+		case R.id.menu_Reg:
+			this.visualizarRegistro();
+			break;
 		case R.id.menu_BusqAv:
 			// Insertar cosas
 			break;
@@ -249,8 +251,8 @@ public class SimpleARBrowserActivity extends Activity implements
 			e.printStackTrace();
 		}
 		this.architectView.callJavascript("newData("
-				+ controlador.getPuntosDeInteresJArray() + "," + latitudActual
-				+ "," + longitudActual + "," + distanciaSeleccionada + ");");
+				+ controlador.getPuntosDeInteresJArray() + "," + controlador.getLatitudActual()
+				+ "," + controlador.getLongitudActual() + "," + distanciaSeleccionada + ");");
 
 	}
 
@@ -270,14 +272,14 @@ public class SimpleARBrowserActivity extends Activity implements
 		if (this.architectView != null) {
 			this.architectView.setLocation((float) (loc.getLatitude()),
 					(float) (loc.getLongitude()), loc.getAccuracy());
-			if (latitudActual != loc.getLatitude()
-					|| longitudActual != loc.getLongitude()) {
-				longitudActual = loc.getLongitude();
-				latitudActual = loc.getLatitude();
+			if (controlador.getLatitudActual() != loc.getLatitude()
+					|| controlador.getLongitudActual() != loc.getLongitude()) {
 				Posicion posicion = new Posicion();
-				posicion.setLongitud(longitudActual);
-				posicion.setLatitud(latitudActual);
-
+				controlador.setLongitudActual(loc.getLongitude());
+				controlador.setLatitudActual(loc.getLatitude());
+				controlador.setAltitudActual(loc.getAltitude());
+				posicion.setLongitud(controlador.getLongitudActual());
+				posicion.setLatitud(controlador.getLatitudActual());
 				controlador.filtrarPDIsCercanos(posicion, 15, this);
 			}
 
@@ -316,6 +318,12 @@ public class SimpleARBrowserActivity extends Activity implements
 		startActivity(intent);
 
 	}
+	public void visualizarRegistro() {
+		Intent intent = new Intent(this, RegistroPDIActivity.class);
+		// intent.putStringArrayListExtra(LISTA_PDI, poiBeanList);
+		startActivity(intent);
+
+	}
 
 	public void ajustarRango(int rangoBarra) {
 		if (rangoBarra == 0)
@@ -327,6 +335,16 @@ public class SimpleARBrowserActivity extends Activity implements
 
 	public double obtenerdistanciaSeleccionada() {
 		return distanciaSeleccionada;
+	}
+	
+	@Override
+	/**
+	 * Metodo que muestra el mensaje en el activity
+	 */
+	public void mostrarMensaje(String mensaje) {
+		// TODO Auto-generated method stu
+	    Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+	    
 	}
 
 	public double calcularNuevoRango() {

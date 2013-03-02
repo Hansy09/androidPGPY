@@ -36,7 +36,7 @@ public class ListaPDIsActivity extends ListActivity {
 			long id) {
 		super.onListItemClick(list, view, position, id);
 		PuntoDeInteres pdi = pdiLista.get(position);
-		Intent intent = new Intent(this, PDIDetalle.class);
+		Intent intent = new Intent(this, ActulizarPDIActivity.class);
 		intent.putExtra("id", String.valueOf(pdi.getId()));
 		this.startActivity(intent);
 		

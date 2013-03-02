@@ -32,6 +32,19 @@ public class ControladorPDIs {
 	public void filtrarPDIsCercanos(Posicion posicion, double distanciaMax, VisorInterface visor) {
 		daoPDIs.buscarDentroDeRangoMax(posicion, distanciaMax, visor);
 	}
+	/**
+	 * Metodo que sirve para registrar un nuevo punto de interes
+	 * @param pdi El punto de interes a registrar
+	 * @param activity El acitivity que mostrara los mensajes del servidor
+	 */
+	public void registrarPDI(String usuario, PuntoDeInteres pdi,ToastInterface activity) {
+		daoPDIs.registrarPDIEnServidor(usuario, pdi,activity);
+	}
+	
+	public void actulizarPDI(String usuario, PuntoDeInteres pdi,ToastInterface activity) {
+		
+		daoPDIs.actualizarPDIEnServidor(usuario, pdi,activity);
+	}
 	
 
 	public void filtrarPDIsPorCategorias(Posicion posicion, double distanciaMax,
@@ -65,6 +78,30 @@ public class ControladorPDIs {
 		return daoPDIs;
 	}
 
+	public double getLatitudActual() {
+		return latitudActual;
+	}
+
+	public void setLatitudActual(double latitudActual) {
+		this.latitudActual = latitudActual;
+	}
+
+	public double getLongitudActual() {
+		return longitudActual;
+	}
+
+	public void setLongitudActual(double longitudActual) {
+		this.longitudActual = longitudActual;
+	}
+
+	public double getAltitudActual() {
+		return altitudActual;
+	}
+
+	public void setAltitudActual(double altitudActual) {
+		this.altitudActual = altitudActual;
+	}
+
 	public void setDaoPDIs(GestorServer daoPDIs) {
 		this.daoPDIs = daoPDIs;
 	}
@@ -75,5 +112,9 @@ public class ControladorPDIs {
 	private String puntosDeInteresJArray = "";
 	private GestorServer daoPDIs = new GestorServer();
 	private static ControladorPDIs controlador;
+	private  double longitudActual = 13.069730f;
+	private  double latitudActual = 47.77318f;
+	private double altitudActual=0;
+	
 
 }
