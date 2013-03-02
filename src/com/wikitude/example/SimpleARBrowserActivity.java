@@ -67,23 +67,7 @@ public class SimpleARBrowserActivity extends Activity implements
 	private LocationManager locManager = null;
 	private ControladorPDIs controlador = ControladorPDIs.getInstance();
 	private SeekBar seekbarRango = null;
-	private double distanciaSeleccionada = 7.5;
-
-	private static boolean fuckingBandera = false;
-	private static SimpleARBrowserActivity instance;
-	
-	public SimpleARBrowserActivity(){
-		instance = this;
-	}
-	
-	public static SimpleARBrowserActivity getInstance(){
-		return instance;
-	}
-	
-	public void levantaLaFuckingBandera(){
-		System.out.println("LLAMADA A: levantaLaFuckingBandera");
-		fuckingBandera = true;		
-	}
+	private double distanciaSeleccionada = 7.5;	
 
 	/** Called when the activity is first created. */
 	@Override
@@ -291,10 +275,8 @@ public class SimpleARBrowserActivity extends Activity implements
 				latitudActual = loc.getLatitude();
 				Posicion posicion = new Posicion();
 				posicion.setLongitud(longitudActual);
-				posicion.setLatitud(latitudActual);
-
-				System.out.println("VALOR BANDERA: " + fuckingBandera);
-				if (!fuckingBandera) {
+				posicion.setLatitud(latitudActual);				
+				if (!controlador.valorFuckingBandera()) {
 					controlador.filtrarPDIsCercanos(posicion, 15, this);
 				}
 			}
