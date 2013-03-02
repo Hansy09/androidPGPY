@@ -14,60 +14,65 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int icon=0x7f020000;
-        public static final int images=0x7f020001;
-        public static final int loading=0x7f020002;
+        public static final int eliminar=0x7f020000;
+        public static final int icon=0x7f020001;
+        public static final int images=0x7f020002;
+        public static final int loading=0x7f020003;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f070000;
-        public static final int architectView=0x7f07001c;
+        public static final int architectView=0x7f07001d;
         public static final int button2=0x7f070010;
-        public static final int editText1=0x7f07001a;
+        public static final int editText1=0x7f07001b;
         public static final int editText2=0x7f070007;
         public static final int editText3=0x7f070009;
         public static final int editText4=0x7f07000d;
         public static final int editText5=0x7f07000f;
         public static final int editText6=0x7f07000b;
-        public static final int imageView1=0x7f070011;
-        public static final int linearLayout1=0x7f07001f;
-        public static final int linearLayout2=0x7f070021;
-        public static final int menu_Act=0x7f070027;
-        public static final int menu_BusqAv=0x7f070025;
-        public static final int menu_Lista=0x7f070024;
-        public static final int menu_Reg=0x7f070026;
-        public static final int menu_settings=0x7f070023;
-        public static final int seekBarRango=0x7f07001e;
-        public static final int spinner1=0x7f07001b;
-        public static final int textBuscar=0x7f07001d;
+        public static final int imageButton1=0x7f070024;
+        public static final int imageView1=0x7f070012;
+        public static final int linearLayout1=0x7f070020;
+        public static final int linearLayout2=0x7f070022;
+        public static final int listView1=0x7f070011;
+        public static final int menu_BusqAv=0x7f070028;
+        public static final int menu_Lista=0x7f070026;
+        public static final int menu_Reg=0x7f070029;
+        public static final int menu_milista=0x7f070027;
+        public static final int menu_settings=0x7f070025;
+        public static final int seekBarRango=0x7f07001f;
+        public static final int spinner1=0x7f07001c;
+        public static final int textBuscar=0x7f07001e;
         public static final int textView0=0x7f070001;
         public static final int textView1=0x7f070002;
         public static final int textView10=0x7f070006;
-        public static final int textView11=0x7f070015;
+        public static final int textView11=0x7f070016;
         public static final int textView12=0x7f070008;
-        public static final int textView13=0x7f070013;
+        public static final int textView13=0x7f070014;
         public static final int textView14=0x7f07000a;
-        public static final int textView15=0x7f070012;
+        public static final int textView15=0x7f070013;
         public static final int textView2=0x7f070004;
         public static final int textView21=0x7f070003;
         public static final int textView22=0x7f070005;
-        public static final int textView3=0x7f070019;
+        public static final int textView3=0x7f07001a;
         public static final int textView4=0x7f07000c;
-        public static final int textView5=0x7f070018;
-        public static final int textView6=0x7f070014;
-        public static final int textView7=0x7f070017;
+        public static final int textView5=0x7f070019;
+        public static final int textView6=0x7f070015;
+        public static final int textView7=0x7f070018;
         public static final int textView8=0x7f07000e;
-        public static final int textView9=0x7f070016;
-        public static final int tvPoiDesc=0x7f070022;
-        public static final int tvPoiName=0x7f070020;
+        public static final int textView9=0x7f070017;
+        public static final int tvPoiDesc=0x7f070023;
+        public static final int tvPoiName=0x7f070021;
     }
     public static final class layout {
         public static final int activity_actulizar_pdi=0x7f030000;
         public static final int activity_busqueda_simple=0x7f030001;
-        public static final int activity_pdidetalle=0x7f030002;
-        public static final int activity_registro_pdi=0x7f030003;
-        public static final int activity_visualizar_lista=0x7f030004;
-        public static final int main=0x7f030005;
-        public static final int poi_detail=0x7f030006;
+        public static final int activity_lista_mis_pdi=0x7f030002;
+        public static final int activity_pdidetalle=0x7f030003;
+        public static final int activity_registro_pdi=0x7f030004;
+        public static final int activity_visualizar_lista=0x7f030005;
+        public static final int main=0x7f030006;
+        public static final int poi_detail=0x7f030007;
+        public static final int single_list_item=0x7f030008;
     }
     public static final class menu {
         public static final int activity_actulizar_pdi=0x7f060000;
@@ -79,16 +84,18 @@ public final class R {
         public static final int visor_menu=0x7f060006;
     }
     public static final class string {
-        public static final int actPDI=0x7f050018;
+        public static final int actPDI=0x7f05001a;
         public static final int app_name=0x7f050000;
-        public static final int botonBuscar=0x7f050016;
+        public static final int botonBuscar=0x7f050018;
         public static final int categoria=0x7f05000f;
         public static final int descripcion=0x7f050010;
         public static final int direccion=0x7f050011;
-        public static final int distancia=0x7f050015;
-        public static final int email=0x7f050014;
+        public static final int distancia=0x7f050017;
+        public static final int email=0x7f050016;
+        public static final int errorImg=0x7f050014;
         public static final int hello_world=0x7f050001;
         public static final int menu_settings=0x7f050002;
+        public static final int pdi=0x7f050015;
         public static final int pdiAnuncio=0x7f05000e;
         public static final int pdiCategoria=0x7f050005;
         public static final int pdiDescripcion=0x7f050006;
@@ -100,14 +107,14 @@ public final class R {
         public static final int pdiTelefono=0x7f050008;
         public static final int pdiTitle=0x7f050004;
         public static final int pdiUrl=0x7f050009;
-        public static final int regPDI=0x7f050017;
+        public static final int regPDI=0x7f050019;
         public static final int telefono=0x7f050012;
-        public static final int title_activity_actulizar_pdi=0x7f05001c;
-        public static final int title_activity_busqueda_simple=0x7f050019;
-        public static final int title_activity_lista_mis_pdi=0x7f05001d;
+        public static final int title_activity_actulizar_pdi=0x7f05001e;
+        public static final int title_activity_busqueda_simple=0x7f05001b;
+        public static final int title_activity_lista_mis_pdi=0x7f05001f;
         public static final int title_activity_pdidetalle=0x7f050003;
-        public static final int title_activity_registro_pdi=0x7f05001b;
-        public static final int title_activity_visualizar_lista=0x7f05001a;
+        public static final int title_activity_registro_pdi=0x7f05001d;
+        public static final int title_activity_visualizar_lista=0x7f05001c;
         public static final int url=0x7f050013;
     }
 }

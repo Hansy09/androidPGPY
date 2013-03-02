@@ -45,6 +45,10 @@ public class ControladorPDIs {
 		
 		daoPDIs.actualizarPDIEnServidor(usuario, pdi,activity);
 	}
+    public void borrarPDI(String usuario, int id,ToastInterface activity) {
+		
+		daoPDIs.borrarPDIenServidor(usuario, id,activity);
+	}
 	
 
 	public void filtrarPDIsPorCategorias(Posicion posicion, double distanciaMax,

@@ -104,7 +104,7 @@ public class PuntoDeInteres {
 	}
 
 	@SerializedName("id")
-	public int id = 0;
+	private int id = 0;
 	@SerializedName("nombre")
 	private String nombre = "";
 	@SerializedName("categoria")

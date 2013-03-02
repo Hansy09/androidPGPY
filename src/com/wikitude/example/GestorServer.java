@@ -74,4 +74,12 @@ public class GestorServer {
 				new RespuestaHandler(visor));
 
 	}
+	public void borrarPDIenServidor(String usuario, int id,ToastInterface activity){
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams rp = new RequestParams();
+		rp.put("usuario", usuario);
+		rp.put("id", String.valueOf(id));
+		client.post(direccionBase + "/geoAdds/pdi/eliminar/", rp,
+				new ServidorMensajeHandler(activity));
+	}
 }

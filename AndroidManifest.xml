@@ -20,6 +20,7 @@
     <application
         android:icon="@drawable/icon"
         android:label="@string/app_name" >
+        
         <activity
             android:name="com.wikitude.example.SimpleARBrowserActivity"
             android:configChanges="orientation"
@@ -64,5 +65,5 @@
             android:label="@string/title_activity_lista_mis_pdi" >
         </activity>
     </application>
-
+    
 </manifest>

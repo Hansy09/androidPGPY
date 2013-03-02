@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:id="@+id/menu_Lista" android:title="Lista" ></item>
+    <item android:id="@+id/menu_milista" android:title="Mis PDIs" ></item>
     <item android:id="@+id/menu_BusqAv" android:title="Busqueda Avanzada"></item>
     <item android:id="@+id/menu_Reg" android:title="Registro PDI"></item>
-    <item android:id="@+id/menu_Act" android:title="Actualizar PDI"></item>
     
 
 </menu>

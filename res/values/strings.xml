@@ -21,6 +21,8 @@
     <string name="direccion">direccion </string>
     <string name="telefono">telefono </string>
     <string name="url">url </string>
+    <string name="errorImg">Imagen no encontrada </string>
+    <string name="pdi">PDI </string>
     <string name="email">email </string>
     <string name="distancia">distancia </string>
     <string name="botonBuscar">Buscar</string>
@@ -31,5 +33,6 @@
     <string name="title_activity_registro_pdi">RegistroPDIActivity</string>
     <string name="title_activity_actulizar_pdi">ActulizarPDIActivity</string>
     <string name="title_activity_lista_mis_pdi">ListaMisPDIActivity</string>
+    
 
 </resources>

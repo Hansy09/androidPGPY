@@ -66,7 +66,7 @@ public class RegistroPDIActivity extends Activity implements ToastInterface{
 		 */
 		String nombre= ((EditText)this.findViewById(R.id.editText1)).getText().toString();
 		Spinner mySpinner = (Spinner)findViewById(R.id.spinner1);
-		String categoria = mySpinner.getSelectedItem().toString();
+		String categoria=String.valueOf(mySpinner.getSelectedItemId()+1);
 		if(validarCampos("Nombre",nombre)){
 			PuntoDeInteres pdi = new PuntoDeInteres();
 			pdi.setNombre(nombre);

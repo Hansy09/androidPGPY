@@ -94,7 +94,7 @@ public class SimpleARBrowserActivity extends Activity implements
 		// Androids LocationManager is used in this case
 		// NOT USED IN THIS EXAMPLE
 		locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5, 0,
+		locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2, 0,
 				this);
 
 		this.architectView = (ArchitectView) this
@@ -187,8 +187,8 @@ public class SimpleARBrowserActivity extends Activity implements
 		case R.id.menu_Reg:
 			this.visualizarRegistro();
 			break;
-		case R.id.menu_BusqAv:
-			// Insertar cosas
+		case R.id.menu_milista:
+			this.visualizarMiLista();
 			break;
 
 		}
@@ -314,6 +314,12 @@ public class SimpleARBrowserActivity extends Activity implements
 
 	public void visualizarLista() {
 		Intent intent = new Intent(this, ListaPDIsActivity.class);
+		// intent.putStringArrayListExtra(LISTA_PDI, poiBeanList);
+		startActivity(intent);
+
+	}
+	public void visualizarMiLista() {
+		Intent intent = new Intent(this, ListaMisPDIActivity.class);
 		// intent.putStringArrayListExtra(LISTA_PDI, poiBeanList);
 		startActivity(intent);
 
