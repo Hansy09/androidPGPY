@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categorias">
+		<item>Restaurantes</item>
+		<item>Ropa</item>
+		<item>Abarrotes</item>
+		<item>Electronicos</item>
+		<item>Gasolineras</item>
+		<item>Entretenimiento</item>
+		<item>Escuelas</item>
+		<item>Plazas Comerciales</item>
+		<item>Hoteles</item>
+		<item>Bancos</item>
+		<item>Otros</item>
+	</string-array>
+</resources>
