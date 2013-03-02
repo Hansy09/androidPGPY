@@ -1,9 +1,30 @@
 package com.wikitude.example;
 
+import java.lang.reflect.Type;
+import java.util.Collection;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-public class GestorServer {
+
+/**
+ * 
+ * @Nombre SMD
+ * @Fecha 01/03/2013
+ * @Descripcion Clase encargada de conectar al server
+ *
+ */
+public class GestorServer{
 
 	private String direccionBase = "http://jd732.o1.gondor.io/";
 
@@ -35,4 +56,21 @@ public class GestorServer {
 				new RespuestaHandler(visor));
 
 	}
+	
+	public void verificarInicioSesionEnServidor(Sesion sesion, IniciarSesionActivity act){
+		AsyncHttpClient httpClient = new AsyncHttpClient();
+		RequestParams peticion = new RequestParams();
+		peticion.put("correo", String.valueOf( sesion.getCorreo()));
+		peticion.put("contrasenia", String.valueOf( sesion.getContrasenia()));
+		httpClient.post(direccionBase + "/geoAdds/usuario/iniciarSesion/", peticion, new InicioSesionHandler(act));
+	}
+	
+	public void registrarUsuarioEnServidor(Sesion sesion, RegistrarUsuarioActivity act){
+		AsyncHttpClient httpClient = new AsyncHttpClient();
+		RequestParams peticion = new RequestParams();
+		peticion.put("correo", String.valueOf( sesion.getCorreo()));
+		peticion.put("contrasenia", String.valueOf( sesion.getContrasenia()));
+		httpClient.post(direccionBase + "/geoAdds/usuario/registrar/", peticion, new RegistroUsuarioHandler(act));
+	}
+	
 }

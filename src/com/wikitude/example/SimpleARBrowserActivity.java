@@ -8,7 +8,11 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
@@ -24,6 +28,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
+
 import com.wikitude.architect.ArchitectUrlListener;
 import com.wikitude.architect.ArchitectView;
 
@@ -67,6 +72,7 @@ public class SimpleARBrowserActivity extends Activity implements
 	private ControladorPDIs controlador = ControladorPDIs.getInstance();
 	private SeekBar seekbarRango = null;
 	private double distanciaSeleccionada = 7.5;
+	private ControladorSesion controladorSesion = ControladorSesion.getInstance();
 
 	/** Called when the activity is first created. */
 	@Override
@@ -170,6 +176,20 @@ public class SimpleARBrowserActivity extends Activity implements
 		if (this.architectView != null)
 			this.architectView.onLowMemory();
 	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu){
+		
+		if(controladorSesion.estaSesionIniciada()){
+			menu.setGroupVisible(R.id.grupo_sesion_false, false);
+			menu.setGroupVisible(R.id.grupo_sesion_true, true);
+		}
+		else {
+			menu.setGroupVisible(R.id.grupo_sesion_true, false);
+			menu.setGroupVisible(R.id.grupo_sesion_false, true);
+		}
+		return super.onPrepareOptionsMenu(menu);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -188,7 +208,18 @@ public class SimpleARBrowserActivity extends Activity implements
 		case R.id.menu_BusqAv:
 			// Insertar cosas
 			break;
-
+		case R.id.menu_RegistrarUsuario:
+			this.registrarUsuario();
+			break;
+		case R.id.menu_IniciarSesion:
+			this.iniciarSesion();
+			break;
+		case R.id.menu_CerrarSesion:
+			this.crearDialogoCierreSesion();
+			break;
+		case R.id.menu_VerPerfil:
+			this.verPerfil();
+			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -333,6 +364,44 @@ public class SimpleARBrowserActivity extends Activity implements
 		Log.d("calculando distancia", "Distancia Seleccionada: "
 				+ obtenerdistanciaSeleccionada());
 		return obtenerdistanciaSeleccionada();
+	}
+	
+	public void iniciarSesion(){
+		Intent intent = new Intent(this, IniciarSesionActivity.class);
+		startActivity(intent);
+	}
+	
+	public void registrarUsuario(){
+		Intent intent = new Intent(this, RegistrarUsuarioActivity.class);
+		startActivity(intent);
+	}
+	
+	public void cerrarSesion(){
+		controladorSesion.cerrarSesion();
+		Toast.makeText(this, "Sesion Finalizada", Toast.LENGTH_SHORT).show();
+	}
+	
+	public void verPerfil(){
+		Intent intent = new Intent(this, PerfilActivity.class);
+		startActivity(intent);
+	}
+	
+	private void crearDialogoCierreSesion(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Cerrar Sesion");
+	    builder.setMessage("¿Desea Cerrar Sesion?");
+	    builder.setPositiveButton("Aceptar", new OnClickListener() {
+	    public void onClick(DialogInterface dialog, int id) {
+	        cerrarSesion();
+	    }
+	    });
+	    builder.setNegativeButton("Cancelar", new OnClickListener() {
+	    public void onClick(DialogInterface dialog, int id) {
+	        dialog.cancel();
+	    }
+	    });
+		
+		builder.create().show();
 	}
 
 }

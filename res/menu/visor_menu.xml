@@ -3,5 +3,14 @@
     <item android:id="@+id/menu_Lista" android:title="Lista" ></item>
     <item android:id="@+id/menu_BusqAv" android:title="Busqueda Avanzada"></item>
     
+    <group android:id ="@+id/grupo_sesion_false">
+        <item android:id="@+id/menu_IniciarSesion" android:title="Iniciar Sesion"></item>
+        <item android:id="@+id/menu_RegistrarUsuario" android:title="Registrar Usuario"></item>
+    </group>
+    
+    <group android:id ="@+id/grupo_sesion_true">
+        <item android:id="@+id/menu_CerrarSesion" android:title="Cerrar Sesion"></item>
+        <item android:id="@+id/menu_VerPerfil" android:title="Ver Perfil"></item>
+    </group>
 
 </menu>
