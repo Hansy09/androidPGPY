@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.TextureView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -57,21 +58,39 @@ public class SimpleARBrowserActivity extends Activity implements
 	private final static float TEST_LATITUDE = 47.77318f;
 	private final static float TEST_LONGITUDE = 13.069730f;
 	private final static float TEST_ALTITUDE = 150;
-	private static double longitudActual = 13.069730f;
-	private static double latitudActual = 47.77318f;
+	public static double longitudActual = 13.069730f;
+	public static double latitudActual = 47.77318f;
 
 	private String apiKey = "n+DtduXJkBa4hwW4Yhfhl6VjAbR0s8Bu+cLAvUYkENtRNfOIL96dDpAK1saHrVCG8D2IR2elw/AZda7r+Z9Gi9OhV/p+4qrNDctU0FRJipzBmGAC7A3Ro74mTk3uvPBv4RKF62H1e5bQbBpw669Jm+1ML9i1aEa9XBTtVrKtaNxTYWx0ZWRfXz3NUfI/Oou3sPI6XQQqnn8jxfaY39n7P/WT3wUj6AHLQa44pS5bVkk+YIUYiu5lrn2DFtG6wNQPk1KgOngpWihJH4IH3xstZl/CJHd6xPI279toJrakn5FWdL3LtDObTtWFI5qCuJttCRiWiZ/hd1lLx7BYyDTxhXCotN+ph5keUquN/cKNQjSJ/AnlvBcDV7NMmqBmBFzi2wJhte1WHnr80OjAw1oBPVT2+uUSCJxX5UyHygGx9qbvFgFVHclrXdalGqOwqQNauKiZF5QslSMfMYgFdWOvQgjDN1RbfTkUaaHJrW36nz2pz2JH2rVlQNN6P6EZZcOViF7H0L4MMQtm3+EqNE/4QEcW/Ir5e6hOzEeXZUx9LlRe8tIoxf50HhR8RfHKmjY0D9bDtVEDQyGD7NjPVJL+fddoEvTlrP5O5TaUSYC3BEd8uXTMxpUFVMfaEezbRQ/lcAF96gSmbkY1DHwgExsqiHs81Czbmfu+GOj6S2mnVDxnBsUF9ZXhg6+GM+0Uqfyk";
 
-	private ArchitectView architectView=null;
-	private LocationManager locManager=null;
+	private ArchitectView architectView = null;
+	private LocationManager locManager = null;
 	private ControladorPDIs controlador = ControladorPDIs.getInstance();
 	private SeekBar seekbarRango = null;
 	private double distanciaSeleccionada = 7.5;
+
+	private static boolean fuckingBandera = false;
+	private static SimpleARBrowserActivity instance;
+	
+	public SimpleARBrowserActivity(){
+		instance = this;
+	}
+	
+	public static SimpleARBrowserActivity getInstance(){
+		return instance;
+	}
+	
+	public void levantaLaFuckingBandera(){
+		System.out.println("LLAMADA A: levantaLaFuckingBandera");
+		fuckingBandera = true;		
+	}
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		
 
 		// let the application be fullscreen
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -98,7 +117,7 @@ public class SimpleARBrowserActivity extends Activity implements
 		// Androids LocationManager is used in this case
 		// NOT USED IN THIS EXAMPLE
 		locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,
+		locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2, 0,
 				this);
 
 		seekbarRango = (SeekBar) findViewById(R.id.seekBarRango);
@@ -183,8 +202,9 @@ public class SimpleARBrowserActivity extends Activity implements
 		case R.id.menu_Lista:
 			this.visualizarLista();
 			break;
-		case R.id.menu_BusqAv:
-			// Insertar cosas
+
+		case R.id.menu_BusqAv:			
+			this.visualizarBusquedaAvanzada();
 			break;
 
 		}
@@ -229,7 +249,6 @@ public class SimpleARBrowserActivity extends Activity implements
 		return true;
 	}
 
-
 	/**
 	 * loads a sample architect world and creates a definable amount of pois in
 	 * beancontainers and converts them into a jsonstring that can be sent to
@@ -248,7 +267,6 @@ public class SimpleARBrowserActivity extends Activity implements
 		this.architectView.callJavascript("newData("
 				+ controlador.getPuntosDeInteresJArray() + "," + latitudActual
 				+ "," + longitudActual + "," + distanciaSeleccionada + ");");
-
 	}
 
 	/**
@@ -267,16 +285,20 @@ public class SimpleARBrowserActivity extends Activity implements
 			this.architectView.setLocation((float) (loc.getLatitude()),
 					(float) (loc.getLongitude()), loc.getAccuracy());
 			if (SimpleARBrowserActivity.latitudActual != loc.getLatitude()
-					|| SimpleARBrowserActivity.longitudActual != loc.getLongitude()) {
+					|| SimpleARBrowserActivity.longitudActual != loc
+							.getLongitude()) {
 				longitudActual = loc.getLongitude();
 				latitudActual = loc.getLatitude();
 				Posicion posicion = new Posicion();
 				posicion.setLongitud(longitudActual);
 				posicion.setLatitud(latitudActual);
 
-				controlador.filtrarPDIsCercanos(posicion, 15, this);
+				System.out.println("VALOR BANDERA: " + fuckingBandera);
+				if (!fuckingBandera) {
+					controlador.filtrarPDIsCercanos(posicion, 15, this);
+				}
 			}
-
+			System.out.println("onLocationChanged");			
 		}
 	}
 
@@ -313,12 +335,17 @@ public class SimpleARBrowserActivity extends Activity implements
 
 	}
 
+	public void visualizarBusquedaAvanzada() {
+		Intent intent = new Intent(this, BusquedaAvanzadaActivity.class);
+		startActivity(intent);
+	}
+
 	public void ajustarRango(int rangoBarra) {
 		if (rangoBarra == 0)
 			distanciaSeleccionada = .05;
 		else
 			distanciaSeleccionada = (rangoBarra * .15);
-		
+
 	}
 
 	public double obtenerdistanciaSeleccionada() {

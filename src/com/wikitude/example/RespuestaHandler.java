@@ -26,10 +26,11 @@ public class RespuestaHandler extends JsonHttpResponseHandler{
 	
 	@Override
 	 public void onSuccess(JSONObject jObject){ 
-		
+		System.out.println(jObject.toString());
 		try {
 			
 			String tipoRespuesta=jObject.get("codigo").toString();
+			
 			if(tipoRespuesta.equals("100")){
 				Gson gson = new Gson();
 				ControladorPDIs controlador = ControladorPDIs.getInstance();
@@ -40,9 +41,9 @@ public class RespuestaHandler extends JsonHttpResponseHandler{
 				ArrayList<PuntoDeInteres> puntosDeInteres = (ArrayList<PuntoDeInteres>) myTypes;
 				controlador.setPuntosDeInteres(puntosDeInteres);
 				controlador.setPuntosDeInteresJArray(jObject.getString("mensaje"));
-			}
-			
-			
+				System.out.println(jObject.getString("onSuccess"));
+				System.out.println(jObject.getString("mensaje"));
+			}						
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,7 +61,7 @@ public class RespuestaHandler extends JsonHttpResponseHandler{
 	 }   
 	 @Override
 	 public void onFailure(Throwable arg0){
-		 System.out.println("Se jodio el handler : "+arg0+" aqui termina el error");
+		 System.out.println("Se jodio el handler : "+arg0+" aqui termina el error");		 
 	 }
 	 private VisorInterface activity=null;
 }

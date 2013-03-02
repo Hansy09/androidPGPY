@@ -35,7 +35,7 @@
             android:name="com.wikitude.example.PoiDetailActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
-         <activity
+        <activity
             android:name="com.wikitude.example.BusquedaSimpleActivity"
             android:label="@string/title_activity_busqueda_simple"
             android:parentActivityName="com.wikitude.example.SimpleARBrowserActivity" >
@@ -50,6 +50,10 @@
         <activity
             android:name="com.wikitude.example.ListaPDIsActivity"
             android:label="@string/title_activity_visualizar_lista" >
+        </activity>        
+        <activity
+            android:name="com.wikitude.example.BusquedaAvanzadaActivity"
+            android:label="@string/title_activity_busqueda_avanzada" >
         </activity>
     </application>
 

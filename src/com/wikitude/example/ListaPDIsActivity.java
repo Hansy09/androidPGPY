@@ -20,15 +20,13 @@ public class ListaPDIsActivity extends ListActivity {
 	
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
+		System.out.println("Entro al ListaPDIsActivity");
 		ControladorPDIs controlador = ControladorPDIs.getInstance();
-		pdiLista = controlador.getPuntosDeInteres();
-		for (int i = 0; i < pdiLista.size(); i++) {
-			listaPDI[i] = pdiLista.get(i).getNombre();
-		}
-		setListAdapter(new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, listaPDI));
+		pdiLista = controlador.getPuntosDeInteres();			
+		setListAdapter(new ArrayAdapter<PuntoDeInteres>(this,
+				android.R.layout.simple_list_item_1, pdiLista));
 	}
 
 	@Override
