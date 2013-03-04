@@ -137,8 +137,9 @@ public class SimpleARBrowserActivity extends Activity implements
 
 		// register this activity as handler of "architectsdk://" urls
 		this.architectView.registerUrlListener(this);
-		BusquedaSimpleActivity.setARBrowserBusquedaSimple(this);//-----------------------------------------------------[ Esto esta mal ]
-		BusquedaAvanzadaActivity.setARBrowserBusquedaAvanzada(this);//-------------------------------------------------[ Esto esta mal ]
+//		Solucion dudosa:
+		BusquedaSimpleActivity.setARBrowserBusquedaSimple(this);
+		BusquedaAvanzadaActivity.setARBrowserBusquedaAvanzada(this);
 	}
 
 	@Override
