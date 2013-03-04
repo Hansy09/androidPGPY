@@ -1,18 +1,19 @@
 package com.wikitude.example;
 
-import android.location.Location;
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
 public class BusquedaAvanzadaActivity extends Activity {
+			
+	private static SimpleARBrowserActivity arBrowser;			
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.activity_busqueda_avanzada);
 	}
 
@@ -34,30 +35,35 @@ public class BusquedaAvanzadaActivity extends Activity {
 		RadioButton porDescripcion = (RadioButton) findViewById(R.id.radio1);
 		RadioButton porCategoria = (RadioButton) findViewById(R.id.radioButton1);
 		RadioButton porDireccion = (RadioButton) findViewById(R.id.radio2);
-		
-		ControladorPDIs.getInstance().levantaLaFuckingBandera();
-		
+						
 		if (porNombre.isChecked()) {
 			ControladorPDIs.getInstance().filtrarPDIsPorCategorias(posicion,
-					rangoMax, clave, "nombre", this);
+					rangoMax, clave, "nombre", arBrowser);			
 			System.out.println("NOMBRE");			
 		}
 		if (porDescripcion.isChecked()) {
 			ControladorPDIs.getInstance().filtrarPDIsPorCategorias(posicion,
-					rangoMax, clave, "descripcion", SimpleARBrowserActivity.getInstance());
+					rangoMax, clave, "descripcion", arBrowser);
 			System.out.println("DESCRIPCION");
 		}
 		if (porCategoria.isChecked()) {
 			ControladorPDIs.getInstance().filtrarPDIsPorCategorias(posicion,
-					rangoMax, clave, "categoria", SimpleARBrowserActivity.getInstance());
+					rangoMax, clave, "categoria", arBrowser);
 			System.out.println("CATEGORIA");
 		}
 		if (porDireccion.isChecked()) {
 			ControladorPDIs.getInstance().filtrarPDIsPorCategorias(posicion,
-					rangoMax, clave, "direccion", SimpleARBrowserActivity.getInstance());
+					rangoMax, clave, "direccion", arBrowser);
 			System.out.println("DIRECCION");
 		}
+		
 	}
 	
-
+	public static void setARBrowserBusquedaAvanzada(SimpleARBrowserActivity browserActivity){
+		arBrowser = browserActivity;		
+		System.out.println("setARBrowserBusquedaAvanzada");
+	}
+	
+	
+			
 }

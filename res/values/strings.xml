@@ -36,5 +36,6 @@
     <string name="title_activity_buscador_pdi">Busqueda Avanzada</string>
     <string name="mensajeBusqueda">" "</string>
     <string name="title_activity_busqueda_avanzada">Busqueda avanzada</string>
+    <string name="title_activity_respuesta_busqueda_handler">RespuestaBusquedaHandler</string>
 
 </resources>

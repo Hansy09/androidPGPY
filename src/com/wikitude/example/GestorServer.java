@@ -1,5 +1,7 @@
 package com.wikitude.example;
 
+import android.content.Intent;
+
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 
@@ -34,7 +36,7 @@ public class GestorServer {
 		peticion.put("searchString", clave);
 		peticion.put("categoria", categoria);  
 		httpClient.post(direccionBase + "/geoAdds/pdi/categoria/", peticion,
-				new RespuestaHandler(visor));
+				new RespuestaHandler(visor));		
 		
 		System.out.println("buscarPDIsPorCategoria");		
 	}

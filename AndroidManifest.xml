@@ -50,10 +50,14 @@
         <activity
             android:name="com.wikitude.example.ListaPDIsActivity"
             android:label="@string/title_activity_visualizar_lista" >
-        </activity>        
+        </activity>
         <activity
             android:name="com.wikitude.example.BusquedaAvanzadaActivity"
             android:label="@string/title_activity_busqueda_avanzada" >
+        </activity>
+        <activity
+            android:name="com.wikitude.example.RespuestaBusquedaHandler"
+            android:label="@string/title_activity_respuesta_busqueda_handler" >
         </activity>
     </application>
 

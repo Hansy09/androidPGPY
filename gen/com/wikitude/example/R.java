@@ -63,8 +63,9 @@ public final class R {
         public static final int activity_busqueda_avanzada_=0x7f050001;
         public static final int activity_busqueda_simple=0x7f050002;
         public static final int activity_pdidetalle=0x7f050003;
-        public static final int activity_visualizar_lista=0x7f050004;
-        public static final int visor_menu=0x7f050005;
+        public static final int activity_respuesta_busqueda_handler=0x7f050004;
+        public static final int activity_visualizar_lista=0x7f050005;
+        public static final int visor_menu=0x7f050006;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
@@ -100,6 +101,7 @@ public final class R {
         public static final int title_activity_busqueda_pdi=0x7f04001f;
         public static final int title_activity_busqueda_simple=0x7f040015;
         public static final int title_activity_pdidetalle=0x7f040003;
+        public static final int title_activity_respuesta_busqueda_handler=0x7f040023;
         public static final int title_activity_visualizar_lista=0x7f040016;
         public static final int url=0x7f040011;
     }

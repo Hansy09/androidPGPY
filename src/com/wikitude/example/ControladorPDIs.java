@@ -1,16 +1,6 @@
 package com.wikitude.example;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.Context;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
 
 /**
  * Clase que controla la iterracion de los activities con el gestor del servidor
@@ -39,8 +29,16 @@ public class ControladorPDIs {
 	public void filtrarPDIsPorCategorias(Posicion posicion,
 			double distanciaMax, String clave, String categoria,
 			VisorInterface visor) {
+		esBusquedaAvanzada = true;
 		daoPDIs.buscarPDIsPorCategoria(posicion, distanciaMax, clave,
 				categoria, visor);
+	}
+
+	public void filtrarPDIsPorNombre(Posicion posicion, double distanciaMax,
+			String clave, VisorInterface visor) {
+		esBusquedaSimple = true;
+		daoPDIs.buscarPDIsPorCategoria(posicion, distanciaMax, clave,
+				"nombre", visor);
 	}
 
 	public ArrayList<PuntoDeInteres> obtenerPDIs() {
@@ -71,20 +69,20 @@ public class ControladorPDIs {
 		this.daoPDIs = daoPDIs;
 	}
 
+	public boolean esUnaBusquedaAvanzada() {
+		return esBusquedaAvanzada;
+	}
+
+	public boolean esUnaBusquedaSimple() {
+		return esBusquedaSimple;
+	}
+	
 	private ArrayList<PuntoDeInteres> puntosDeInteres = new ArrayList<PuntoDeInteres>();
 	private String puntosDeInteresJArray = "";
 	private GestorServer daoPDIs = new GestorServer();
 	private static ControladorPDIs controlador;
 
-	private static boolean fuckingBandera = false;
-
-	public void levantaLaFuckingBandera() {
-		System.out.println("LLAMADA A: levantaLaFuckingBandera");
-		fuckingBandera = true;
-	}
-	
-	public boolean valorFuckingBandera(){
-		return fuckingBandera;
-	}
+	private static boolean esBusquedaAvanzada = false;
+	private static boolean esBusquedaSimple = false;
 
 }

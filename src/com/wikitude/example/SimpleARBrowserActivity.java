@@ -1,6 +1,7 @@
 package com.wikitude.example;
 
 import java.io.IOException;
+
 import java.net.URI;
 import java.util.List;
 
@@ -18,7 +19,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.TextureView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -137,7 +137,8 @@ public class SimpleARBrowserActivity extends Activity implements
 
 		// register this activity as handler of "architectsdk://" urls
 		this.architectView.registerUrlListener(this);
-
+		BusquedaSimpleActivity.setARBrowserBusquedaSimple(this);//-----------------------------------------------------[ Esto esta mal ]
+		BusquedaAvanzadaActivity.setARBrowserBusquedaAvanzada(this);//-------------------------------------------------[ Esto esta mal ]
 	}
 
 	@Override
@@ -276,7 +277,7 @@ public class SimpleARBrowserActivity extends Activity implements
 				Posicion posicion = new Posicion();
 				posicion.setLongitud(longitudActual);
 				posicion.setLatitud(latitudActual);				
-				if (!controlador.valorFuckingBandera()) {
+				if (!controlador.esUnaBusquedaAvanzada()) {
 					controlador.filtrarPDIsCercanos(posicion, 15, this);
 				}
 			}
@@ -303,10 +304,11 @@ public class SimpleARBrowserActivity extends Activity implements
 	}
 
 	public void realizarBusqueda(View view) {
+		System.out.println("realizarBusqueda");		
 		Intent intent = new Intent(this, BusquedaSimpleActivity.class);
 		EditText editText = (EditText) findViewById(R.id.textBuscar);
 		String message = editText.getText().toString();
-		intent.putExtra("clave", message);
+		intent.putExtra("clave", message);		
 		startActivity(intent);
 	}
 
@@ -317,8 +319,8 @@ public class SimpleARBrowserActivity extends Activity implements
 
 	}
 
-	public void visualizarBusquedaAvanzada() {
-		Intent intent = new Intent(this, BusquedaAvanzadaActivity.class);
+	public void visualizarBusquedaAvanzada() {		
+		Intent intent = new Intent(this, BusquedaAvanzadaActivity.class);		
 		startActivity(intent);
 	}
 

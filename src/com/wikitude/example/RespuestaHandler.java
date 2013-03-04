@@ -6,6 +6,8 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -15,9 +17,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
  * @author Hansy
  *
  */
-public class RespuestaHandler extends JsonHttpResponseHandler{
-	
-	
+public class RespuestaHandler extends JsonHttpResponseHandler{	
 	
 	public RespuestaHandler(VisorInterface activity) {
 		// TODO Auto-generated constructor stub
@@ -41,6 +41,12 @@ public class RespuestaHandler extends JsonHttpResponseHandler{
 				ArrayList<PuntoDeInteres> puntosDeInteres = (ArrayList<PuntoDeInteres>) myTypes;
 				controlador.setPuntosDeInteres(puntosDeInteres);
 				controlador.setPuntosDeInteresJArray(jObject.getString("mensaje"));
+
+				if (controlador.esUnaBusquedaAvanzada() || controlador.esUnaBusquedaSimple()) {
+					SimpleARBrowserActivity arBrowser = (SimpleARBrowserActivity) activity;
+					arBrowser.visualizarLista();
+				}
+				
 				System.out.println(jObject.getString("onSuccess"));
 				System.out.println(jObject.getString("mensaje"));
 			}						
@@ -59,9 +65,11 @@ public class RespuestaHandler extends JsonHttpResponseHandler{
 	
 	     
 	 }   
+	
 	 @Override
 	 public void onFailure(Throwable arg0){
 		 System.out.println("Se jodio el handler : "+arg0+" aqui termina el error");		 
 	 }
+	 	 
 	 private VisorInterface activity=null;
 }
