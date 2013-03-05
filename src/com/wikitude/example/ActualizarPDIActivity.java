@@ -20,32 +20,16 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class ActulizarPDIActivity extends Activity implements ToastInterface {
+public class ActualizarPDIActivity extends Activity implements ToastInterface {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_actulizar_pdi);
-		String idS = this.getIntent().getExtras().getString("id");
-		int id = Integer.parseInt(idS);
-		ControladorPDIs controlador= ControladorPDIs.getInstance();
-		ArrayList<PuntoDeInteres> puntosDeInteres=controlador.getPuntosDeInteres();
-		for(int i=0;i<puntosDeInteres.size();i++){
-			if(puntosDeInteres.get(i).getId()==id){
-				pdi=puntosDeInteres.get(i);
-			}
-		}
-		if(pdi!=null){
-			((TextView) this.findViewById(R.id.textView21)).setText(pdi.getNombre());
-			((TextView) this.findViewById(R.id.textView22)).setText(pdi.getCategoria());
-			((EditText) this.findViewById(R.id.editText4)).setText(pdi.getDescripcion());
-			((EditText) this.findViewById(R.id.editText6)).setText(pdi.getDireccion());
-			((EditText) this.findViewById(R.id.editText5)).setText(pdi.getTelefono());
-			((EditText) this.findViewById(R.id.editText2)).setText(pdi.getUrl());
-			((EditText) this.findViewById(R.id.editText3)).setText(pdi.getEmail());
-			
-		}
+		this.cargarDatosPDI();
 	}
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -78,18 +62,18 @@ public class ActulizarPDIActivity extends Activity implements ToastInterface {
 	/**
 	 * Metodo que se llama cuando se presiona el boton de tomar foto que realice el proceso de tomar y guardar la foto
 	 * @param v Boton que desencadena el evento
-	 */
+	 *//*
 	public void tomarFoto(View v){
 		final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		  intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getArchivoTemporal(this)) ); 
 		  startActivityForResult(intent, TAKE_PHOTO_CODE);
 	}
 	
-	/**
+	*//**
 	 * Metodo que sirve para obtener la imagen guardada
 	 * @param context El contexto actual de la activity
 	 * @return La imagen temporal guardada en la aplicacion
-	 */
+	 *//*
 	private File getArchivoTemporal(Context context){
 		  //it will return /sdcard/image.tmp
 		  final File path = new File( Environment.getExternalStorageDirectory(), context.getPackageName() );
@@ -99,9 +83,9 @@ public class ActulizarPDIActivity extends Activity implements ToastInterface {
 		  return new File(path, "image.tmp");
 		}
 	
-	/**
+	*//**
 	 * Metodo que es llamado una vez tomada la foto que guarda el resultado en una variable global llamada archivoSeleccionado
-	 */
+	 *//*
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
 		if (resultCode == RESULT_OK) {
 		    switch(requestCode){
@@ -118,7 +102,7 @@ public class ActulizarPDIActivity extends Activity implements ToastInterface {
 		      break;
 		    }
 		  }
-	}
+	}*/
 	
 	/**
 	 * Metodo para validar si esta vacio un campo y tirar un mensaje de error si
@@ -130,7 +114,7 @@ public class ActulizarPDIActivity extends Activity implements ToastInterface {
 	 *            El valor a validar
 	 * @return True si esta correcto y false si esta incorrecto.
 	 */
-	public boolean validarCampos(String nombreCampo, String campo) {
+	private boolean validarCampos(String nombreCampo, String campo) {
 		if (campo.trim().equals("")) {
 			Toast.makeText(this,
 					"El campo " + nombreCampo + " no puede estar vacio.",
@@ -152,8 +136,33 @@ public class ActulizarPDIActivity extends Activity implements ToastInterface {
 	    
 	}
 	
+	/**
+	 * Metodo que carga en el visual los datos del punto de interes a modificar
+	 */
+	private void cargarDatosPDI(){
+		String idS = this.getIntent().getExtras().getString("id");
+		int id = Integer.parseInt(idS);
+		ControladorPDIs controlador= ControladorPDIs.getInstance();
+		ArrayList<PuntoDeInteres> puntosDeInteres=controlador.getPuntosDeInteres();
+		for(int i=0;i<puntosDeInteres.size();i++){
+			if(puntosDeInteres.get(i).getId()==id){
+				pdi=puntosDeInteres.get(i);
+			}
+		}
+		if(pdi!=null){
+			((TextView) this.findViewById(R.id.textView21)).setText(pdi.getNombre());
+			((TextView) this.findViewById(R.id.textView22)).setText(pdi.getCategoria());
+			((EditText) this.findViewById(R.id.editText4)).setText(pdi.getDescripcion());
+			((EditText) this.findViewById(R.id.editText6)).setText(pdi.getDireccion());
+			((EditText) this.findViewById(R.id.editText5)).setText(pdi.getTelefono());
+			((EditText) this.findViewById(R.id.editText2)).setText(pdi.getUrl());
+			((EditText) this.findViewById(R.id.editText3)).setText(pdi.getEmail());
+			
+		}
+	}
+	/*
 	private static final int TAKE_PHOTO_CODE = 1;
-	private static File archivoSeleccionado=null;
+	private static File archivoSeleccionado=null;*/
 	private ControladorPDIs controlador = ControladorPDIs.getInstance();
 	private PuntoDeInteres pdi = new PuntoDeInteres();
 	

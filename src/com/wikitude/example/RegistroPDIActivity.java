@@ -50,7 +50,6 @@ public class RegistroPDIActivity extends Activity implements ToastInterface{
 		 * usuario = conSesion.getSesion().getCorreo();
 		 * 
 		 */
-		System.out.println("Entre al boton registro");
 		String nombre= ((EditText)this.findViewById(R.id.editText1)).getText().toString();
 		Spinner mySpinner = (Spinner)findViewById(R.id.spinner1);
 		int catego=(int) mySpinner.getSelectedItemId()+1;
@@ -78,7 +77,7 @@ public class RegistroPDIActivity extends Activity implements ToastInterface{
 	 *            El valor a validar
 	 * @return True si esta correcto y false si esta incorrecto.
 	 */
-	public boolean validarCampos(String nombreCampo, String campo) {
+	private boolean validarCampos(String nombreCampo, String campo) {
 		if (campo.trim().equals("")) {
 			Toast.makeText(this,
 					"El campo " + nombreCampo + " no puede estar vacio.",

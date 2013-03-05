@@ -109,7 +109,7 @@ public final class R {
         public static final int pdiUrl=0x7f050009;
         public static final int regPDI=0x7f050019;
         public static final int telefono=0x7f050012;
-        public static final int title_activity_actulizar_pdi=0x7f05001e;
+        public static final int title_activity_actualizar_pdi=0x7f05001e;
         public static final int title_activity_busqueda_simple=0x7f05001b;
         public static final int title_activity_lista_mis_pdi=0x7f05001f;
         public static final int title_activity_pdidetalle=0x7f050003;

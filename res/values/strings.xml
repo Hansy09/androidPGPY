@@ -31,7 +31,7 @@
     <string name="title_activity_busqueda_simple">Busqueda Simple</string>
     <string name="title_activity_visualizar_lista">Visualizar en Lista</string>
     <string name="title_activity_registro_pdi">RegistroPDIActivity</string>
-    <string name="title_activity_actulizar_pdi">ActulizarPDIActivity</string>
+    <string name="title_activity_actualizar_pdi">ActualizarPDIActivity</string>
     <string name="title_activity_lista_mis_pdi">ListaMisPDIActivity</string>
     
 

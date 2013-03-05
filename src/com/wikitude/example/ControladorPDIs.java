@@ -126,6 +126,7 @@ public class ControladorPDIs {
 
 
 	private ArrayList<PuntoDeInteres> puntosDeInteres = new ArrayList<PuntoDeInteres>();
+	private ArrayList<PuntoDeInteres> misPuntosDeInteres = new ArrayList<PuntoDeInteres>();
 	private String puntosDeInteresJArray = "";
 	private GestorServer daoPDIs = new GestorServer();
 	private static ControladorPDIs controlador;

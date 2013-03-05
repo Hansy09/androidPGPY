@@ -57,8 +57,8 @@
             android:label="@string/title_activity_registro_pdi" >
         </activity>
         <activity
-            android:name="com.wikitude.example.ActulizarPDIActivity"
-            android:label="@string/title_activity_actulizar_pdi" >
+            android:name="com.wikitude.example.ActualizarPDIActivity"
+            android:label="@string/title_activity_actualizar_pdi" >
         </activity>
         <activity
             android:name="com.wikitude.example.ListaMisPDIActivity"
