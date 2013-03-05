@@ -25,6 +25,10 @@ public class ListaMisPDIActivity extends Activity implements ToastInterface{
         return true;
     }
     
+    /**
+     * Metodo que es llamado por el evento de borrar un punto d einteres
+     * @param id El id del punto de interes seleccionado
+     */
     public void onBorrarPDI(int id){
     	String usuario="hdse09@gmail.com";
     	controlador.borrarPDI(usuario, id, this);

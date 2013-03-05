@@ -38,13 +38,26 @@ public class ControladorPDIs {
 	 * @param activity El acitivity que mostrara los mensajes del servidor
 	 */
 	public void registrarPDI(String usuario, PuntoDeInteres pdi,ToastInterface activity) {
+		System.out.println("Entre al contr regis");
 		daoPDIs.registrarPDIEnServidor(usuario, pdi,activity);
 	}
 	
-	public void actulizarPDI(String usuario, PuntoDeInteres pdi,ToastInterface activity) {
+	/**
+	 * Metodo que sirve para actualizar un punto de interes
+	 * @param usuario El usuario que tiene registrado el punto de interes
+	 * @param pdi El punto de interes a actualizar
+	 * @param activity El activity tipo ToastInterface que maneja los mensajes del servidor
+	 */
+	public void actualizarPDI(String usuario, PuntoDeInteres pdi,ToastInterface activity) {
 		
 		daoPDIs.actualizarPDIEnServidor(usuario, pdi,activity);
 	}
+	/**
+	 * Metodo que sirve para borrar un punto de interes
+	 * @param usuario el usuario que tiene el punto de interes a borrar
+	 * @param id El id del punto de interes a borrar
+	 * @param activity El activity de tipo ToastInterface que maneja los mensajes del servidor
+	 */
     public void borrarPDI(String usuario, int id,ToastInterface activity) {
 		
 		daoPDIs.borrarPDIenServidor(usuario, id,activity);

@@ -1,7 +1,5 @@
 package com.wikitude.example;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,9 +23,9 @@ public class ServidorMensajeHandler extends JsonHttpResponseHandler{
 	
 	 @Override
 	 /**
-	  * Metodo que maneja la correcta conexion con el servidor
+	  * Metodo que maneja los mensajes correctos recibidos del server
 	  */
-     public void onSuccess(JSONObject jObject) {
+	 public void onSuccess(JSONObject jObject) {
          // Pull out the first event on the public timeline
 		 try {
 				String tipoRespuesta=jObject.get("codigo").toString();
@@ -46,7 +44,7 @@ public class ServidorMensajeHandler extends JsonHttpResponseHandler{
 
 		@Override
 		/**
-		 * Metodo que maneja la incorrecta conexion con el servidor
+		 * Metodo que maneja los errores relacionados con el servidor
 		 */
 		public void onFailure(Throwable arg0, JSONObject arg1) {
 			// TODO Auto-generated method stub

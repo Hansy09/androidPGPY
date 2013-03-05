@@ -71,7 +71,7 @@ public class ActulizarPDIActivity extends Activity implements ToastInterface {
 		pdi.setEmail(email);
 		pdi.setTelefono(telefono);
 		pdi.setUrl(url);
-		controlador.actulizarPDI(usuario, pdi, this);
+		controlador.actualizarPDI(usuario, pdi, this);
 	}
 	
 	
