@@ -45,7 +45,7 @@ public class IniciarSesionActivity extends Activity {
 	}
 	
 	private ControladorSesion controladorSesion = ControladorSesion.getInstance();
-	private Sesion sesion;
+	private Sesion sesion = null;
 	String correo = "";
 	String contrasenia ="";
 
