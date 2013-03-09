@@ -137,7 +137,7 @@ public class SimpleARBrowserActivity extends Activity implements
 
 		// register this activity as handler of "architectsdk://" urls
 		this.architectView.registerUrlListener(this);
-//		Solucion dudosa:
+//		Solucion dudosa:   <--------------------------------------------------------------
 		BusquedaSimpleActivity.setARBrowserBusquedaSimple(this);
 		BusquedaAvanzadaActivity.setARBrowserBusquedaAvanzada(this);
 	}
