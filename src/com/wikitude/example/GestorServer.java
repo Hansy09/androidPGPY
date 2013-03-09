@@ -74,6 +74,7 @@ public class GestorServer {
 		rp.put("telefono", pdi.getTelefono());
 		rp.put("paginaWeb", pdi.getUrl());
 		rp.put("email", pdi.getEmail());
+		rp.put("imagen", "");
 		client.post(direccionBase + "/geoAdds/pdi/actualizar/", rp,
 				new ServidorMensajeHandler(activity));
 

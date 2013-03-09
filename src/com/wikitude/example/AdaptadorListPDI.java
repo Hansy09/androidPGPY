@@ -73,7 +73,7 @@ public class AdaptadorListPDI extends BaseAdapter {
 
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(listaActivity, ActulizarPDIActivity.class);
+				Intent intent = new Intent(listaActivity, ActualizarPDIActivity.class);
 				intent.putExtra("id", String.valueOf(pdi.getId()));
 				listaActivity.startActivity(intent);
 			}
