@@ -40,8 +40,8 @@ public class BusquedaSimpleActivity extends Activity {
 	
 	public void realizaBusquedaSimple(){
 		Posicion posicion = new Posicion();
-		posicion.setLatitud(SimpleARBrowserActivity.latitudActual);
-		posicion.setLongitud(SimpleARBrowserActivity.longitudActual);
+		posicion.setLatitud(arBrowser.latitudActual);
+		posicion.setLongitud(arBrowser.longitudActual);
 		double distanciaMax = 15;
 		Intent intent = getIntent();
 		String fraseBuscar = intent.getStringExtra("clave");

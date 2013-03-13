@@ -52,8 +52,6 @@ import com.wikitude.architect.ArchitectView;
 public class SimpleARBrowserActivity extends Activity implements
 		ArchitectUrlListener, LocationListener, VisorInterface {
 
-	private static final String TAG = SimpleARBrowserActivity.class
-			.getSimpleName();
 
 	private final static float TEST_LATITUDE = 47.77318f;
 	private final static float TEST_LONGITUDE = 13.069730f;
@@ -101,8 +99,11 @@ public class SimpleARBrowserActivity extends Activity implements
 		// Androids LocationManager is used in this case
 		// NOT USED IN THIS EXAMPLE
 		locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2, 0,
-				this);
+		
+		
+//		locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2, 0,this);
+//		modificaciones temporales con motivo de pruebas
+		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2, 0,this);
 
 		seekbarRango = (SeekBar) findViewById(R.id.seekBarRango);
 
