@@ -1,6 +1,6 @@
 package com.wikitude.example;
 
-import android.content.Intent;
+
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
