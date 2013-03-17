@@ -123,5 +123,11 @@ public class PuntoDeInteres {
 	@SerializedName("posicion")
 	private Posicion posicion = new Posicion();
 	private ArrayList<Anuncio> listaAnuncios = new ArrayList<Anuncio>();
-
+@Override
+public String toString() {
+	String nombre_categoria = nombre;
+	return nombre_categoria;
+}
+	
+	
 }

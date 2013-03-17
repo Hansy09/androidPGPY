@@ -1,5 +1,6 @@
 package com.wikitude.example;
 
+
 import java.lang.reflect.Type;
 import java.util.Collection;
 
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -26,11 +28,13 @@ import com.loopj.android.http.RequestParams;
  */
 public class GestorServer{
 
-	private String direccionBase = "http://jd732.o1.gondor.io/";
+//	private String direccionBase = "http://192.168.1.67:8000/"; //Josue	
+//	private String direccionBase = "http://192.168.1.83:8000/";  //Rusel
+	private String direccionBase = "http://jd732.o1.gondor.io/"; 
 
 	public void buscarDentroDeRangoMax(Posicion posicion, double rangoMaximo,
 			VisorInterface visor) {
-
+		
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams rp = new RequestParams();
 
@@ -43,18 +47,19 @@ public class GestorServer{
 	}
 
 	public void buscarPDIsPorCategoria(Posicion posicion, double rangoMaximo,
-			String clave, String categoria, VisorInterface visor) {
-
+			String clave, String categoria, VisorInterface visor) {		
+		
 		AsyncHttpClient httpClient = new AsyncHttpClient();
 		RequestParams peticion = new RequestParams();
 		peticion.put("longitud", String.valueOf(posicion.getLongitud()));
 		peticion.put("latitud", String.valueOf(posicion.getLatitud()));
-		peticion.put("clave", clave);
-		peticion.put("categoria", categoria);
-		peticion.put("rangoMaximoAlcance", String.valueOf(rangoMaximo));
-		httpClient.post(direccionBase + "/geoAdds/pdi/lista/", peticion,
-				new RespuestaHandler(visor));
-
+		peticion.put("rangoMaximoAlcance", "100");
+		peticion.put("searchString", clave);
+		peticion.put("categoria", categoria);  
+		httpClient.post(direccionBase + "/geoAdds/pdi/categoria/", peticion,
+				new RespuestaHandler(visor));		
+		
+		System.out.println("buscarPDIsPorCategoria");		
 	}
 	
 	public void verificarInicioSesionEnServidor(Sesion sesion, IniciarSesionActivity act){

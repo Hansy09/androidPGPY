@@ -62,8 +62,8 @@ public class SimpleARBrowserActivity extends Activity implements
 	private final static float TEST_LATITUDE = 47.77318f;
 	private final static float TEST_LONGITUDE = 13.069730f;
 	private final static float TEST_ALTITUDE = 150;
-	private  double longitudActual = 13.069730f;
-	private  double latitudActual = 47.77318f;
+	private static double longitudActual = 13.069730f;
+	private static double latitudActual = 47.77318f;
 
 	private String apiKey = "n+DtduXJkBa4hwW4Yhfhl6VjAbR0s8Bu+cLAvUYkENtRNfOIL96dDpAK1saHrVCG8D2IR2elw/AZda7r+Z9Gi9OhV/p+4qrNDctU0FRJipzBmGAC7A3Ro74mTk3uvPBv4RKF62H1e5bQbBpw669Jm+1ML9i1aEa9XBTtVrKtaNxTYWx0ZWRfXz3NUfI/Oou3sPI6XQQqnn8jxfaY39n7P/WT3wUj6AHLQa44pS5bVkk+YIUYiu5lrn2DFtG6wNQPk1KgOngpWihJH4IH3xstZl/CJHd6xPI279toJrakn5FWdL3LtDObTtWFI5qCuJttCRiWiZ/hd1lLx7BYyDTxhXCotN+ph5keUquN/cKNQjSJ/AnlvBcDV7NMmqBmBFzi2wJhte1WHnr80OjAw1oBPVT2+uUSCJxX5UyHygGx9qbvFgFVHclrXdalGqOwqQNauKiZF5QslSMfMYgFdWOvQgjDN1RbfTkUaaHJrW36nz2pz2JH2rVlQNN6P6EZZcOViF7H0L4MMQtm3+EqNE/4QEcW/Ir5e6hOzEeXZUx9LlRe8tIoxf50HhR8RfHKmjY0D9bDtVEDQyGD7NjPVJL+fddoEvTlrP5O5TaUSYC3BEd8uXTMxpUFVMfaEezbRQ/lcAF96gSmbkY1DHwgExsqiHs81Czbmfu+GOj6S2mnVDxnBsUF9ZXhg6+GM+0Uqfyk";
 
@@ -142,7 +142,9 @@ public class SimpleARBrowserActivity extends Activity implements
 
 		// register this activity as handler of "architectsdk://" urls
 		this.architectView.registerUrlListener(this);
-
+//		Solucion dudosa:   <--------------------------------------------------------------
+		BusquedaSimpleActivity.setARBrowserBusquedaSimple(this);
+		BusquedaAvanzadaActivity.setARBrowserBusquedaAvanzada(this);
 	}
 
 	@Override
@@ -206,7 +208,7 @@ public class SimpleARBrowserActivity extends Activity implements
 			this.visualizarLista();
 			break;
 		case R.id.menu_BusqAv:
-			// Insertar cosas
+			this.visualizarBusquedaAvanzada();
 			break;
 		case R.id.menu_RegistrarUsuario:
 			this.registrarUsuario();
@@ -308,8 +310,9 @@ public class SimpleARBrowserActivity extends Activity implements
 				Posicion posicion = new Posicion();
 				posicion.setLongitud(longitudActual);
 				posicion.setLatitud(latitudActual);
-
-				controlador.filtrarPDIsCercanos(posicion, 15, this);
+				if (!controlador.esUnaBusquedaAvanzada()) {
+					controlador.filtrarPDIsCercanos(posicion, 15, this);
+				}
 			}
 
 		}
@@ -345,7 +348,11 @@ public class SimpleARBrowserActivity extends Activity implements
 		Intent intent = new Intent(this, ListaPDIsActivity.class);
 		// intent.putStringArrayListExtra(LISTA_PDI, poiBeanList);
 		startActivity(intent);
-
+	}
+	
+	public void visualizarBusquedaAvanzada() {		
+		Intent intent = new Intent(this, BusquedaAvanzadaActivity.class);		
+		startActivity(intent);
 	}
 
 	public void ajustarRango(int rangoBarra) {
@@ -403,5 +410,12 @@ public class SimpleARBrowserActivity extends Activity implements
 		
 		builder.create().show();
 	}
-
+	
+	public static double getLatitudActual(){
+		return latitudActual;
+	}
+	
+	public static double getLongitudActual(){
+		return longitudActual;
+	}
 }
