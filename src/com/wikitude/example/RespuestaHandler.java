@@ -39,7 +39,6 @@ public class RespuestaHandler extends JsonHttpResponseHandler{
 				ArrayList<PuntoDeInteres> puntosDeInteres = (ArrayList<PuntoDeInteres>) myTypes;
 				controlador.setPuntosDeInteres(puntosDeInteres);
 				controlador.setPuntosDeInteresJArray(jObject.getString("mensaje"));
-				System.out.println("String recibido: "+controlador.getPuntosDeInteresJArray());
 				
 			}
 			

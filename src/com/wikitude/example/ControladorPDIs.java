@@ -1,16 +1,9 @@
 package com.wikitude.example;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.JSONArray;
 
-import android.content.Context;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
 /**
  * Clase que controla la iterracion de los activities con el gestor del servidor
  * @author Hansy
@@ -69,6 +62,26 @@ public class ControladorPDIs {
 		daoPDIs.buscarPDIsPorCategoria(posicion, distanciaMax, clave, categoria,visor);
 	}
 
+	
+	public void actualizarJSONArrayPDIs(){
+		JSONArray nuevoJSONArray = new JSONArray();
+		for (int i=0;i<puntosDeInteres.size();i++) {
+		    nuevoJSONArray.put(puntosDeInteres.get(i).getJSONObject());
+		}
+		this.setPuntosDeInteresJArray(nuevoJSONArray.toString());
+	}
+	
+	public void borrarPDIDeArray(int id){
+		for (int i=0;i<puntosDeInteres.size();i++) {
+		    if(puntosDeInteres.get(i).getId()==id){
+		    	puntosDeInteres.remove(i);
+		    	break;
+		    }
+		}
+		this.actualizarJSONArrayPDIs();
+	}
+	
+	
 	public ArrayList<PuntoDeInteres> obtenerPDIs() {
 		return puntosDeInteres;
 	}

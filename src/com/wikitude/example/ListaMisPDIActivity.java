@@ -1,12 +1,19 @@
 package com.wikitude.example;
 
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.Menu;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class ListaMisPDIActivity extends Activity implements ToastInterface{
+public class ListaMisPDIActivity extends Activity implements ToastInterface, RespuestaInterface{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +37,17 @@ public class ListaMisPDIActivity extends Activity implements ToastInterface{
      * @param id El id del punto de interes seleccionado
      */
     public void onBorrarPDI(int id){
-    	String usuario="hdse09@gmail.com";
-    	controlador.borrarPDI(usuario, id, this);
+			    	String usuario="hdse09@gmail.com";
+			    	controlador.borrarPDI(usuario, id, this);	
+    }
+    
+    /**
+     * 
+     */
+    public void actualizarLista(){
+    	ListView listView = (ListView) findViewById(R.id.listView1);
+        AdaptadorListPDI customAdapter = new AdaptadorListPDI(controlador.getPuntosDeInteres(),this);
+        listView.setAdapter(customAdapter);
     }
     
     @Override
@@ -45,7 +61,24 @@ public class ListaMisPDIActivity extends Activity implements ToastInterface{
 	}
     
     
+    @Override
+	public void procesarRespuestaServidor(JSONObject jObject) {
+		ArrayList<PuntoDeInteres> pdis=controlador.getPuntosDeInteres();
+		PuntoDeInteres pdi = null;
+		for(int i=0;i<pdis.size();i++ ){
+			if(pdis.get(i).getId()==id){
+				pdi=pdis.get(i);
+				pdis.remove(pdi);
+				controlador.setPuntosDeInteres(pdis);
+				controlador.actualizarJSONArrayPDIs();
+				this.actualizarLista();
+			}
+		}
+	}
+    
     private ControladorPDIs controlador= ControladorPDIs.getInstance();
-
+    private static boolean borrarPDI=false;
+    private int id=0;
+	
     
 }

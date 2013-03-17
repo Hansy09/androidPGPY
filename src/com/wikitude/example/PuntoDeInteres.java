@@ -3,6 +3,9 @@ package com.wikitude.example;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -102,6 +105,25 @@ public class PuntoDeInteres {
 	public void imprimir(){
 		System.out.println("Los datos del PDI son: id "+id+",  nombre"+nombre+",  categoria"+categoria+", direccion  "+direccion+",  telefono "+telefono+", url "+url+",  imagen "+imagen+",  descripcion "+descripcion+", ");
 	}
+	
+	public JSONObject getJSONObject() {
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("id", id);
+            obj.put("nombre", nombre);
+            obj.put("categoria", categoria);
+            obj.put("direccion", direccion);
+            obj.put("telefono", telefono);
+            obj.put("url", url);
+            obj.put("correoElectronico", email);
+            obj.put("urlImagen", imagen);
+            obj.put("descripcion", descripcion);
+            obj.put("posicion", posicion.getJSONObject());
+        } catch (JSONException e) {
+            System.out.println("DefaultListItem.toString JSONException: "+e.getMessage());
+        }
+        return obj;
+    }
 
 	@SerializedName("id")
 	private int id = 0;

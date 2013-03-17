@@ -2,6 +2,9 @@ package com.wikitude.example;
 
 import java.util.ArrayList;
 
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +53,7 @@ public class AdaptadorListPDI extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int index, View view, final ViewGroup parent) {
+	public View getView(final int index, View view, final ViewGroup parent) {
 		// TODO Auto-generated method stub
 		if (view == null) {
 			LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -65,7 +68,22 @@ public class AdaptadorListPDI extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				listaActivity.onBorrarPDI(pdi.getId());
+				new AlertDialog.Builder(v.getContext())
+				.setIcon(android.R.drawable.ic_dialog_alert)
+				.setTitle("Borrando Corredor")
+				.setMessage("Estas seguro de borrarlo?")
+				.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+						listaActivity.onBorrarPDI(pdi.getId());
+						ControladorPDIs controlador= ControladorPDIs.getInstance();
+						controlador.borrarPDIDeArray(pdi.getId());
+						listArray.remove(index);
+						notifyDataSetChanged();
+					}
+
+				}).setNegativeButton("No", null).show();
 
 			}
 		});
