@@ -1,5 +1,12 @@
 package com.wikitude.example;
 
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.google.gson.Gson;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -13,7 +20,7 @@ import android.widget.Toast;
  * @author Hansy
  *
  */
-public class RegistroPDIActivity extends Activity implements ToastInterface{
+public class RegistroPDIActivity extends Activity implements ToastInterface, RespuestaInterface{
 
 	@Override
 	/**
@@ -100,6 +107,32 @@ public class RegistroPDIActivity extends Activity implements ToastInterface{
 	    
 	}
 
+	
+	@Override
+	/**
+	 * Metodo que recibe el objeto json respuesta del servidor y realiza la correspondiente accion segun la respuesta
+	 */
+	public void procesarRespuestaServidor(JSONObject jObject) {
+		
+		try {
+			String tipoRespuesta=jObject.get("codigo").toString();
+			if(tipoRespuesta.equals("100")){
+				mostrarMensaje(jObject.get("mensaje").toString());
+				Gson gson = new Gson();
+				PuntoDeInteres pdiRegistrado=  gson.fromJson(jObject.getString("objeto"),PuntoDeInteres.class);
+				controlador.getPuntosDeInteres().add(pdiRegistrado);
+				controlador.actualizarJSONArrayPDIs();
+				finish();
+			}else{
+				mostrarMensaje(jObject.get("mensaje").toString());
+			}
+			
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	
 	private ControladorPDIs controlador = ControladorPDIs.getInstance();

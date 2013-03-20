@@ -1,9 +1,7 @@
 package com.wikitude.example;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import android.app.Activity;
+import org.json.JSONObject;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -14,9 +12,8 @@ public class ServidorHandler extends JsonHttpResponseHandler{
 	 * Constructor de la clase
 	 * @param act Activity que manejara los mensajes del servidor
 	 */
-	public ServidorHandler(Activity act){
-		activity=(RespuestaInterface) act;
-		toast=(ToastInterface) act;
+	public ServidorHandler(RespuestaInterface act){
+		activity=act;
 	}
 	
 	 @Override
@@ -25,20 +22,8 @@ public class ServidorHandler extends JsonHttpResponseHandler{
 	  */
 	 public void onSuccess(JSONObject jObject) {
          // Pull out the first event on the public timeline
-		 try {
-				String tipoRespuesta=jObject.get("codigo").toString();
-				if(tipoRespuesta.equals("100")){
-					toast.mostrarMensaje(jObject.get("mensaje").toString());
-					activity.procesarRespuestaServidor(jObject);
-				}else{
-					toast.mostrarMensaje(jObject.get("mensaje").toString());
-				}
-				
-				
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		 activity.procesarRespuestaServidor(jObject);
+		 
      }
 
 		@Override

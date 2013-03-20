@@ -77,10 +77,7 @@ public class AdaptadorListPDI extends BaseAdapter {
 					public void onClick(DialogInterface dialog, int which) {
 
 						listaActivity.onBorrarPDI(pdi.getId());
-						ControladorPDIs controlador= ControladorPDIs.getInstance();
-						controlador.borrarPDIDeArray(pdi.getId());
-						listArray.remove(index);
-						notifyDataSetChanged();
+						
 					}
 
 				}).setNegativeButton("No", null).show();

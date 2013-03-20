@@ -28,7 +28,7 @@ public class GestorServer {
 	 * @param pdi Punto de interes a registrar
 	 * @param activity Activity que implementa la interfaz ToastInterface que mostrar los mensajes recibidos
 	 */
-	public void registrarPDIEnServidor(String usuario, PuntoDeInteres pdi,ToastInterface activity) {
+	public void registrarPDIEnServidor(String usuario, PuntoDeInteres pdi,RespuestaInterface activity) {
 
 		System.out.println("Entre al gestor registro");
 		AsyncHttpClient client = new AsyncHttpClient();
@@ -53,7 +53,7 @@ public class GestorServer {
 		System.out.println("altitud: _"+String.valueOf(pdi.getPosicion().getAltitud())+"_");
 		System.out.println("direccion: _"+direccionBase + "/geoAdds/pdi/registrar/_");
 		client.post(direccionBase + "/geoAdds/pdi/registrar/", rp,
-				new ServidorMensajeHandler(activity));
+				new ServidorHandler(activity));
 
 	}
 	
@@ -100,12 +100,12 @@ public class GestorServer {
 	 * @param id El id del punto de interes a borrar
 	 * @param activity El activity de tipo ToastInterface que manejara los mensajes de respuesta
 	 */
-	public void borrarPDIenServidor(String usuario, int id,ToastInterface activity){
+	public void borrarPDIenServidor(String usuario, int id,RespuestaInterface activity){
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams rp = new RequestParams();
 		rp.put("usuario", usuario);
 		rp.put("idPDI", String.valueOf(id));
 		client.post(direccionBase + "/geoAdds/pdi/eliminar/", rp,
-				new ServidorMensajeHandler(activity));
+				new ServidorHandler(activity));
 	}
 }

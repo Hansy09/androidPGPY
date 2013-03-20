@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.gson.Gson;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,7 +22,7 @@ public class ListaMisPDIActivity extends Activity implements ToastInterface, Res
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_mis_pdi);
         ListView listView = (ListView) findViewById(R.id.listView1);
-        AdaptadorListPDI customAdapter = new AdaptadorListPDI(controlador.getPuntosDeInteres(),this);
+        customAdapter = new AdaptadorListPDI(controlador.getPuntosDeInteres(),this);
         listView.setAdapter(customAdapter);
 
     }
@@ -41,14 +43,7 @@ public class ListaMisPDIActivity extends Activity implements ToastInterface, Res
 			    	controlador.borrarPDI(usuario, id, this);	
     }
     
-    /**
-     * 
-     */
-    public void actualizarLista(){
-    	ListView listView = (ListView) findViewById(R.id.listView1);
-        AdaptadorListPDI customAdapter = new AdaptadorListPDI(controlador.getPuntosDeInteres(),this);
-        listView.setAdapter(customAdapter);
-    }
+    
     
     @Override
 	/**
@@ -62,23 +57,45 @@ public class ListaMisPDIActivity extends Activity implements ToastInterface, Res
     
     
     @Override
+    /**
+	 * Metodo que recibe el objeto json respuesta del servidor y realiza la correspondiente accion segun la respuesta
+	 */
 	public void procesarRespuestaServidor(JSONObject jObject) {
-		ArrayList<PuntoDeInteres> pdis=controlador.getPuntosDeInteres();
-		PuntoDeInteres pdi = null;
-		for(int i=0;i<pdis.size();i++ ){
-			if(pdis.get(i).getId()==id){
-				pdi=pdis.get(i);
-				pdis.remove(pdi);
-				controlador.setPuntosDeInteres(pdis);
-				controlador.actualizarJSONArrayPDIs();
-				this.actualizarLista();
+		
+		try {
+			String tipoRespuesta=jObject.get("codigo").toString();
+			if(tipoRespuesta.equals("100")){
+				mostrarMensaje(jObject.get("mensaje").toString());
+				ArrayList<PuntoDeInteres> pdis=controlador.getPuntosDeInteres();
+				Gson gson = new Gson();
+				PuntoDeInteres pdiEliminado=  gson.fromJson(jObject.getString("objeto"),PuntoDeInteres.class);
+				System.out.println("El id a eliminar es: "+pdiEliminado.getId());
+				PuntoDeInteres pdi = null;
+				for(int i=0;i<pdis.size();i++ ){
+					if(pdis.get(i).getId()==pdiEliminado.getId()){
+						System.out.println("Encontre el de eliminar");
+						pdi=pdis.get(i);
+						pdis.remove(pdi);
+						controlador.setPuntosDeInteres(pdis);
+						controlador.actualizarJSONArrayPDIs();
+						customAdapter.notifyDataSetChanged();
+					}
+				}
+				
+			}else{
+				mostrarMensaje(jObject.get("mensaje").toString());
 			}
+			
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error con el json de eliminar de server");
+			e.printStackTrace();
 		}
 	}
     
     private ControladorPDIs controlador= ControladorPDIs.getInstance();
-    private static boolean borrarPDI=false;
-    private int id=0;
+    private AdaptadorListPDI customAdapter;
 	
     
 }
