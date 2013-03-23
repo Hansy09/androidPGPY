@@ -101,7 +101,7 @@ public class SimpleARBrowserActivity extends Activity implements
 		// Androids LocationManager is used in this case
 		// NOT USED IN THIS EXAMPLE
 		locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 15, 0,
+		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 15, 0,
 				this);
 
 		this.architectView = (ArchitectView) this

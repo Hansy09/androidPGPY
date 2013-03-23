@@ -63,7 +63,8 @@
         <activity
             android:name="com.wikitude.example.PerfilActivity"
             android:label="@string/title_activity_perfil" >
-
+		</activity>
+        <activity
             android:name="com.wikitude.example.BusquedaAvanzadaActivity"
             android:label="@string/title_activity_busqueda_avanzada" >
         </activity>
