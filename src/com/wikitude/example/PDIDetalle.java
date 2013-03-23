@@ -32,11 +32,11 @@ public class PDIDetalle extends Activity {
 		if(pdi!=null){
 			((TextView) this.findViewById(R.id.textView1)).setText(pdi.getNombre());
 			((TextView) this.findViewById(R.id.textView3)).setText(pdi.getCategoria());
-			((TextView) this.findViewById(R.id.textView5)).setText(pdi.getDescripcion());
-			((TextView) this.findViewById(R.id.textView7)).setText(pdi.getDireccion());
-			((TextView) this.findViewById(R.id.textView9)).setText(pdi.getTelefono());
-			((TextView) this.findViewById(R.id.textView2)).setText(pdi.getUrl());
-			((TextView) this.findViewById(R.id.textView13)).setText(pdi.getEmail());
+			((TextView) this.findViewById(R.id.textView5)).setText(pdi.getUrl());
+			((TextView) this.findViewById(R.id.textView7)).setText(pdi.getEmail());
+			((TextView) this.findViewById(R.id.textView9)).setText(pdi.getDireccion());
+			((TextView) this.findViewById(R.id.textView11)).setText(pdi.getDescripcion());
+			((TextView) this.findViewById(R.id.textView13)).setText(pdi.getTelefono());
 			int loader = R.drawable.loading;
 			 
 	        // Imageview to show
