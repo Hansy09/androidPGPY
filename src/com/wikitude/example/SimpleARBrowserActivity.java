@@ -54,7 +54,7 @@ import com.wikitude.architect.ArchitectView;
  *        SDK has to possess. (REF: ARchitect Documentation)
  */
 public class SimpleARBrowserActivity extends Activity implements
-		ArchitectUrlListener, LocationListener, VisorInterface {
+		ArchitectUrlListener, LocationListener, VisorInterface, ToastInterface {
 
 	private static final String TAG = SimpleARBrowserActivity.class
 			.getSimpleName();
@@ -221,6 +221,11 @@ public class SimpleARBrowserActivity extends Activity implements
 			break;
 		case R.id.menu_VerPerfil:
 			this.verPerfil();
+		case R.id.menu_Reg:
+			this.visualizarRegistro();
+			break;
+		case R.id.menu_milista:
+			this.visualizarMiLista();
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -282,8 +287,8 @@ public class SimpleARBrowserActivity extends Activity implements
 			e.printStackTrace();
 		}
 		this.architectView.callJavascript("newData("
-				+ controlador.getPuntosDeInteresJArray() + "," + latitudActual
-				+ "," + longitudActual + "," + distanciaSeleccionada + ");");
+				+ controlador.getPuntosDeInteresJArray() + "," + controlador.getLatitudActual()
+				+ "," + controlador.getLongitudActual() + "," + distanciaSeleccionada + ");");
 
 	}
 
@@ -303,13 +308,16 @@ public class SimpleARBrowserActivity extends Activity implements
 		if (this.architectView != null) {
 			this.architectView.setLocation((float) (loc.getLatitude()),
 					(float) (loc.getLongitude()), loc.getAccuracy());
-			if (latitudActual != loc.getLatitude()
-					|| longitudActual != loc.getLongitude()) {
-				longitudActual = loc.getLongitude();
-				latitudActual = loc.getLatitude();
+			if (SimpleARBrowserActivity.latitudActual != loc.getLatitude()
+					|| SimpleARBrowserActivity.longitudActual != loc.getLongitude()) {
 				Posicion posicion = new Posicion();
-				posicion.setLongitud(longitudActual);
-				posicion.setLatitud(latitudActual);
+				controlador.setLongitudActual(loc.getLongitude());
+				controlador.setLatitudActual(loc.getLatitude());
+				controlador.setAltitudActual(loc.getAltitude());
+				latitudActual=loc.getLatitude();
+				longitudActual=loc.getLongitude();
+				posicion.setLongitud(controlador.getLongitudActual());
+				posicion.setLatitud(controlador.getLatitudActual());
 				if (!controlador.esUnaBusquedaAvanzada()) {
 					controlador.filtrarPDIsCercanos(posicion, 15, this);
 				}
@@ -354,6 +362,19 @@ public class SimpleARBrowserActivity extends Activity implements
 		Intent intent = new Intent(this, BusquedaAvanzadaActivity.class);		
 		startActivity(intent);
 	}
+	
+	public void visualizarMiLista() {
+		Intent intent = new Intent(this, ListaMisPDIActivity.class);
+		// intent.putStringArrayListExtra(LISTA_PDI, poiBeanList);
+		startActivity(intent);
+	}
+	
+	public void visualizarRegistro() {
+		Intent intent = new Intent(this, RegistroPDIActivity.class);
+		// intent.putStringArrayListExtra(LISTA_PDI, poiBeanList);
+		startActivity(intent);
+
+	}
 
 	public void ajustarRango(int rangoBarra) {
 		if (rangoBarra == 0)
@@ -365,6 +386,16 @@ public class SimpleARBrowserActivity extends Activity implements
 
 	public double obtenerdistanciaSeleccionada() {
 		return distanciaSeleccionada;
+	}
+	
+	@Override
+	/**
+	 * Metodo que muestra el mensaje en el activity
+	 */
+	public void mostrarMensaje(String mensaje) {
+		// TODO Auto-generated method stu
+	    Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+	    
 	}
 
 	public double calcularNuevoRango() {

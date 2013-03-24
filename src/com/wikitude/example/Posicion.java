@@ -1,5 +1,7 @@
 package com.wikitude.example;
 
+
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,14 +13,6 @@ import com.google.gson.annotations.SerializedName;
  *
  */
 public class Posicion {
-
-	public JSONObject toJSONString() throws JSONException {
-		JSONObject object = new JSONObject();
-		object.put("latitud", this.latitud);
-		object.put("longitud", this.longitud);
-		object.put("altitud", this.altitud);
-		return object;
-	}
 
 
 	public double getLatitud() {
@@ -45,6 +39,18 @@ public class Posicion {
 		this.longitud = longitud;
 	}
 
+	public JSONObject getJSONObject() {
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("latitud", latitud);
+            obj.put("altitud", altitud);
+            obj.put("longitud", longitud);
+        } catch (JSONException e) {
+            System.out.println("DefaultListItem.toString JSONException: "+e.getMessage());
+        }
+        return obj;
+    }
+	
 	@SerializedName("latitud")
 	private double latitud = 0;
 	@SerializedName("altitud")

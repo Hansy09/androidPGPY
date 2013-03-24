@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/menu_Lista" android:title="Lista" ></item>
+    <item android:id="@+id/menu_Lista" android:title="Lista" ></item>    
     <item android:id="@+id/menu_BusqAv" android:title="Busqueda Avanzada"></item>
+<!--     <item android:id="@+id/menu_Reg" android:title="Registro PDI"></item> -->
     
     <group android:id ="@+id/grupo_sesion_false">
         <item android:id="@+id/menu_IniciarSesion" android:title="Iniciar Sesion"></item>
         <item android:id="@+id/menu_RegistrarUsuario" android:title="Registrar Usuario"></item>
     </group>
     
-    <group android:id ="@+id/grupo_sesion_true">
+    <group android:id ="@+id/grupo_sesion_true">        
+<!--         <item android:id="@+id/menu_milista" android:title="Mis PDIs" ></item> -->
         <item android:id="@+id/menu_CerrarSesion" android:title="Cerrar Sesion"></item>
         <item android:id="@+id/menu_VerPerfil" android:title="Ver Perfil"></item>
     </group>

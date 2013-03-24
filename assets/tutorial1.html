@@ -165,8 +165,9 @@
                     var label = new AR.Label(jsonObject[i].nombre,1.0, {offsetY : -1.5,
                                              triggers: { 
                                              onClick:
-                                             createClickTrigger(jsonObject[i].id)},
-                                             style : {textColor : '#FFC100',backgroundColor : '#FFFFFF80'}});
+                                             //createClickTrigger(jsonObject[i].id)},
+											 generateOnPoiBubbleClickFunc(jsonObject[i].id)},
+                                             style : {textColor : '#FFC100',backgroundColor : '#FFFFFF80'}});                                         
                     
                     jsonObject[i].arLabel = label;
                     
@@ -176,7 +177,8 @@
                     var img = new AR.ImageDrawable(poiImage, 2.0,
                                                    {triggers: { 
                                                    onClick:
-                                                   createClickTrigger(jsonObject[i].id)}}
+                                                   //createClickTrigger(jsonObject[i].id)}}
+                                                   generateOnPoiBubbleClickFunc(jsonObject[i].id)}}
                                                    );
                     
                     jsonObject[i].animation = createOnClickAnimation(img);

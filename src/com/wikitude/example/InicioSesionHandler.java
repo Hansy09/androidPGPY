@@ -1,5 +1,8 @@
 package com.wikitude.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -7,6 +10,8 @@ import android.app.Activity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 public class InicioSesionHandler extends JsonHttpResponseHandler  {
@@ -26,7 +31,15 @@ public class InicioSesionHandler extends JsonHttpResponseHandler  {
 			//String mensajeRespuesta = jObject.getString("mensaje");
 			//contSesion.getSesion().setId(Integer.parseInt(resp));
 			contSesion.setSesionIniciada(true);
-			Toast.makeText(activity, "Sesion Iniciada",Toast.LENGTH_SHORT).show();
+			Gson gson = new Gson();
+			ControladorSesion controlador = ControladorSesion.getInstance();
+			List<PuntoDeInteres> myTypes = null;
+			myTypes = gson.fromJson(jObject.getString("objeto"),
+					new TypeToken<List<PuntoDeInteres>>() {
+					}.getType());
+			ArrayList<PuntoDeInteres> puntosDeInteres = (ArrayList<PuntoDeInteres>) myTypes;
+			controlador.getSesion().setMisPDI(puntosDeInteres);
+			Toast.makeText(activity, jObject.getString("mensaje"),Toast.LENGTH_SHORT).show();
 		} else {
 			Toast.makeText(activity, jObject.getString("mensaje"),Toast.LENGTH_SHORT).show();
 		}
