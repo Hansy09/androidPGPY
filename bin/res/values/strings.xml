@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SimpleARBrowser</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_pdidetalle">PDIDetalle</string>
+    <string name="pdiTitle">Titulo</string>
+    <string name="pdiCategoria">Categoria: </string>
+    <string name="pdiDescripcion">Descripcion: </string>
+    <string name="pdiDireccion">Direccion: </string>
+    <string name="pdiTelefono">Telefono: </string>
+    <string name="pdiUrl">Url: </string>
+    <string name="pdiEmail">Correo Electronico: </string>
+    <string name="pdiNombre">Nombre: </string>
+    <string name="pdiImagen">Tomar Imagen </string>
+    <string name="pdiDistancia">Distancia: </string>
+    <string name="pdiAnuncio">Distancia: </string>
+    <string name="categoria">categoria </string>
+    <string name="descripcion">descripcion </string>
+    <string name="direccion">direccion </string>
+    <string name="telefono">telefono </string>
+    <string name="url">url </string>
+    <string name="errorImg">Imagen no encontrada </string>
+    <string name="pdi">PDI </string>
+    <string name="email">email </string>
+    <string name="distancia">distancia </string>
+    <string name="botonBuscar">Buscar</string>
+    <string name="regPDI">Registrar PDI</string>
+    <string name="actPDI">Actualizar PDI</string>
+    <string name="title_activity_busqueda_simple">Busqueda Simple</string>
+    <string name="title_activity_visualizar_lista">Visualizar en Lista</string>
+    <string name="title_activity_registro_pdi">RegistroPDIActivity</string>
+    <string name="title_activity_actualizar_pdi">ActualizarPDIActivity</string>
+    <string name="title_activity_lista_mis_pdi">ListaMisPDIActivity</string>
+    
+
+</resources>

@@ -108,6 +108,7 @@ public class SimpleARBrowserActivity extends Activity implements
 				.findViewById(R.id.architectView);
 		// onCreate method for setting the license key for the SDK
 		architectView.onCreate(apiKey);
+		architectView.setCullingDistance(7500);
 
 		seekbarRango = (SeekBar) findViewById(R.id.seekBarRango);
 
@@ -124,7 +125,6 @@ public class SimpleARBrowserActivity extends Activity implements
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				ajustarRango(seekBar.getProgress());
 				calcularNuevoRango();
-				
 				loadSampleWorld();
 				Log.d("probando al soltar", "SeekBar: " + seekBar.getProgress());
 			}
@@ -377,11 +377,14 @@ public class SimpleARBrowserActivity extends Activity implements
 	}
 
 	public void ajustarRango(int rangoBarra) {
-		if (rangoBarra == 0)
-			distanciaSeleccionada = .05;
-		else
-			distanciaSeleccionada = (rangoBarra * .15);
 		
+		if (rangoBarra == 0){
+			distanciaSeleccionada = .05;
+		}
+		else{
+			distanciaSeleccionada = (rangoBarra * .15);
+		}
+		architectView.setCullingDistance((float)(distanciaSeleccionada*1000));
 	}
 
 	public double obtenerdistanciaSeleccionada() {
