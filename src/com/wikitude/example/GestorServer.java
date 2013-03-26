@@ -30,8 +30,8 @@ public class GestorServer{
 
 //	private String direccionBase = "http://192.168.1.67:8000/"; //Josue	
 //	private String direccionBase = "http://192.168.1.83:8000/";  //Rusel
-//	private String direccionBase = "http://jd732.o1.gondor.io/";
-	private String direccionBase = "http://pgpy.dyndns-ip.com:8000";
+	private String direccionBase = "http://jd732.o1.gondor.io/";
+//	private String direccionBase = "http://pgpy.dyndns-ip.com:8000";
 
 	public void buscarDentroDeRangoMax(Posicion posicion, double rangoMaximo,
 			VisorInterface visor) {
@@ -111,7 +111,7 @@ public class GestorServer{
 		RequestParams peticion = new RequestParams();
 		peticion.put("longitud", String.valueOf(posicion.getLongitud()));
 		peticion.put("latitud", String.valueOf(posicion.getLatitud()));
-		peticion.put("rangoMaximoAlcance", "100");
+		peticion.put("rangoMaximoAlcance", String.valueOf(rangoMaximo));
 		peticion.put("searchString", clave);
 		peticion.put("categoria", categoria);  
 		httpClient.post(direccionBase + "/geoAdds/pdi/categoria/", peticion,
