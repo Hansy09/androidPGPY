@@ -12,6 +12,14 @@ import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
+/**
+ * 
+ * @Autor SMD
+ * @Fecha 29/03/2013
+ * @Descripcion Clase encargada de la actividad de mostrar
+ * los anuncios de PDI en forma de lista, para actualizarlos o borrarlos
+ *
+ */
 public class ListaMisAnunciosPDIActivity extends Activity implements RespuestaInterface, ToastInterface{
 
 	@Override
@@ -57,7 +65,7 @@ public class ListaMisAnunciosPDIActivity extends Activity implements RespuestaIn
 	private int numeroPDI = 1;
 	private int idPDI= 0;
 	private ControladorAnuncio contAnuncio = ControladorAnuncio.getInstance();
-	private AdaptadorListAnuncios customAdapter;
+	private AdaptadorListAnuncios customAdapter = null;
 	private ControladorSesion contSesion = ControladorSesion.getInstance();
 	
 }

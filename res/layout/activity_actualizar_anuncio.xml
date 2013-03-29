@@ -58,6 +58,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:text="@string/anuncioDescripcion"
+            android:minLines="3"
+            android:maxLines="3"
             android:inputType="textMultiLine" >
 
             <requestFocus />

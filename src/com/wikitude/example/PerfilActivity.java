@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 /**
  * 
- * @Nombre SMD
+ * @Autor SMD
  * @Fecha 01/03/2013
  * @Descripcion Clase encargada de la actividad del perfil
  *
@@ -60,7 +60,11 @@ public class PerfilActivity extends Activity implements RespuestaInterface{
 		intent.putExtra("idPDI", contSesion.getSesion().getMisPDI().get(numeroPDI).getId());
 		startActivity(intent);
 	}
-
+	
+	/**
+	 * Muestra los anuncios segun el PDI que se haya seleccionado previamente, 
+	 * con la variable numeroPDI
+	 */
 	public void verAnuncios(){
 		Intent intent = new Intent(this, ListaMisAnunciosPDIActivity.class);
 		intent.putExtra("idPDI", contSesion.getSesion().getMisPDI().get(numeroPDI).getId());

@@ -13,9 +13,18 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+
+/**
+ * 
+ * @Autor SMD
+ * @Fecha 29/03/2013
+ * @Descripcion Clase encargada de adaptar la lista de Anuncios para
+ * obtener las funcionalidades deseadas
+ *
+ */
 public class AdaptadorListAnuncios extends BaseAdapter{
 	
-	private ArrayList<Anuncio> listArray;
+	private ArrayList<Anuncio> listArray = null;
 	private int idPDI = 0;
 	private final ListaMisAnunciosPDIActivity listaActivity;
 	
@@ -49,6 +58,9 @@ public class AdaptadorListAnuncios extends BaseAdapter{
 		this.listArray = listArray;
 	}
 
+	/**
+	 * Se obtiene la vista actual y se actualiza la lista de donde proviene el adaptador
+	 */
 	@Override
 	public View getView(int index, View view, ViewGroup parent) {
 		if (view == null) {

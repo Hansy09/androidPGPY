@@ -7,6 +7,13 @@ import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+/**
+ * 
+ * @Autor SMD
+ * @Fecha 29/03/2013
+ * @Descripcion Clase encargada de ejecutar la respuesta del servidor
+ *
+ */
 public class ServidorHandler extends JsonHttpResponseHandler{
 
 

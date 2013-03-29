@@ -16,6 +16,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * 
+ * @Autor SMD
+ * @Fecha 29/03/2013
+ * @Descripcion Clase encargada de la actividad para actualizar anuncios
+ *
+ */
 public class ActualizarAnuncioActivity extends Activity implements RespuestaInterface, ToastInterface{
 	
 	@Override
@@ -29,6 +36,9 @@ public class ActualizarAnuncioActivity extends Activity implements RespuestaInte
 	}
 	
 	public void onActualizarAnuncio(View view){
+		String titulo = ((TextView)this.findViewById(R.id.textView2)).getText().toString();
+		String categoria = ((TextView)this.findViewById(R.id.textView4)).getText().toString();
+		if(contAnuncio.confirmarCamposObligatorios(titulo, categoria)){
 		String descripcion = ((EditText) this.findViewById(R.id.editText1)).getText().toString();
 		if(!descripcion.equals(anuncio.getDescripcion())){
 			anuncio.setDescripcion(descripcion);
@@ -36,8 +46,12 @@ public class ActualizarAnuncioActivity extends Activity implements RespuestaInte
 		} else {
 			Toast.makeText(this, "No se realizaron cambios", Toast.LENGTH_SHORT).show();
 		}
+		} else Toast.makeText(this, "Falta definir los campos obligatorios Titulo, Categoria", Toast.LENGTH_SHORT).show();
 	}
 	
+	/**
+	 * Carga los datos del anuncio para mostrarlos dentro de la activity
+	 */
 	private void cargarDatosAnuncio() {
 		Log.d("log","idPDI intent "+idPDI);
 		ArrayList<PuntoDeInteres> puntosDeInteres = contSesion.getSesion().getMisPDI();

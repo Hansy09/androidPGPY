@@ -15,6 +15,14 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+
+/**
+ * 
+ * @Autor SMD
+ * @Fecha 29/03/2013
+ * @Descripcion Clase encargada de la actividad de registrar anuncio
+ *
+ */
 public class RegistrarAnuncioActivity extends Activity implements RespuestaInterface, ToastInterface{
 
 	@Override

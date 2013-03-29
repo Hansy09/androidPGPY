@@ -77,6 +77,12 @@ public class GestorServer{
 		httpClient.post(direccionBase + "/geoAdds/anuncio/registrar/", peticion, new ServidorHandler(act));
 	}
 	
+	/**
+	 * Esta clase se utiliza para cualquier lugar donde se necesiten obtener los Anuncios de algun PDI
+	 * ya registrado previamente
+	 * @param idPDI
+	 * @param act
+	 */
 	public void obtenerAnunciosPDI(int idPDI, RespuestaInterface act){
 		AsyncHttpClient httpClient = new AsyncHttpClient();
 		RequestParams peticion = new RequestParams();

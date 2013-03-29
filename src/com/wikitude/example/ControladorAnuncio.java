@@ -10,7 +10,13 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
-
+/**
+ * 
+ * @Autor SMD
+ * @Fecha 29/03/2013
+ * @Descripcion Clase encargada del Controlador de Anuncios
+ *
+ */
 public class ControladorAnuncio {
 
 	public static ControladorAnuncio getInstance(){
@@ -35,6 +41,14 @@ public class ControladorAnuncio {
 		else return true;
 	}
 	
+	/**
+	 * Envia una notificacion al usuario, para abrir la actividad del anuncio que se muestra
+	 * OJO: Actualmente envia la notificacion del anuncio al registrarlo, y solo al usuario que
+	 * la registro
+	 * @param idPDI
+	 * @param anuncio
+	 * @param act
+	 */
 	public void enviarNotificacion(int idPDI, Anuncio anuncio, RegistrarAnuncioActivity act){
 		ControladorPDIs controlador= ControladorPDIs.getInstance();
 		ArrayList<PuntoDeInteres> puntosDeInteres=controlador.getPuntosDeInteres();
@@ -88,6 +102,12 @@ public class ControladorAnuncio {
 		gestorServer.eliminarAnuncioEnServidor(idAnuncio, idPDI, act);
 	}
 	
+	/**
+	 * Esta clase se utiliza para cualquier lugar donde se necesiten obtener los Anuncios de algun PDI
+	 * ya registrado previamente
+	 * @param idPDI
+	 * @param act
+	 */
 	public void obtenerAnunciosDePDI(int idPDI, RespuestaInterface act){
 		Log.d("log", "mandando a obtener anuncios");
 		GestorServer gestorServer = new GestorServer();
