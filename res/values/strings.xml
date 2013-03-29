@@ -25,12 +25,23 @@
     <string name="correo_Sesion">Correo Electronico:</string>
     <string name="cont_Sesion">Contraseña:</string>
     <string name="conf_cont_Sesion">Confirmar Contraseña:</string>
+    <string name="registrar_anuncio">Registrar Anuncio</string>
+    <string name="actualizar_anuncio">Actualizar Anuncio</string>
+    <string name="anuncioTitulo">Titulo: </string>
+    <string name="anuncioCategoria">Categoria: </string>
+    <string name="anuncioDescripcion">Descripcion: </string>
     <string name="boton_Registro">Registrar</string>
+    <string name="boton_Actualizar">Actualizar</string>
     <string name="boton_Inicio">Iniciar Sesion</string>
+    <string name="anuncio">Anuncio</string>
+    <string name="errorImg">Imagen no encontrada </string>
     <string name="title_activity_busqueda_simple">Busqueda Simple</string>
     <string name="title_activity_visualizar_lista">Visualizar en Lista</string>
     <string name="title_activity_registrar_usuario">Registrar Usuario</string>
     <string name="title_activity_iniciar_sesion">Iniciar Sesion</string>
     <string name="title_activity_perfil">Perfil</string>
-
+	<string name="title_activity_registrar_anuncio">Registrar Anuncio</string>
+	<string name="title_activity_actualizar_anuncio">Actualizar Anuncio</string>
+	<string name="title_activity_anuncio">Anuncio</string>
+	<string name="title_activity_lista_anuncios">Lista de Anuncios</string>
 </resources>

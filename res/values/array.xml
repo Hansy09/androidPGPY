@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categoriasAnuncio">
+		<item>Ropa y Accesorios</item>
+		<item>Deportes</item>
+		<item>Electronicos</item>
+		<item>Zapatos</item>
+		<item>Papelerias</item>
+		<item>Librerias y Bibliotecas</item>
+		<item>Cultura</item>
+		<item>Telefonia</item>
+		<item>Comida</item>
+		<item>Entretenimiento</item>
+	</string-array>
+</resources>

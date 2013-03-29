@@ -63,6 +63,26 @@
             android:name="com.wikitude.example.PerfilActivity"
             android:label="@string/title_activity_perfil" >
         </activity>
+        <activity
+            android:name="com.wikitude.example.RegistrarAnuncioActivity"
+            android:label="@string/title_activity_registrar_anuncio" >
+        </activity>
+        <activity
+            android:name="com.wikitude.example.ActualizarAnuncioActivity"
+            android:label="@string/title_activity_actualizar_anuncio" >
+        </activity>
+        <activity
+            android:name="com.wikitude.example.AnuncioActivity"
+            android:label="@string/title_activity_anuncio" >
+        </activity>
+        <activity
+            android:name="com.wikitude.example.ListaAnunciosActivity"
+            android:label="@string/title_activity_lista_anuncios" >
+        </activity>
+        <activity
+            android:name="com.wikitude.example.ListaMisAnunciosPDIActivity"
+            android:label="@string/title_activity_lista_anuncios" >
+        </activity>
     </application>
 
 </manifest>

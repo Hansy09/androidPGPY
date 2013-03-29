@@ -1,19 +1,8 @@
 package com.wikitude.example;
 
-import java.lang.reflect.Type;
-import java.util.Collection;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.app.Activity;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 
@@ -71,6 +60,55 @@ public class GestorServer{
 		peticion.put("correo", String.valueOf( sesion.getCorreo()));
 		peticion.put("contrasenia", String.valueOf( sesion.getContrasenia()));
 		httpClient.post(direccionBase + "/geoAdds/usuario/registrar/", peticion, new RegistroUsuarioHandler(act));
+	}
+
+	public void registrarAnuncioEnServidor(Anuncio anuncio, int idPDI,RespuestaInterface act) {
+		AsyncHttpClient httpClient = new AsyncHttpClient();
+		RequestParams peticion = new RequestParams();
+		ControladorSesion contSesion = ControladorSesion.getInstance();
+		String correo = contSesion.getSesion().getCorreo();
+		peticion.put("idPDI", String.valueOf(idPDI));
+		peticion.put("correo_e", correo);
+		peticion.put("titulo", anuncio.getTitulo());
+		peticion.put("descripcion", anuncio.getDescripcion());
+		peticion.put("categoria", anuncio.getCategoria());
+		peticion.put("URLimagen", "");
+		Log.d("log", "mandando a handler");
+		httpClient.post(direccionBase + "/geoAdds/anuncio/registrar/", peticion, new ServidorHandler(act));
+	}
+	
+	public void obtenerAnunciosPDI(int idPDI, RespuestaInterface act){
+		AsyncHttpClient httpClient = new AsyncHttpClient();
+		RequestParams peticion = new RequestParams();
+		peticion.put("idPDI", String.valueOf(idPDI));
+		Log.d("log", "mandando a handler");
+		httpClient.post(direccionBase + "/geoAdds/anuncio/obtenerTodo/", peticion, new ServidorHandler(act));
+	}
+
+	public void actualizarAnuncioEnServidor(Anuncio anuncio, int idPDI,RespuestaInterface act) {
+		AsyncHttpClient httpClient = new AsyncHttpClient();
+		RequestParams peticion = new RequestParams();
+		ControladorSesion contSesion = ControladorSesion.getInstance();
+		String correo = contSesion.getSesion().getCorreo();
+		peticion.put("idAnuncio", String.valueOf(anuncio.getId()));
+		peticion.put("idPDI", String.valueOf(idPDI));
+		peticion.put("correo_e", correo);
+		peticion.put("titulo", anuncio.getTitulo());
+		peticion.put("descripcion", anuncio.getDescripcion());
+		peticion.put("categoria", anuncio.getCategoria());
+		peticion.put("URLimagen", anuncio.getImagen());
+		httpClient.post(direccionBase + "/geoAdds/anuncio/modificar/", peticion, new ServidorHandler(act));
+	}
+
+	public void eliminarAnuncioEnServidor(int idAnuncio, int idPDI, RespuestaInterface act) {
+		AsyncHttpClient httpClient = new AsyncHttpClient();
+		RequestParams peticion = new RequestParams();
+		ControladorSesion contSesion = ControladorSesion.getInstance();
+		String correo = contSesion.getSesion().getCorreo();
+		peticion.put("idAnuncio", String.valueOf(idAnuncio));
+		peticion.put("idPDI", String.valueOf(idPDI));
+		peticion.put("correo_e", correo);
+		httpClient.post(direccionBase + "/geoAdds/anuncio/eliminar/", peticion, new ServidorHandler(act));
 	}
 	
 }
