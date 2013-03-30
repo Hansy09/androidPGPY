@@ -41,8 +41,10 @@ public class RespuestaHandler extends JsonHttpResponseHandler{
 						new TypeToken<List<PuntoDeInteres>>() {
 						}.getType());
 				ArrayList<PuntoDeInteres> puntosDeInteres = (ArrayList<PuntoDeInteres>) myTypes;
+				CalculadoraGeografica calculadora= CalculadoraGeografica.getInstance();
+				calculadora.actualizarDistanciaLista(puntosDeInteres);
 				controlador.setPuntosDeInteres(puntosDeInteres);
-				controlador.setPuntosDeInteresJArray(jObject.getString("mensaje"));
+				controlador.actualizarJSONArrayPDIs();
 
 				if (controlador.esUnaBusquedaAvanzada() || controlador.esUnaBusquedaSimple()) {
 					SimpleARBrowserActivity arBrowser = (SimpleARBrowserActivity) activity;

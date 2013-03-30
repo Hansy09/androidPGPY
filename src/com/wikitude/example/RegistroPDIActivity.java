@@ -114,8 +114,10 @@ public class RegistroPDIActivity extends Activity implements ToastInterface, Res
 		
 		try {
 			String tipoRespuesta=jObject.get("codigo").toString();
+			System.out.println("Llego respuesta");
 			if(tipoRespuesta.equals("100")){
 				mostrarMensaje(jObject.get("mensaje").toString());
+				System.out.println("el mensaje recibido: "+jObject.get("mensaje").toString());
 				Gson gson = new Gson();
 				PuntoDeInteres pdiRegistrado=  gson.fromJson(jObject.getString("objeto"),PuntoDeInteres.class);
 				contSesion.getSesion().getMisPDI().add(pdiRegistrado);
@@ -133,6 +135,7 @@ public class RegistroPDIActivity extends Activity implements ToastInterface, Res
 		}
 	}
 
+	
 	
 	private ControladorPDIs controlador = ControladorPDIs.getInstance();
 	private ControladorSesion contSesion = ControladorSesion.getInstance();

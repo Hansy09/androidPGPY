@@ -65,6 +65,28 @@ public class ControladorSesion{
 		else return true;
 	}
 	
+	public void obtenerListaMisFavoritos(RespuestaInterface act){
+		GestorServer gestor = new GestorServer();
+		gestor.obtenerListaMisFavoritosEnServer(sesion,act);
+	}
+	
+	public void marcarFavorito(String id,int marcado, RespuestaInterface act){
+		GestorServer gestor = new GestorServer();
+		gestor.marcarFavoritoEnServidor(sesion, id, marcado, act);
+	}
+	
+	public void esFavorito(String id, ExisteFavoritoInterface act){
+		GestorServer gestor = new GestorServer();
+		gestor.existeEnFavoritosEnServer(sesion, id, act);
+	}
+	
+	public void agregarFavorito(PuntoDeInteres pdi){
+		sesion.getMisFavoritos().add(pdi);
+	}
+	
+	public void eliminarFavorito(PuntoDeInteres pdi){
+		sesion.getMisFavoritos().remove(pdi);
+	}
 	public boolean getSesionIniciada() {
 		return sesionIniciada;
 	}
@@ -83,6 +105,6 @@ public class ControladorSesion{
 	
 	private boolean sesionIniciada = false;
 	private Sesion sesion = new Sesion();
-	private static ControladorSesion controladorSesion;
+	private static ControladorSesion controladorSesion=null;
 	
 }

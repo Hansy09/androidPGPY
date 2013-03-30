@@ -101,6 +101,7 @@ public class ListaMisPDIActivity extends Activity implements ToastInterface, Res
 		}
 	}
     
+    
     private ControladorPDIs controlador= ControladorPDIs.getInstance();
     private AdaptadorListPDI customAdapter;
 	private ControladorSesion contSesion = ControladorSesion.getInstance();

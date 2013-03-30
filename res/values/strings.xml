@@ -38,6 +38,7 @@
     <string name="title_activity_registro_pdi">RegistroPDIActivity</string>
     <string name="title_activity_actualizar_pdi">ActualizarPDIActivity</string>
     <string name="title_activity_lista_mis_pdi">ListaMisPDIActivity</string>
+    <string name="title_activity_lista_mis_favoritos">ListaMisFavoritosActivity</string>
     <string name="title_activity_registrar_usuario">Registrar Usuario</string>
     <string name="title_activity_iniciar_sesion">Iniciar Sesion</string>
     <string name="title_activity_perfil">Perfil</string>
@@ -48,6 +49,7 @@
     <string name="porDescripcion">Descripción</string>
     <string name="porCategoria">Categoria</string>
     <string name="porDireccion">Dirección</string>
+    <string name="favorito">Favorito</string>
     <string name="title_activity_buscador_pdi_">Busqueda avanzdaa</string>
     <string name="title_activity_busqueda_pdi">Busqueda Avanzada</string>
     <string name="title_activity_buscador_pdi">Busqueda Avanzada</string>

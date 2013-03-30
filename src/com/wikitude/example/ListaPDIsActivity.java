@@ -24,7 +24,17 @@ public class ListaPDIsActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		System.out.println("Entro al ListaPDIsActivity");
 		ControladorPDIs controlador = ControladorPDIs.getInstance();
-		pdiLista = controlador.getPuntosDeInteres();			
+		ArrayList<PuntoDeInteres> pdisTotales=new ArrayList<PuntoDeInteres>();
+		System.out.println("La distancia permitida es de "+controlador.getDistanciaSeleccionada());
+		for(int i=0;i<controlador.getPuntosDeInteres().size();i++){
+			//System.out.println("La distancia entre el pdi "+controlador.getPuntosDeInteres().get(i).getNombre()+" y mi posicion es de "+pdisTotales.get(i).getDistancia());
+			if(controlador.getPuntosDeInteres().get(i).getDistancia()<=controlador.getDistanciaSeleccionada()){
+				pdisTotales.add(controlador.getPuntosDeInteres().get(i));
+			}
+				
+		}
+		System.out.println("El numero de pdis permitidos es de "+pdisTotales.size());
+		pdiLista = pdisTotales;			
 		setListAdapter(new ArrayAdapter<PuntoDeInteres>(this,
 				android.R.layout.simple_list_item_1, pdiLista));
 	}
@@ -48,5 +58,4 @@ public class ListaPDIsActivity extends ListActivity {
 	}
 
 	private ArrayList<PuntoDeInteres> pdiLista=null;
-	private String listaPDI[] = new String[50];
 }

@@ -150,4 +150,32 @@ public class GestorServer{
 		client.post(direccionBase + "/geoAdds/pdi/eliminar/", rp,
 				new ServidorHandler(activity));
 	}
+	
+	
+	public void marcarFavoritoEnServidor(Sesion sesion,String id,int marcado, RespuestaInterface activity){
+		AsyncHttpClient httpClient = new AsyncHttpClient();
+		RequestParams peticion = new RequestParams();
+		peticion.put("correo_e", String.valueOf( sesion.getCorreo()));
+		peticion.put("idPDI", String.valueOf( id));
+		peticion.put("marcado", String.valueOf( marcado));
+		System.out.println("Llego favorito antes server");
+		httpClient.post(direccionBase + "/geoAdds/favorito/marcar/", peticion, new ServidorHandler(activity));
+	}
+	
+	public void obtenerListaMisFavoritosEnServer(Sesion sesion, RespuestaInterface activity){
+		AsyncHttpClient httpClient = new AsyncHttpClient();
+		RequestParams peticion = new RequestParams();
+		peticion.put("usuario", String.valueOf( sesion.getCorreo()));
+		httpClient.post(direccionBase + "/geoAdds/usuario/listafavoritos/", peticion, new ServidorHandler(activity));
+	}
+	
+	public void existeEnFavoritosEnServer(Sesion sesion,String id, ExisteFavoritoInterface activity){
+		AsyncHttpClient httpClient = new AsyncHttpClient();
+		RequestParams peticion = new RequestParams();
+		peticion.put("usuario", String.valueOf( sesion.getCorreo()));
+		peticion.put("idPDI", String.valueOf( id));
+		httpClient.post(direccionBase + "/geoAdds/favorito/esfavorito/", peticion, new ExisteFavoritoHandler(activity));
+	}
+	
+	
 }

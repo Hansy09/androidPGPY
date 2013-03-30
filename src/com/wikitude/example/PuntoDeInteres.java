@@ -119,11 +119,24 @@ public class PuntoDeInteres {
             obj.put("urlImagen", imagen);
             obj.put("descripcion", descripcion);
             obj.put("posicion", posicion.getJSONObject());
+            obj.put("distancia", distancia);
         } catch (JSONException e) {
             System.out.println("DefaultListItem.toString JSONException: "+e.getMessage());
         }
         return obj;
     }
+	
+	
+
+	public double getDistancia() {
+		return distancia;
+	}
+
+	public void setDistancia(double distancia) {
+		this.distancia = distancia;
+	}
+
+
 
 	@SerializedName("id")
 	private int id = 0;
@@ -146,6 +159,9 @@ public class PuntoDeInteres {
 	@SerializedName("posicion")
 	private Posicion posicion = new Posicion();
 	private ArrayList<Anuncio> listaAnuncios = new ArrayList<Anuncio>();
+	@SerializedName("distancia")
+	private double distancia=0;
+	
 @Override
 public String toString() {
 	String nombre_categoria = nombre;

@@ -30,7 +30,7 @@ public class ServidorMensajeHandler extends JsonHttpResponseHandler{
 		 try {
 				String tipoRespuesta=jObject.get("codigo").toString();
 				if(tipoRespuesta.equals("100")){
-					activity.mostrarMensaje("La peticion fue correcta");
+					activity.mostrarMensaje(jObject.get("mensaje").toString());
 				}else{
 					activity.mostrarMensaje(jObject.get("mensaje").toString());
 				}

@@ -57,15 +57,16 @@ public class ActualizarPDIActivity extends Activity implements ToastInterface {
 		String email = ((EditText) this.findViewById(R.id.editText3)).getText()
 				.toString();
 		if(this.existeCambiosEnPDI()){
-			if (url.matches("^(www\\.)[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&:/~\\+#!]*[\\w\\-\\@?^=%&/~\\+#])?")) {
-				if (email.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")) {
-					if (telefono.matches("^[0-9]{1,10}$")) {
+			if (url.matches("^(www\\.)[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&:/~\\+#!]*[\\w\\-\\@?^=%&/~\\+#])?") || url.trim().equals("")) {
+				if (email.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")|| email.trim().equals("")) {
+					if (telefono.matches("^[0-9]{1,10}$") || telefono.trim().equals("")) {
 
 						pdi.setDescripcion(descripcion);
 						pdi.setDireccion(direccion);
 						pdi.setEmail(email);
 						pdi.setTelefono(telefono);
 						pdi.setUrl(url);
+						int idSend=0;
 						ArrayList<PuntoDeInteres> pdis=controlador.getPuntosDeInteres();
 						for(int i=0;i<pdis.size();i++ ){
 							if(pdis.get(i).getId()==pdi.getId()){
@@ -76,6 +77,10 @@ public class ActualizarPDIActivity extends Activity implements ToastInterface {
 							}
 						}
 						controlador.actualizarPDI(usuario, pdi, this);
+						Intent intent = new Intent(this, PDIDetalle.class);
+						System.out.println("El id es: "+pdi.getId());
+						intent.putExtra("id", String.valueOf(pdi.getId()));
+						this.startActivity(intent);
 					} else {
 						Toast.makeText(this,
 								"El campo telefono no es un telefono valido.",
@@ -214,6 +219,7 @@ public class ActualizarPDIActivity extends Activity implements ToastInterface {
 			}
 		}
 		if (pdi != null) {
+			pdi.setId(id);
 			((TextView) this.findViewById(R.id.textView21)).setText(pdi
 					.getNombre());
 			((TextView) this.findViewById(R.id.textView22)).setText(pdi

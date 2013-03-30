@@ -108,8 +108,10 @@ public class SimpleARBrowserActivity extends Activity implements
 				.findViewById(R.id.architectView);
 		// onCreate method for setting the license key for the SDK
 		architectView.onCreate(apiKey);
+		
 
 		seekbarRango = (SeekBar) findViewById(R.id.seekBarRango);
+		architectView.setCullingDistance((float)(distanciaSeleccionada*1000));
 
 		seekbarRango.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			public void onProgressChanged(SeekBar seekBar, int progress,
@@ -221,11 +223,6 @@ public class SimpleARBrowserActivity extends Activity implements
 			break;
 		case R.id.menu_VerPerfil:
 			this.verPerfil();
-		case R.id.menu_Reg:
-			this.visualizarRegistro();
-			break;
-		case R.id.menu_milista:
-			this.visualizarMiLista();
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -286,6 +283,8 @@ public class SimpleARBrowserActivity extends Activity implements
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("Esto es lo que mando a html: "+controlador.getPuntosDeInteresJArray());
+		System.out.println("Aqui termina");
 		this.architectView.callJavascript("newData("
 				+ controlador.getPuntosDeInteresJArray() + "," + controlador.getLatitudActual()
 				+ "," + controlador.getLongitudActual() + "," + distanciaSeleccionada + ");");
@@ -363,25 +362,14 @@ public class SimpleARBrowserActivity extends Activity implements
 		startActivity(intent);
 	}
 	
-	public void visualizarMiLista() {
-		Intent intent = new Intent(this, ListaMisPDIActivity.class);
-		// intent.putStringArrayListExtra(LISTA_PDI, poiBeanList);
-		startActivity(intent);
-	}
-	
-	public void visualizarRegistro() {
-		Intent intent = new Intent(this, RegistroPDIActivity.class);
-		// intent.putStringArrayListExtra(LISTA_PDI, poiBeanList);
-		startActivity(intent);
-
-	}
 
 	public void ajustarRango(int rangoBarra) {
 		if (rangoBarra == 0)
 			distanciaSeleccionada = .05;
 		else
 			distanciaSeleccionada = (rangoBarra * .15);
-		
+		controlador.setDistanciaSeleccionada(distanciaSeleccionada);
+		architectView.setCullingDistance((float)(distanciaSeleccionada*1000));
 	}
 
 	public double obtenerdistanciaSeleccionada() {
@@ -449,4 +437,6 @@ public class SimpleARBrowserActivity extends Activity implements
 	public static double getLongitudActual(){
 		return longitudActual;
 	}
+	
+	
 }

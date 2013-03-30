@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >    
     <item android:id="@+id/menu_milista" android:title="Mis PDIs" ></item>    
     <item android:id="@+id/menu_Reg" android:title="Registro PDI"></item>
+    <item android:id="@+id/menu_Favo" android:title="Mis Favoritos"></item>
     
 
 </menu>

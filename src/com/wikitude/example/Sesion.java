@@ -49,6 +49,16 @@ public class Sesion {
 	}
 	
 	
+	
+	
+	public ArrayList<PuntoDeInteres> getMisFavoritos() {
+		return misFavoritos;
+	}
+
+	public void setMisFavoritos(ArrayList<PuntoDeInteres> misFavoritos) {
+		this.misFavoritos = misFavoritos;
+	}
+
 	public Sesion(){
 		
 	}
@@ -56,5 +66,6 @@ public class Sesion {
 	private int id = 0;
 	private String correo = "";
 	private String contrasenia = "";
-	private ArrayList<PuntoDeInteres> misPDI = new ArrayList(); 
+	private ArrayList<PuntoDeInteres> misPDI = new ArrayList();
+	private ArrayList<PuntoDeInteres> misFavoritos = new ArrayList();
 }

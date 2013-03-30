@@ -154,6 +154,18 @@ public class ControladorPDIs {
 		return esBusquedaSimple;
 	}
 	
+	
+	
+	public double getDistanciaSeleccionada() {
+		return distanciaSeleccionada;
+	}
+
+	public void setDistanciaSeleccionada(double distanciaSeleccionada) {
+		this.distanciaSeleccionada = distanciaSeleccionada;
+	}
+
+
+
 	private ArrayList<PuntoDeInteres> puntosDeInteres = new ArrayList<PuntoDeInteres>();
 	private ArrayList<PuntoDeInteres> misPuntosDeInteres = new ArrayList<PuntoDeInteres>();
 	private String puntosDeInteresJArray = "";
@@ -162,7 +174,7 @@ public class ControladorPDIs {
 	private  double longitudActual = 13.069730f;
 	private  double latitudActual = 47.77318f;
 	private double altitudActual=0;
-	
+	private double distanciaSeleccionada=7.5;
 
 	private static boolean esBusquedaAvanzada = false;
 	private static boolean esBusquedaSimple = false;
