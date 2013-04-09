@@ -35,8 +35,8 @@ public class ControladorAnuncio {
 		gestorServer.registrarAnuncioEnServidor(anuncio, idPDI, act);
 	}
 	
-	public boolean confirmarCamposObligatorios(String titulo, String categoria){
-		if(titulo.equals("") || categoria.equals(""))
+	public boolean confirmarCamposObligatorios(String titulo, String categoria, String descripcion){
+		if(titulo.equals("") || categoria.equals("") || descripcion.equals(""))
 			return false;
 		else return true;
 	}

@@ -47,7 +47,7 @@ public class RegistrarAnuncioActivity extends Activity implements RespuestaInter
 		EditText editText2 = (EditText) findViewById(R.id.editText2);
 		String descripcion = editText2.getText().toString();;
 		
-		if(controladorAnuncio.confirmarCamposObligatorios(titulo, categoria)){
+		if(controladorAnuncio.confirmarCamposObligatorios(titulo, categoria, descripcion)){
 			anuncio = new Anuncio();
 			anuncio.setTitulo(titulo);
 			anuncio.setCategoria(categoria);
@@ -55,7 +55,7 @@ public class RegistrarAnuncioActivity extends Activity implements RespuestaInter
 			Log.d("log", "Mandando a registrar");
 			controladorAnuncio.registrarAnuncio(anuncio, idPDI, this);
 		}
-		else Toast.makeText(this, "Falta definir los campos obligatorios Titulo, Categoria", Toast.LENGTH_SHORT).show();
+		else Toast.makeText(this, "No puede dejar campos vacios", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

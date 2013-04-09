@@ -38,15 +38,15 @@ public class ActualizarAnuncioActivity extends Activity implements RespuestaInte
 	public void onActualizarAnuncio(View view){
 		String titulo = ((TextView)this.findViewById(R.id.textView2)).getText().toString();
 		String categoria = ((TextView)this.findViewById(R.id.textView4)).getText().toString();
-		if(contAnuncio.confirmarCamposObligatorios(titulo, categoria)){
 		String descripcion = ((EditText) this.findViewById(R.id.editText1)).getText().toString();
+		if(contAnuncio.confirmarCamposObligatorios(titulo, categoria, descripcion)){
 		if(!descripcion.equals(anuncio.getDescripcion())){
 			anuncio.setDescripcion(descripcion);
 			contAnuncio.actualizarAnuncio(anuncio, idPDI, this);
 		} else {
 			Toast.makeText(this, "No se realizaron cambios", Toast.LENGTH_SHORT).show();
 		}
-		} else Toast.makeText(this, "Falta definir los campos obligatorios Titulo, Categoria", Toast.LENGTH_SHORT).show();
+		} else Toast.makeText(this, "No puede dejar campos vacios", Toast.LENGTH_SHORT).show();
 	}
 	
 	/**
