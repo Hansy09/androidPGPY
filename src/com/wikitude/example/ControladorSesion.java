@@ -70,9 +70,9 @@ public class ControladorSesion{
 		gestor.obtenerListaMisFavoritosEnServer(sesion,act);
 	}
 	
-	public void marcarFavorito(String id,int marcado, RespuestaInterface act){
+	public void marcarCheckBoxFavorito(String id,int marcado, RespuestaInterface act){
 		GestorServer gestor = new GestorServer();
-		gestor.marcarFavoritoEnServidor(sesion, id, marcado, act);
+		gestor.marcarCheckBoxFavoritoEnServidor(sesion, id, marcado, act);
 	}
 	
 	public void esFavorito(String id, ExisteFavoritoInterface act){

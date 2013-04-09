@@ -74,14 +74,14 @@ public class PDIDetalle extends Activity implements RespuestaInterface, ExisteFa
 		
 	}
 	
-	public void onMarcarFavorito(View v){
+	public void onMarcarCheckBoxFavorito(View v){
 		CheckBox cBox=((CheckBox) this.findViewById(R.id.checkBox1));
 		int marcar=1;
 		if(cBox.isChecked()){
 			marcar=0;
 		}
 		
-		contSesion.marcarFavorito(idPdi, marcar, this);
+		contSesion.marcarCheckBoxFavorito(idPdi, marcar, this);
 	}
 
 	@Override

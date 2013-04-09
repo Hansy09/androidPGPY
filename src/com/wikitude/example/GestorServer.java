@@ -152,7 +152,7 @@ public class GestorServer{
 	}
 	
 	
-	public void marcarFavoritoEnServidor(Sesion sesion,String id,int marcado, RespuestaInterface activity){
+	public void marcarCheckBoxFavoritoEnServidor(Sesion sesion,String id,int marcado, RespuestaInterface activity){
 		AsyncHttpClient httpClient = new AsyncHttpClient();
 		RequestParams peticion = new RequestParams();
 		peticion.put("correo_e", String.valueOf( sesion.getCorreo()));
