@@ -35,13 +35,37 @@ public class Sesion {
 		this.contrasenia = contrasenia;
 	}
 	
+	public String getNombre() {
+		return nombreDelUsuario;
+	} 
+	
+	public void setNombre(String nuevoNombre) {
+		this.nombreDelUsuario = nuevoNombre;
+	}
+	
+	public String getApellido() {
+		return apellidoDelUsuairio;
+	}
+	
+	public void setApellido(String nuevoApellido) { 
+		this.apellidoDelUsuairio = nuevoApellido;				
+	}
+		
+	public String getURLImagenDelUsuario() {
+		return URLImagenDelUsuario;
+	}
+	
+	public void setURLImagen(String nuevaURLImagen) {
+		this.URLImagenDelUsuario = nuevaURLImagen;
+	}
+	
 	public ArrayList<PuntoDeInteres> getMisPDI(){
 		return misPDI;
 	}
 	
 	public void setMisPDI(ArrayList<PuntoDeInteres> PDI){
 		this.misPDI = PDI;
-	}
+	}	
 	
 	public Sesion(String correo, String contrasenia){
 		setCorreo(correo);
@@ -56,5 +80,8 @@ public class Sesion {
 	private int id = 0;
 	private String correo = "";
 	private String contrasenia = "";
-	private ArrayList<PuntoDeInteres> misPDI = new ArrayList(); 
+	private String nombreDelUsuario = "";
+	private String apellidoDelUsuairio = "";
+	private String URLImagenDelUsuario = "";
+	private ArrayList<PuntoDeInteres> misPDI = new ArrayList();	
 }

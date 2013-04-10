@@ -36,7 +36,7 @@ public class InicioSesionHandler extends JsonHttpResponseHandler  {
 			List<PuntoDeInteres> myTypes = null;
 			myTypes = gson.fromJson(jObject.getString("objeto"),
 					new TypeToken<List<PuntoDeInteres>>() {
-					}.getType());
+					}.getType());			
 			ArrayList<PuntoDeInteres> puntosDeInteres = (ArrayList<PuntoDeInteres>) myTypes;
 			controlador.getSesion().setMisPDI(puntosDeInteres);
 			Toast.makeText(activity, jObject.getString("mensaje"),Toast.LENGTH_SHORT).show();

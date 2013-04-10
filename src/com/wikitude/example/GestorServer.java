@@ -137,6 +137,23 @@ public class GestorServer{
 	}
 	
 	/**
+	 * Metodo que sirve para actualizar el nombre, el apellido, el correo, o la contraseña del usuario
+	 * @param sesion La sesion del usuario que quiere cambiar alguno de sus datos
+	 * @param act Activity al cual sera redirigida la respuesta de petición.
+	 */
+	public void actualizaUsuarioEnServidor(Sesion sesion, ActualizarPerfilActivity act){
+		AsyncHttpClient httpClient = new AsyncHttpClient();
+		RequestParams peticion = new RequestParams();
+		peticion.put("idUser", String.valueOf(sesion.getId()));
+		peticion.put("correo", String.valueOf( sesion.getCorreo()));
+		peticion.put("contrasenia", String.valueOf( sesion.getContrasenia()));
+		peticion.put("nombre", sesion.getNombre());
+		peticion.put("apellido", sesion.getApellido());
+		peticion.put("URLimagen", sesion.getURLImagenDelUsuario());
+		httpClient.post(direccionBase + "/geoAdds/usuario/actualizar/", peticion, new ActualizaUsuarioHandler(act));
+	}
+	
+	/**
 	 * Metodo que sirve parar borrar un punto de interes en el servidor
 	 * @param usuario El usuario que tiene registrado el punto de interes
 	 * @param id El id del punto de interes a borrar

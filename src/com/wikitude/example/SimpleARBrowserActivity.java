@@ -221,6 +221,7 @@ public class SimpleARBrowserActivity extends Activity implements
 			break;
 		case R.id.menu_VerPerfil:
 			this.verPerfil();
+			break;
 		case R.id.menu_Reg:
 			this.visualizarRegistro();
 			break;
