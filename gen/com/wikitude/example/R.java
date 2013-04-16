@@ -118,8 +118,9 @@ public final class R {
         public static final int activity_registrar_usuario=0x7f070009;
         public static final int activity_registro_pdi=0x7f07000a;
         public static final int activity_respuesta_busqueda_handler=0x7f07000b;
-        public static final int activity_visualizar_lista=0x7f07000c;
-        public static final int visor_menu=0x7f07000d;
+        public static final int activity_tomar_foto=0x7f07000c;
+        public static final int activity_visualizar_lista=0x7f07000d;
+        public static final int visor_menu=0x7f07000e;
     }
     public static final class string {
         public static final int actPDI=0x7f05001a;
@@ -189,6 +190,7 @@ public final class R {
         public static final int title_activity_registrar_usuario=0x7f050025;
         public static final int title_activity_registro_pdi=0x7f050022;
         public static final int title_activity_respuesta_busqueda_handler=0x7f050034;
+        public static final int title_activity_tomar_foto=0x7f050046;
         public static final int title_activity_visualizar_lista=0x7f050021;
         public static final int tomarFoto=0x7f05003e;
         public static final int url=0x7f050013;

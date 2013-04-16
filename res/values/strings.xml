@@ -63,13 +63,14 @@
     <string name="imagenPerfilUsuario">Imegen de perfil:</string>
     <string name="modificarPerfil">Modificar perfil</string>
     <string name="title_activity_actualizar_perfil">Actualizar mi perfil</string>
-    <string name="tomarFoto">Tomar foto</string>
-    <string name="imagenArchivo">Imagen desde Archivo</string>
+    <string name="tomarFoto">Tomar una foto</string>
+    <string name="imagenArchivo">Seleccionar una imagen de galería</string>
     <string name="contraseniaUsuario">Contraseña:</string>
     <string name="cambiarContrasenia">Cambiar contraseña</string>
     <string name="title_activity_cambiar_contrasenia">Cambiar contraseña</string>
     <string name="contraseniaActual">Escriba su contraseña actual:</string>
     <string name="contraseniaNueva">Escriba su nueva contraseña:</string>
-    <string name="confirmaConatrasenia">Confirme su nueva contraseña:</string>   
+    <string name="confirmaConatrasenia">Confirme su nueva contraseña:</string>
+    <string name="title_activity_tomar_foto">TomarFotoActivity</string>
 
 </resources>

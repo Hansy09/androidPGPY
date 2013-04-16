@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class CambiarContraseniaActivity extends Activity {
@@ -24,23 +25,26 @@ public class CambiarContraseniaActivity extends Activity {
 	
 	public void actualizarNuevaContrasena(View view){
 		Sesion sesion = ControladorSesion.getInstance().getSesion();
-		String contrasenaActual = findViewById(R.id.txtFld_contraseniaActual).toString();
-		String contrasenaNueva = findViewById(R.id.txtFld_contraseniaNueva).toString();
-		String contrasenaNuevaConfirmacion = findViewById(R.id.txtFld_confirmaContrasenia).toString();		
-//		La contraseña esta encriptada, por tanto no es posible compararlas con un simple equals.
-		if(sesion.getContrasenia().equals(contrasenaActual)){
-			System.out.println("________________LA CONTRASEÑA ACTUAL ES CORRECTA");
-			if(contrasenaNueva.equals(contrasenaNuevaConfirmacion)){
-				sesion.setContrasenia(contrasenaNueva);
-				startActivity(new Intent(this, ActualizarPerfilActivity.class));
-				Toast.makeText(this, "Nueva contraseña establecida",Toast.LENGTH_SHORT).show();
-			} 
-			else {
-				Toast.makeText(this, "Los campos 'Escriba su nueva contraseña' y 'Confirme su nueva contraseña' no coinciden",Toast.LENGTH_LONG).show();
+		String contrasenaActual = ((EditText) findViewById(R.id.txtFld_contraseniaActual)).getText().toString();
+		String contrasenaNueva = ((EditText) findViewById(R.id.txtFld_contraseniaNueva)).getText().toString();
+		String contrasenaNuevaConfirmacion = ((EditText) findViewById(R.id.txtFld_confirmaContrasenia)).getText().toString();		
+		if (!contrasenaActual.equals("") && !contrasenaNueva.equals("") && !contrasenaNuevaConfirmacion.equals("")) {
+			if (sesion.getContrasenia().equals(contrasenaActual)) {
+				System.out.println("________________LA CONTRASEÑA ACTUAL ES CORRECTA");
+				if (contrasenaNueva.equals(contrasenaNuevaConfirmacion)) {
+					sesion.setContrasenia(contrasenaNueva);					
+					Toast.makeText(this, "Nueva contraseña establecida",Toast.LENGTH_SHORT).show();					
+					startActivity(new Intent(this,ActualizarPerfilActivity.class));					
+					finish();
+				} else {
+					Toast.makeText(this,"Los campos 'Escriba su nueva contraseña' y 'Confirme su nueva contraseña' no coinciden",Toast.LENGTH_LONG).show();
+				}
+			} else {
+				Toast.makeText(this, "La contraseña actual no es correcta",	Toast.LENGTH_SHORT).show();
 			}
-		}	
+		}
 		else {
-			Toast.makeText(this, "La contraseña actual no es correcta. [Existe un problema de comparación, REVISAR] ",Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "Por favor llene todos los campos",Toast.LENGTH_SHORT).show();
 		}
 	}
 

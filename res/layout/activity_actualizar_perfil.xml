@@ -99,7 +99,7 @@
                     android:id="@+id/img_imagenUsuario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/images"
+                    android:src="@drawable/images"                    
                     tools:ignore="ContentDescription" />
 
                 <Button
@@ -107,7 +107,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="80dp"       
                     android:layout_toRightOf="@+id/img_imagenUsuario"             
-                    android:text="@string/tomarFoto" />
+                    android:text="@string/tomarFoto" 
+                    android:onClick="tomarFoto"/>
 
                 <Button
                     android:id="@+id/btn_imagenArchivo"                    
@@ -115,7 +116,8 @@
                     android:layout_height="80dp"    
                     android:layout_toRightOf="@+id/img_imagenUsuario"
                     android:layout_below="@+id/btn_tomarFoto"                                                      
-                    android:text="@string/imagenArchivo" />
+                    android:text="@string/imagenArchivo"
+                    android:onClick="seleccionarImagenDeGaleria" />
 
             </RelativeLayout>
         </TableRow>

@@ -50,6 +50,22 @@ public class Sesion {
 	public void setApellido(String nuevoApellido) { 
 		this.apellidoDelUsuairio = nuevoApellido;				
 	}
+	
+	public int getEdad(){
+		return edad;
+	}
+	
+	public void setEdad(int edad) {		
+		this.edad = edad;
+	}
+	
+	public String getGenero(){
+		return genero;
+	}
+	
+	public void setGenero(String genero){
+		this.genero = genero;
+	}	
 		
 	public String getURLImagenDelUsuario() {
 		return URLImagenDelUsuario;
@@ -82,6 +98,8 @@ public class Sesion {
 	private String contrasenia = "";
 	private String nombreDelUsuario = "";
 	private String apellidoDelUsuairio = "";
+	private int edad = 0;
+	private String genero = "";
 	private String URLImagenDelUsuario = "";
 	private ArrayList<PuntoDeInteres> misPDI = new ArrayList();	
 }

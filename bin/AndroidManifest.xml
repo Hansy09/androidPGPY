@@ -87,6 +87,10 @@
             android:name="com.wikitude.example.CambiarContraseniaActivity"
             android:label="@string/title_activity_cambiar_contrasenia" >
         </activity>
+        <activity
+            android:name="com.wikitude.example.TomarFotoActivity"
+            android:label="@string/title_activity_tomar_foto" >
+        </activity>
     </application>
 
 </manifest>

@@ -44,7 +44,8 @@ public class PDIDetalle extends Activity {
 	 
 	        // Image url
 	        String image_url = "http://arquidiocesiscali.org/apc-aa-files/38373837383738733837383773383738/aguaparque.JPG";
-	 
+	        
+	        
 	        // ImageLoader class instance
 	        ImageLoader imgLoader = new ImageLoader(getApplicationContext());
 	 
