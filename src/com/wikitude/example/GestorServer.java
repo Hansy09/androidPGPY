@@ -30,8 +30,9 @@ public class GestorServer{
 
 //	private String direccionBase = "http://192.168.1.67:8000/"; //Josue	
 //	private String direccionBase = "http://192.168.1.83:8000/";  //Rusel
-	private String direccionBase = "http://jd732.o1.gondor.io/";
+//	private String direccionBase = "http://jd732.o1.gondor.io/";
 //	private String direccionBase = "http://pgpy.dyndns-ip.com:8000";
+	private String direccionBase = "http://jd732.gondor.co/";
 
 	public void buscarDentroDeRangoMax(Posicion posicion, double rangoMaximo,
 			VisorInterface visor) {
@@ -134,6 +135,61 @@ public class GestorServer{
 		peticion.put("correo", String.valueOf( sesion.getCorreo()));
 		peticion.put("contrasenia", String.valueOf( sesion.getContrasenia()));
 		httpClient.post(direccionBase + "/geoAdds/usuario/registrar/", peticion, new RegistroUsuarioHandler(act));
+	}
+
+	public void registrarAnuncioEnServidor(Anuncio anuncio, int idPDI,RespuestaInterface act) {
+		AsyncHttpClient httpClient = new AsyncHttpClient();
+		RequestParams peticion = new RequestParams();
+		ControladorSesion contSesion = ControladorSesion.getInstance();
+		String correo = contSesion.getSesion().getCorreo();
+		peticion.put("idPDI", String.valueOf(idPDI));
+		peticion.put("correo_e", correo);
+		peticion.put("titulo", anuncio.getTitulo());
+		peticion.put("descripcion", anuncio.getDescripcion());
+		peticion.put("categoria", anuncio.getCategoria());
+		peticion.put("URLimagen", "");
+		Log.d("log", "mandando a handler");
+		httpClient.post(direccionBase + "/geoAdds/anuncio/registrar/", peticion, new ServidorHandler(act));
+	}
+	
+	/**
+	 * Esta clase se utiliza para cualquier lugar donde se necesiten obtener los Anuncios de algun PDI
+	 * ya registrado previamente
+	 * @param idPDI
+	 * @param act
+	 */
+	public void obtenerAnunciosPDI(int idPDI, ExisteFavoritoInterface act){
+		AsyncHttpClient httpClient = new AsyncHttpClient();
+		RequestParams peticion = new RequestParams();
+		peticion.put("idPDI", String.valueOf(idPDI));
+		Log.d("log", "mandando a handler");
+		httpClient.post(direccionBase + "/geoAdds/anuncio/obtenerTodo/", peticion, new ExisteFavoritoHandler(act));
+	}
+
+	public void actualizarAnuncioEnServidor(Anuncio anuncio, int idPDI,RespuestaInterface act) {
+		AsyncHttpClient httpClient = new AsyncHttpClient();
+		RequestParams peticion = new RequestParams();
+		ControladorSesion contSesion = ControladorSesion.getInstance();
+		String correo = contSesion.getSesion().getCorreo();
+		peticion.put("idAnuncio", String.valueOf(anuncio.getId()));
+		peticion.put("idPDI", String.valueOf(idPDI));
+		peticion.put("correo_e", correo);
+		peticion.put("titulo", anuncio.getTitulo());
+		peticion.put("descripcion", anuncio.getDescripcion());
+		peticion.put("categoria", anuncio.getCategoria());
+		peticion.put("URLimagen", anuncio.getImagen());
+		httpClient.post(direccionBase + "/geoAdds/anuncio/modificar/", peticion, new ServidorHandler(act));
+	}
+
+	public void eliminarAnuncioEnServidor(int idAnuncio, int idPDI, RespuestaInterface act) {
+		AsyncHttpClient httpClient = new AsyncHttpClient();
+		RequestParams peticion = new RequestParams();
+		ControladorSesion contSesion = ControladorSesion.getInstance();
+		String correo = contSesion.getSesion().getCorreo();
+		peticion.put("idAnuncio", String.valueOf(idAnuncio));
+		peticion.put("idPDI", String.valueOf(idPDI));
+		peticion.put("correo_e", correo);
+		httpClient.post(direccionBase + "/geoAdds/anuncio/eliminar/", peticion, new ServidorHandler(act));
 	}
 	
 	/**

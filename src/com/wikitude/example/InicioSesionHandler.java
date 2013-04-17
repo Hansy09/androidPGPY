@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -28,8 +27,6 @@ public class InicioSesionHandler extends JsonHttpResponseHandler  {
 		try {
 			tipoRespuesta = jObject.get("codigo").toString();
 		if(tipoRespuesta.equals("100")){
-			//String mensajeRespuesta = jObject.getString("mensaje");
-			//contSesion.getSesion().setId(Integer.parseInt(resp));
 			contSesion.setSesionIniciada(true);
 			Gson gson = new Gson();
 			ControladorSesion controlador = ControladorSesion.getInstance();

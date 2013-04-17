@@ -30,9 +30,10 @@ public class ServidorHandler extends JsonHttpResponseHandler{
 		/**
 		 * Metodo que maneja los errores relacionados con el servidor
 		 */
-		public void onFailure(Throwable arg0, JSONObject arg1) {
+		//public void onFailure(Throwable arg0, JSONObject arg1) { A veces hacia que explote
+			public void onFailure(Throwable arg0) {
 			// TODO Auto-generated method stub
-			super.onFailure(arg0, arg1);
+			//super.onFailure(arg0, arg1);
 			toast.mostrarMensaje("Hubo un problema con el servidor");
 		}
     private ToastInterface toast;

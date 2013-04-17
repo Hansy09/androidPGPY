@@ -126,7 +126,10 @@ public class PuntoDeInteres {
         return obj;
     }
 	
-	
+	@Override
+	public String toString(){
+		return nombre;
+	}
 
 	public double getDistancia() {
 		return distancia;
@@ -135,7 +138,6 @@ public class PuntoDeInteres {
 	public void setDistancia(double distancia) {
 		this.distancia = distancia;
 	}
-
 
 
 	@SerializedName("id")
@@ -161,12 +163,5 @@ public class PuntoDeInteres {
 	private ArrayList<Anuncio> listaAnuncios = new ArrayList<Anuncio>();
 	@SerializedName("distancia")
 	private double distancia=0;
-	
-@Override
-public String toString() {
-	String nombre_categoria = nombre;
-	return nombre_categoria;
-}
-	
-	
+
 }

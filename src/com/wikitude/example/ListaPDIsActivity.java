@@ -34,7 +34,7 @@ public class ListaPDIsActivity extends ListActivity {
 				
 		}
 		System.out.println("El numero de pdis permitidos es de "+pdisTotales.size());
-		pdiLista = pdisTotales;			
+		pdiLista = pdisTotales;
 		setListAdapter(new ArrayAdapter<PuntoDeInteres>(this,
 				android.R.layout.simple_list_item_1, pdiLista));
 	}

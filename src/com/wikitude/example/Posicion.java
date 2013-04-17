@@ -50,7 +50,6 @@ public class Posicion {
         }
         return obj;
     }
-	
 	@SerializedName("latitud")
 	private double latitud = 0;
 	@SerializedName("altitud")

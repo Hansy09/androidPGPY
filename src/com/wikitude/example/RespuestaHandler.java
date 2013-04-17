@@ -67,7 +67,6 @@ public class RespuestaHandler extends JsonHttpResponseHandler{
 	
 	 @Override
 	 public void onFailure(Throwable arg0){
-	
 		 Toast.makeText(((Activity)activity), "No hay servidor",
 					Toast.LENGTH_LONG).show();
 	 }

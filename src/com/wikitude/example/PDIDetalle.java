@@ -5,16 +5,18 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.google.gson.Gson;
-
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 /**
  * Activity que muestra los datos completos del punto de interes seleccionado
@@ -70,7 +72,8 @@ public class PDIDetalle extends Activity implements RespuestaInterface, ExisteFa
 	        imgLoader.DisplayImage(image_url, loader, image);
 	        
 		}
-		
+		ControladorAnuncio contAnuncio = ControladorAnuncio.getInstance();
+		contAnuncio.obtenerAnunciosDePDI(pdi.getId(), this);
 		
 	}
 	
@@ -82,6 +85,26 @@ public class PDIDetalle extends Activity implements RespuestaInterface, ExisteFa
 		}
 		
 		contSesion.marcarCheckBoxFavorito(idPdi, marcar, this);
+	}
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int itemId = item.getItemId();
+
+		switch (itemId) {
+		case R.id.menu_verAnuncios:
+			this.onVerAnuncios();
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	/**
+	 * Muestra los anuncios segun el PDI que se haya seleccionado previamente, 
+	 * con la variable numeroPDI
+	 */
+	public void onVerAnuncios(){
+		Intent intent = new Intent(this, ListaAnunciosActivity.class);
+		intent.putExtra("idPDI", Integer.parseInt(idPdi));
+		startActivity(intent);		
 	}
 
 	@Override
@@ -146,7 +169,6 @@ public class PDIDetalle extends Activity implements RespuestaInterface, ExisteFa
 		}
 	}
 	
-
 	private ControladorSesion contSesion = ControladorSesion.getInstance();
 	private String idPdi=null;
 	

@@ -13,4 +13,17 @@
 		<item>Bancos</item>
 		<item>Otros</item>
 	</string-array>
+
+    <string-array name="categoriasAnuncio">
+		<item>Ropa y Accesorios</item>
+		<item>Deportes</item>
+		<item>Electronicos</item>
+		<item>Zapatos</item>
+		<item>Papelerias</item>
+		<item>Librerias y Bibliotecas</item>
+		<item>Cultura</item>
+		<item>Telefonia</item>
+		<item>Comida</item>
+		<item>Entretenimiento</item>
+	</string-array>
 </resources>

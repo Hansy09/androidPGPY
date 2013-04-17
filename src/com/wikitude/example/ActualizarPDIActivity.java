@@ -1,26 +1,17 @@
 package com.wikitude.example;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActualizarPDIActivity extends Activity implements ToastInterface {
@@ -38,6 +29,36 @@ public class ActualizarPDIActivity extends Activity implements ToastInterface {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_actulizar_pdi, menu);
 		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int itemId = item.getItemId();
+
+		switch (itemId) {
+		case R.id.menu_RegistrarAnuncio:
+			this.registrarAnuncio();
+			break;
+		case R.id.menu_VerAnunciosPDI:
+			this.verAnuncios();
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	private void registrarAnuncio() {
+		Intent intent = new Intent(this, RegistrarAnuncioActivity.class);
+		intent.putExtra("idPDI", pdi.getId());
+		startActivity(intent);
+	}
+	
+	/**
+	 * Muestra los anuncios segun el PDI que se haya seleccionado previamente, 
+	 * con la variable numeroPDI
+	 */
+	public void verAnuncios(){
+		Intent intent = new Intent(this, ListaMisAnunciosPDIActivity.class);
+		intent.putExtra("idPDI", pdi.getId());
+		startActivity(intent);		
 	}
 
 	public void onActualizarPDI(View v) {
@@ -245,5 +266,4 @@ public class ActualizarPDIActivity extends Activity implements ToastInterface {
 	private ControladorPDIs controlador = ControladorPDIs.getInstance();
 	private ControladorSesion contSesion = ControladorSesion.getInstance();
 	private PuntoDeInteres pdi = new PuntoDeInteres();
-
 }
