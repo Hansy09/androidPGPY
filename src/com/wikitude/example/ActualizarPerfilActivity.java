@@ -26,9 +26,9 @@ import android.widget.Toast;
 
 public class ActualizarPerfilActivity extends Activity {
 
-	final int TAKE_PHOTO_CODE = 1;
+	private final int TAKE_PHOTO_CODE = 1;
 
-	final int SELECT_PICTURE = 2;
+	private final int SELECT_PICTURE = 2;
 
 	private String rutaArchivoImagen = "";
 
