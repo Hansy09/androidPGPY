@@ -222,7 +222,7 @@ public class SimpleARBrowserActivity extends Activity implements
 			this.crearDialogoCierreSesion();
 			break;
 		case R.id.menu_VerPerfil:
-			this.verPerfil();
+			this.verPerfil();			
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -283,8 +283,6 @@ public class SimpleARBrowserActivity extends Activity implements
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Esto es lo que mando a html: "+controlador.getPuntosDeInteresJArray());
-		System.out.println("Aqui termina");
 		this.architectView.callJavascript("newData("
 				+ controlador.getPuntosDeInteresJArray() + "," + controlador.getLatitudActual()
 				+ "," + controlador.getLongitudActual() + "," + distanciaSeleccionada + ");");

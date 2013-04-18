@@ -1,0 +1,135 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:isScrollContainer="true"
+    android:overScrollMode="always"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    android:scrollbarStyle="outsideInset"
+    android:scrollbars="vertical" >
+
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ActualizarPerfilActivity" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/nombreUsuario"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <EditText
+            android:id="@+id/txtFld_nombreUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" >
+
+            <requestFocus
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+        </EditText>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/apellidoUsuario"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <EditText
+            android:id="@+id/txtFld_apellidoUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="@string/correoElectronicoUsuario"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <EditText
+            android:id="@+id/txtFld_correoUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contraseniaUsuario"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <Button
+            android:id="@+id/btn_cambiarContrasenia"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="cambiarContrasenia"
+            android:text="@string/cambiarContrasenia" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/imagenPerfilUsuario"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TableRow
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="165dp" >
+
+                <ImageView
+                    android:id="@+id/img_imagenUsuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/images"                    
+                    tools:ignore="ContentDescription" />
+
+                <Button
+                    android:id="@+id/btn_tomarFoto"                    
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"       
+                    android:layout_toRightOf="@+id/img_imagenUsuario"             
+                    android:text="@string/tomarFoto" 
+                    android:onClick="tomarFoto"/>
+
+                <Button
+                    android:id="@+id/btn_imagenArchivo"                    
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"    
+                    android:layout_toRightOf="@+id/img_imagenUsuario"
+                    android:layout_below="@+id/btn_tomarFoto"                                                      
+                    android:text="@string/imagenArchivo"
+                    android:onClick="seleccionarImagenDeGaleria" />
+
+            </RelativeLayout>
+        </TableRow>
+
+        <Button
+            android:id="@+id/btn_actualizarPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/title_activity_actualizar_perfil" 
+            android:onClick="actualizarPerfil"/>
+
+    </TableLayout>
+
+</ScrollView>

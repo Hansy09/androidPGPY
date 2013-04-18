@@ -1,6 +1,8 @@
 package com.wikitude.example;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Type;
 import java.util.Collection;
 
@@ -30,7 +32,6 @@ public class GestorServer{
 
 //	private String direccionBase = "http://192.168.1.67:8000/"; //Josue	
 //	private String direccionBase = "http://192.168.1.83:8000/";  //Rusel
-//	private String direccionBase = "http://jd732.o1.gondor.io/";
 //	private String direccionBase = "http://pgpy.dyndns-ip.com:8000";
 	private String direccionBase = "http://jd732.gondor.co/";
 
@@ -176,7 +177,7 @@ public class GestorServer{
 		peticion.put("correo_e", correo);
 		peticion.put("titulo", anuncio.getTitulo());
 		peticion.put("descripcion", anuncio.getDescripcion());
-		peticion.put("categoria", anuncio.getCategoria());
+//		peticion.put("categoria", anuncio.getCategoria());
 		peticion.put("URLimagen", anuncio.getImagen());
 		httpClient.post(direccionBase + "/geoAdds/anuncio/modificar/", peticion, new ServidorHandler(act));
 	}
@@ -192,6 +193,56 @@ public class GestorServer{
 		httpClient.post(direccionBase + "/geoAdds/anuncio/eliminar/", peticion, new ServidorHandler(act));
 	}
 	
+	/**
+	 * Metodo que sirve para actualizar el nombre, el apellido, el correo, o la contraseña del usuario
+	 * @param sesion La sesion del usuario que quiere cambiar alguno de sus datos
+	 * @param act Activity al cual sera redirigida la respuesta de petición.
+	 */
+	public void actualizaUsuarioEnServidor(Sesion sesion, ActualizarPerfilActivity act){
+		AsyncHttpClient httpClient = new AsyncHttpClient();
+		RequestParams peticion = new RequestParams();
+		peticion.put("idUser", String.valueOf(sesion.getId()));
+		peticion.put("correo", String.valueOf( sesion.getCorreo()));
+		peticion.put("contrasenia", String.valueOf( sesion.getContrasenia()));
+		peticion.put("nombre", sesion.getNombre());
+		peticion.put("apellido", sesion.getApellido());				
+		peticion.put("URLimagen", sesion.getURLImagenDelUsuario());		
+		peticion.put("edad", String.valueOf(sesion.getEdad()));		
+		peticion.put("genero", sesion.getGenero());		
+		httpClient.post(direccionBase + "/geoAdds/usuario/actualizar/", peticion, new ActualizaUsuarioHandler(act));
+		
+		System.out.println("actualizaUsuarioEnServidor: "+sesion.getURLImagenDelUsuario());
+	}
+	
+	/**
+	 * Obtiene los datos del perfil del ususario desde el servidor
+	 * @param sesion La sesion de donde se obtiene el ID de sesión y el correo asociado a esta sesión.
+	 * Con estos datos se realiza una consulta al servodor para obtener los datos de perfil. 
+	 * @param act El activity al cual será redireccionada la respuesta del servidor.
+	 */
+	public void establecerDatosDePerfilEnSesion(Sesion sesion, PerfilActivity act){
+		AsyncHttpClient httpClient = new AsyncHttpClient();
+		RequestParams peticion = new RequestParams();
+		peticion.put("idUser", String.valueOf(sesion.getId()));
+		peticion.put("correo", String.valueOf( sesion.getCorreo()));			
+		httpClient.post(direccionBase + "/geoAdds/usuario/perfil/", peticion, new PerfilUsuarioHandler(act));
+	}
+	
+	/**
+	 * Este metodo sirve para subir imagenes al servidor pero se puede usar para subir cualquier tipo de archivo. 
+	 * Este metodo, en particular, esta orientado a subir imagenes para el perfil del usuario. 
+	 * @param archivoImagen El archivo de imagen que se establecerá como imagen de perfil de usuario.
+	 * @param act El activity al cual se redireccionará la respuesta del servidor.
+	 * @throws FileNotFoundException 
+	 */
+	public void subirImagenDePerfilAlServidor(File archivoImagen, String correoUsuario, ActualizarPerfilActivity act) throws FileNotFoundException{		 
+		AsyncHttpClient httpClient = new AsyncHttpClient();
+		RequestParams peticion = new RequestParams();		
+		peticion.put("imagen", archivoImagen);					
+		peticion.put("correo", correoUsuario);
+		httpClient.post(direccionBase + "/geoAdds/imagen/mostrar/", peticion, new ImagenDePerfilHandler(act));
+		Toast.makeText(act, "...Subiendo imagen...",10).show();
+	}	
 	/**
 	 * Metodo que sirve parar borrar un punto de interes en el servidor
 	 * @param usuario El usuario que tiene registrado el punto de interes

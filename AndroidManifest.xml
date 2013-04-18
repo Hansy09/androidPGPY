@@ -114,7 +114,18 @@
             android:name="com.wikitude.example.ListaMisFavoritosActivity"
             android:label="@string/title_activity_lista_mis_favoritos" >
         </activity>
-        
+         <activity
+            android:name="com.wikitude.example.ActualizarPerfilActivity"
+            android:label="@string/title_activity_actualizar_perfil" >
+        </activity>
+        <activity
+            android:name="com.wikitude.example.CambiarContraseniaActivity"
+            android:label="@string/title_activity_cambiar_contrasenia" >
+        </activity>
+        <activity
+            android:name="com.wikitude.example.TomarFotoActivity"
+            android:label="@string/title_activity_tomar_foto" >
+        </activity>
     </application>
 
 </manifest>

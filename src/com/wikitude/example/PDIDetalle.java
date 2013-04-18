@@ -59,8 +59,8 @@ public class PDIDetalle extends Activity implements RespuestaInterface, ExisteFa
 	        ImageView image = (ImageView) findViewById(R.id.imageView1);
 	 
 	        // Image url
-	        String image_url = "http://arquidiocesiscali.org/apc-aa-files/38373837383738733837383773383738/aguaparque.JPG";
-	 
+	        String image_url = pdi.getImagen();
+	        	        
 	        // ImageLoader class instance
 	        ImageLoader imgLoader = new ImageLoader(getApplicationContext());
 	 
