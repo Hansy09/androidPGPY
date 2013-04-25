@@ -3,6 +3,9 @@ package fmat.pgpy.team1.handlers;
 
 import org.json.JSONObject;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import fmat.pgpy.team1.interfaces.RespuestaInterface;
@@ -39,6 +42,26 @@ public class ServidorHandler extends JsonHttpResponseHandler{
 			//super.onFailure(arg0, arg1);
 			toast.mostrarMensaje("Hubo un problema con el servidor");
 		}
-    private ToastInterface toast;
+		
+		
+    @Override
+		public void onFinish() {
+			// TODO Auto-generated method stub
+    	System.out.println("termino");
+		progressDialog.dismiss();
+			super.onFinish();
+		}
+
+		@Override
+		public void onStart() {
+			// TODO Auto-generated method stub
+			System.out.println("empiezo");
+			progressDialog =ProgressDialog.show((Context) activity, "In progress", "Loading");
+			super.onStart();
+		}
+
+
+	private ToastInterface toast;
+	private ProgressDialog progressDialog;
 	private RespuestaInterface activity;
 }

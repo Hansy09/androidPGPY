@@ -10,8 +10,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -74,6 +78,17 @@ public class ListaMisFavoritosActivity extends Activity implements RespuestaInte
 
 				mainListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		        mainListView.setAdapter(customAdapter);
+		        mainListView.setOnItemClickListener(new OnItemClickListener() {
+		            @Override
+		            public void onItemClick(AdapterView<?> parent, View view, int position,
+		                    long id) {
+		                
+		                ArrayList<PuntoDeInteres> favoritos=ControladorSesion.getInstance().getSesion().getMisFavoritos();
+		                PuntoDeInteres pdi=favoritos.get(position);
+		                llamarDetalle(pdi);
+		                
+		            }
+		        });
 				
 			}else{
 				Toast.makeText(this, jObject.get("mensaje").toString(), Toast.LENGTH_SHORT).show();
