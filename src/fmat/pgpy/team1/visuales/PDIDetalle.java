@@ -62,23 +62,26 @@ public class PDIDetalle extends Activity implements RespuestaInterface, ExisteFa
 			((TextView) this.findViewById(R.id.textView9)).setText(pdi.getDireccion());
 			((TextView) this.findViewById(R.id.textView11)).setText(pdi.getDescripcion());
 			((TextView) this.findViewById(R.id.textView13)).setText(pdi.getTelefono());
-			int loader = R.drawable.loading;
-			 
-	        // Imageview to show
-	        ImageView image = (ImageView) findViewById(R.id.imageView1);
-	 
-	        // Image url
-	        String image_url = pdi.getImagen();
-	        	        
-	        // ImageLoader class instance
-	        ImageLoader imgLoader = new ImageLoader(getApplicationContext());
-	 
-	        // whenever you want to load an image from url
-	        // call DisplayImage function
-	        // url - image url to load
-	        // loader - loader image, will be displayed before getting image
-	        // image - ImageView
-	        imgLoader.DisplayImage(image_url, loader, image);
+			String image_url = pdi.getImagen().trim();
+			if(!image_url.equals("")){
+				int loader = R.drawable.loading;
+				 
+		        // Imageview to show
+		        ImageView image = (ImageView) findViewById(R.id.imageView1);
+		 
+		        // Image url
+		                
+		        // ImageLoader class instance
+		        ImageLoader imgLoader = new ImageLoader(getApplicationContext());
+		 
+		        // whenever you want to load an image from url
+		        // call DisplayImage function
+		        // url - image url to load
+		        // loader - loader image, will be displayed before getting image
+		        // image - ImageView
+		        imgLoader.DisplayImage(image_url, loader, image);
+			}
+			
 	        
 		}
 		ControladorAnuncio contAnuncio = ControladorAnuncio.getInstance();

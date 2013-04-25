@@ -228,7 +228,7 @@
  
 function locationChanged(lat, lon, alt, acc) { 
         myGeoLocation = new AR.GeoLocation(lat,lon);
-        document.getElementById("statusElement").innerHTML='Me movi a lat '+lat+' lon '+lon;
+        
 }
 AR.context.onLocationChanged = locationChanged;
 
@@ -236,8 +236,7 @@ AR.context.onLocationChanged = locationChanged;
             </script>
         
         
-		<!-- Status element at the top of the HUD -->
-        <div id="statusElement" class="status"></div>
+		
         <br/>
         <br/>
         <br/>

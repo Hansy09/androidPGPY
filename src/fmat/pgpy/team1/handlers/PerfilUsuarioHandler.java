@@ -78,5 +78,9 @@ public class PerfilUsuarioHandler extends JsonHttpResponseHandler {
 		String image_url = sesion.getURLImagenDelUsuario();
 		ImageLoader imgLoader = new ImageLoader(perfilActivity.getApplicationContext());
 		imgLoader.DisplayImage(image_url, loader, imagenDePerfil);
+		imagenDePerfil.setMinimumHeight(243);
+		imagenDePerfil.setMinimumWidth(207);
+		imagenDePerfil.setMaxHeight(243);
+		imagenDePerfil.setMaxWidth(207);
 	}
 }
