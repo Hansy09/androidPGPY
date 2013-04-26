@@ -11,14 +11,14 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import fmat.pgpy.team1.interfaces.RespuestaInterface;
 import fmat.pgpy.team1.interfaces.ToastInterface;
 
-public class ServidorHandler extends JsonHttpResponseHandler{
+public class RespuestaServidorHandler extends JsonHttpResponseHandler{
 
 	
 	/**
 	 * Constructor de la clase
 	 * @param act Activity que manejara los mensajes del servidor
 	 */
-	public ServidorHandler(RespuestaInterface act){
+	public RespuestaServidorHandler(RespuestaInterface act){
 		activity=act;
 	}
 	

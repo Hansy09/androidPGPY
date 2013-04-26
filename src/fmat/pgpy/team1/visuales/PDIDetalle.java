@@ -23,7 +23,7 @@ import fmat.pgpy.team1.controladores.ControladorAnuncio;
 import fmat.pgpy.team1.controladores.ControladorPDIs;
 import fmat.pgpy.team1.controladores.ControladorSesion;
 import fmat.pgpy.team1.dominio.PuntoDeInteres;
-import fmat.pgpy.team1.interfaces.ExisteFavoritoInterface;
+import fmat.pgpy.team1.interfaces.RespuestaAlternativaInterface;
 import fmat.pgpy.team1.interfaces.RespuestaInterface;
 import fmat.pgpy.team1.visuales.resource.ImageLoader;
 
@@ -32,7 +32,7 @@ import fmat.pgpy.team1.visuales.resource.ImageLoader;
  * @author Hansy
  *
  */
-public class PDIDetalle extends Activity implements RespuestaInterface, ExisteFavoritoInterface{
+public class PDIDetalle extends Activity implements RespuestaInterface, RespuestaAlternativaInterface{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -161,7 +161,7 @@ public class PDIDetalle extends Activity implements RespuestaInterface, ExisteFa
 		}
 	}
 	@Override
-	public void procesarExisteRespuestaServidor(JSONObject jObject) {
+	public void procesarRespuestaAlternativaServidor(JSONObject jObject) {
 		// TODO Auto-generated method stub
 		try {
 			String tipoRespuesta=jObject.get("codigo").toString();

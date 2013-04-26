@@ -5,6 +5,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.google.gson.Gson;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,17 +21,21 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import fmat.pgpy.team1.R;
 import fmat.pgpy.team1.controladores.ControladorSesion;
+import fmat.pgpy.team1.dominio.PuntoDeInteres;
 import fmat.pgpy.team1.dominio.Sesion;
+import fmat.pgpy.team1.interfaces.RespuestaAlternativaInterface;
+import fmat.pgpy.team1.interfaces.RespuestaInterface;
 import fmat.pgpy.team1.operadores.GestorServer;
 import fmat.pgpy.team1.visuales.resource.ImageLoader;
 
-public class ActualizarPerfilActivity extends Activity {
+public class ActualizarPerfilActivity extends Activity implements RespuestaInterface, RespuestaAlternativaInterface{
 
 	private final int TAKE_PHOTO_CODE = 1;
 
@@ -64,6 +73,10 @@ public class ActualizarPerfilActivity extends Activity {
 		String image_url = sesion.getURLImagenDelUsuario();
 		ImageLoader imgLoader = new ImageLoader(getApplicationContext());
 		imgLoader.DisplayImage(image_url, loader, imgPerfil);
+		imgPerfil.setMinimumHeight(243);
+		imgPerfil.setMinimumWidth(207);
+		imgPerfil.setMaxHeight(243);
+		imgPerfil.setMaxWidth(207);
 	}
 
 	public void cambiarContrasenia(View view) {
@@ -131,6 +144,45 @@ public class ActualizarPerfilActivity extends Activity {
 		else{
 			System.out.println("________________El archivo de no imagen existe");
 			new GestorServer().actualizaUsuarioEnServidor(sesion, this); 			
+		}
+	}
+	
+	@Override
+	public void procesarRespuestaServidor(JSONObject jObject) {
+		// TODO Auto-generated method stub
+		String tipoRespuesta;
+		try {
+			tipoRespuesta = jObject.get("codigo").toString();
+			if (tipoRespuesta.equals("100")) {
+				Toast.makeText(this, "Perfil de usuario actualizado",Toast.LENGTH_SHORT).show();
+				startActivity(new Intent(this, PerfilActivity.class));
+				finish();								
+			} else
+				Toast.makeText(this, jObject.getString("mensaje"),Toast.LENGTH_SHORT).show();
+		} catch (JSONException e) {
+			Toast.makeText(this, "No se ha podido actualizar el perfil de usuario",Toast.LENGTH_SHORT).show();
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void procesarRespuestaAlternativaServidor(JSONObject jObject) {
+		// TODO Auto-generated method stub
+		String tipoRespuesta;			
+		try {
+			tipoRespuesta = jObject.get("codigo").toString();
+			if (tipoRespuesta.equals("100")) {																
+				
+				String urlImagen =  jObject.getString("mensaje");
+				
+				Sesion sesion = ControladorSesion.getInstance().getSesion();					
+				sesion.setURLImagen(urlImagen);									
+									
+				new GestorServer().actualizaUsuarioEnServidor(sesion, this);
+			} else
+				Toast.makeText(this, jObject.getString("mensaje"), Toast.LENGTH_SHORT).show();
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 }

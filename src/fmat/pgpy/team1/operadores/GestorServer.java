@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
@@ -15,23 +14,10 @@ import fmat.pgpy.team1.dominio.Anuncio;
 import fmat.pgpy.team1.dominio.Posicion;
 import fmat.pgpy.team1.dominio.PuntoDeInteres;
 import fmat.pgpy.team1.dominio.Sesion;
-import fmat.pgpy.team1.handlers.ActualizaUsuarioHandler;
-import fmat.pgpy.team1.handlers.ExisteFavoritoHandler;
-import fmat.pgpy.team1.handlers.ImagenDePerfilHandler;
-import fmat.pgpy.team1.handlers.InicioSesionHandler;
-import fmat.pgpy.team1.handlers.PerfilUsuarioHandler;
-import fmat.pgpy.team1.handlers.RegistroUsuarioHandler;
-import fmat.pgpy.team1.handlers.RespuestaHandler;
-import fmat.pgpy.team1.handlers.ServidorHandler;
-import fmat.pgpy.team1.handlers.ServidorMensajeHandler;
-import fmat.pgpy.team1.interfaces.ExisteFavoritoInterface;
+import fmat.pgpy.team1.handlers.RespuestaAlternativaServidorHandler;
+import fmat.pgpy.team1.handlers.RespuestaServidorHandler;
+import fmat.pgpy.team1.interfaces.RespuestaAlternativaInterface;
 import fmat.pgpy.team1.interfaces.RespuestaInterface;
-import fmat.pgpy.team1.interfaces.ToastInterface;
-import fmat.pgpy.team1.interfaces.VisorInterface;
-import fmat.pgpy.team1.visuales.ActualizarPerfilActivity;
-import fmat.pgpy.team1.visuales.IniciarSesionActivity;
-import fmat.pgpy.team1.visuales.PerfilActivity;
-import fmat.pgpy.team1.visuales.RegistrarUsuarioActivity;
 
 
 /**
@@ -49,7 +35,7 @@ public class GestorServer{
 	private String direccionBase = "http://jd732.gondor.co/";
 
 	public void buscarDentroDeRangoMax(Posicion posicion, double rangoMaximo,
-			VisorInterface visor) {
+			RespuestaInterface visor) {
 		
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams rp = new RequestParams();
@@ -58,7 +44,7 @@ public class GestorServer{
 		rp.put("latitud", String.valueOf(posicion.getLatitud()));
 		rp.put("rangoMaximoAlcance", String.valueOf(rangoMaximo));
 		client.post(direccionBase + "/geoAdds/pdi/lista/", rp,
-				new RespuestaHandler(visor));
+				new RespuestaServidorHandler(visor));
 
 	}
 	/**
@@ -92,7 +78,7 @@ public class GestorServer{
 		System.out.println("altitud: _"+String.valueOf(pdi.getPosicion().getAltitud())+"_");
 		System.out.println("direccion: _"+direccionBase + "/geoAdds/pdi/registrar/_");
 		client.post(direccionBase + "/geoAdds/pdi/registrar/", rp,
-				new ServidorHandler(activity));
+				new RespuestaServidorHandler(activity));
 
 	}
 	
@@ -102,7 +88,7 @@ public class GestorServer{
 	 * @param pdi El punto de interes que contiene los nuevos datos a regisrar
 	 * @param activity el activity que implementa el toastinterface para manejar los mensajes del servidor
 	 */
-	public void actualizarPDIEnServidor(String usuario, PuntoDeInteres pdi,ToastInterface activity) {
+	public void actualizarPDIEnServidor(String usuario, PuntoDeInteres pdi,RespuestaInterface activity) {
 		
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams rp = new RequestParams();
@@ -115,12 +101,12 @@ public class GestorServer{
 		rp.put("email", pdi.getEmail());
 		rp.put("imagen", "");
 		client.post(direccionBase + "/geoAdds/pdi/actualizar/", rp,
-				new ServidorMensajeHandler(activity));
+				new RespuestaServidorHandler(activity));
 
 	}
 
 	public void buscarPDIsPorCategoria(Posicion posicion, double rangoMaximo,
-			String clave, String categoria, VisorInterface visor) {		
+			String clave, String categoria, RespuestaInterface visor) {		
 		
 		AsyncHttpClient httpClient = new AsyncHttpClient();
 		RequestParams peticion = new RequestParams();
@@ -130,25 +116,25 @@ public class GestorServer{
 		peticion.put("searchString", clave);
 		peticion.put("categoria", categoria);  
 		httpClient.post(direccionBase + "/geoAdds/pdi/categoria/", peticion,
-				new RespuestaHandler(visor));		
+				new RespuestaServidorHandler(visor));		
 		
 		System.out.println("buscarPDIsPorCategoria");		
 	}
 	
-	public void verificarInicioSesionEnServidor(Sesion sesion, IniciarSesionActivity act){
+	public void verificarInicioSesionEnServidor(Sesion sesion, RespuestaInterface act){
 		AsyncHttpClient httpClient = new AsyncHttpClient();
 		RequestParams peticion = new RequestParams();
 		peticion.put("correo", String.valueOf( sesion.getCorreo()));
 		peticion.put("contrasenia", String.valueOf( sesion.getContrasenia()));
-		httpClient.post(direccionBase + "/geoAdds/usuario/iniciarSesion/", peticion, new InicioSesionHandler(act));
+		httpClient.post(direccionBase + "/geoAdds/usuario/iniciarSesion/", peticion, new RespuestaServidorHandler(act));
 	}
 	
-	public void registrarUsuarioEnServidor(Sesion sesion, RegistrarUsuarioActivity act){
+	public void registrarUsuarioEnServidor(Sesion sesion, RespuestaInterface act){
 		AsyncHttpClient httpClient = new AsyncHttpClient();
 		RequestParams peticion = new RequestParams();
 		peticion.put("correo", String.valueOf( sesion.getCorreo()));
 		peticion.put("contrasenia", String.valueOf( sesion.getContrasenia()));
-		httpClient.post(direccionBase + "/geoAdds/usuario/registrar/", peticion, new RegistroUsuarioHandler(act));
+		httpClient.post(direccionBase + "/geoAdds/usuario/registrar/", peticion, new RespuestaServidorHandler(act));
 	}
 
 	public void registrarAnuncioEnServidor(Anuncio anuncio, int idPDI,RespuestaInterface act) {
@@ -163,7 +149,7 @@ public class GestorServer{
 		peticion.put("categoria", anuncio.getCategoria());
 		peticion.put("URLimagen", "");
 		Log.d("log", "mandando a handler");
-		httpClient.post(direccionBase + "/geoAdds/anuncio/registrar/", peticion, new ServidorHandler(act));
+		httpClient.post(direccionBase + "/geoAdds/anuncio/registrar/", peticion, new RespuestaServidorHandler(act));
 	}
 	
 	/**
@@ -172,12 +158,12 @@ public class GestorServer{
 	 * @param idPDI
 	 * @param act
 	 */
-	public void obtenerAnunciosPDI(int idPDI, ExisteFavoritoInterface act){
+	public void obtenerAnunciosPDI(int idPDI, RespuestaAlternativaInterface act){
 		AsyncHttpClient httpClient = new AsyncHttpClient();
 		RequestParams peticion = new RequestParams();
 		peticion.put("idPDI", String.valueOf(idPDI));
 		Log.d("log", "mandando a handler");
-		httpClient.post(direccionBase + "/geoAdds/anuncio/obtenerTodo/", peticion, new ExisteFavoritoHandler(act));
+		httpClient.post(direccionBase + "/geoAdds/anuncio/obtenerTodo/", peticion, new RespuestaAlternativaServidorHandler(act));
 	}
 
 	public void actualizarAnuncioEnServidor(Anuncio anuncio, int idPDI,RespuestaInterface act) {
@@ -192,7 +178,7 @@ public class GestorServer{
 		peticion.put("descripcion", anuncio.getDescripcion());
 //		peticion.put("categoria", anuncio.getCategoria());
 		peticion.put("URLimagen", anuncio.getImagen());
-		httpClient.post(direccionBase + "/geoAdds/anuncio/modificar/", peticion, new ServidorHandler(act));
+		httpClient.post(direccionBase + "/geoAdds/anuncio/modificar/", peticion, new RespuestaServidorHandler(act));
 	}
 
 	public void eliminarAnuncioEnServidor(int idAnuncio, int idPDI, RespuestaInterface act) {
@@ -203,7 +189,7 @@ public class GestorServer{
 		peticion.put("idAnuncio", String.valueOf(idAnuncio));
 		peticion.put("idPDI", String.valueOf(idPDI));
 		peticion.put("correo_e", correo);
-		httpClient.post(direccionBase + "/geoAdds/anuncio/eliminar/", peticion, new ServidorHandler(act));
+		httpClient.post(direccionBase + "/geoAdds/anuncio/eliminar/", peticion, new RespuestaServidorHandler(act));
 	}
 	
 	/**
@@ -211,7 +197,7 @@ public class GestorServer{
 	 * @param sesion La sesion del usuario que quiere cambiar alguno de sus datos
 	 * @param act Activity al cual sera redirigida la respuesta de petición.
 	 */
-	public void actualizaUsuarioEnServidor(Sesion sesion, ActualizarPerfilActivity act){
+	public void actualizaUsuarioEnServidor(Sesion sesion, RespuestaInterface act){
 		AsyncHttpClient httpClient = new AsyncHttpClient();
 		RequestParams peticion = new RequestParams();
 		peticion.put("idUser", String.valueOf(sesion.getId()));
@@ -222,7 +208,7 @@ public class GestorServer{
 		peticion.put("URLimagen", sesion.getURLImagenDelUsuario());		
 		peticion.put("edad", String.valueOf(sesion.getEdad()));		
 		peticion.put("genero", sesion.getGenero());		
-		httpClient.post(direccionBase + "/geoAdds/usuario/actualizar/", peticion, new ActualizaUsuarioHandler(act));
+		httpClient.post(direccionBase + "/geoAdds/usuario/actualizar/", peticion, new RespuestaServidorHandler(act));
 		
 		System.out.println("actualizaUsuarioEnServidor: "+sesion.getURLImagenDelUsuario());
 	}
@@ -233,12 +219,12 @@ public class GestorServer{
 	 * Con estos datos se realiza una consulta al servodor para obtener los datos de perfil. 
 	 * @param act El activity al cual será redireccionada la respuesta del servidor.
 	 */
-	public void establecerDatosDePerfilEnSesion(Sesion sesion, PerfilActivity act){
+	public void establecerDatosDePerfilEnSesion(Sesion sesion, RespuestaInterface act){
 		AsyncHttpClient httpClient = new AsyncHttpClient();
 		RequestParams peticion = new RequestParams();
 		peticion.put("idUser", String.valueOf(sesion.getId()));
 		peticion.put("correo", String.valueOf( sesion.getCorreo()));			
-		httpClient.post(direccionBase + "/geoAdds/usuario/perfil/", peticion, new PerfilUsuarioHandler(act));
+		httpClient.post(direccionBase + "/geoAdds/usuario/perfil/", peticion, new RespuestaServidorHandler(act));
 	}
 	
 	/**
@@ -248,13 +234,12 @@ public class GestorServer{
 	 * @param act El activity al cual se redireccionará la respuesta del servidor.
 	 * @throws FileNotFoundException 
 	 */
-	public void subirImagenDePerfilAlServidor(File archivoImagen, String correoUsuario, ActualizarPerfilActivity act) throws FileNotFoundException{		 
+	public void subirImagenDePerfilAlServidor(File archivoImagen, String correoUsuario, RespuestaAlternativaInterface act) throws FileNotFoundException{		 
 		AsyncHttpClient httpClient = new AsyncHttpClient();
 		RequestParams peticion = new RequestParams();		
 		peticion.put("imagen", archivoImagen);					
 		peticion.put("correo", correoUsuario);
-		httpClient.post(direccionBase + "/geoAdds/imagen/mostrar/", peticion, new ImagenDePerfilHandler(act));
-		Toast.makeText(act, "...Subiendo imagen...",Toast.LENGTH_SHORT).show();
+		httpClient.post(direccionBase + "/geoAdds/imagen/mostrar/", peticion, new RespuestaAlternativaServidorHandler(act));
 	}	
 	/**
 	 * Metodo que sirve parar borrar un punto de interes en el servidor
@@ -268,7 +253,7 @@ public class GestorServer{
 		rp.put("usuario", usuario);
 		rp.put("idPDI", String.valueOf(id));
 		client.post(direccionBase + "/geoAdds/pdi/eliminar/", rp,
-				new ServidorHandler(activity));
+				new RespuestaServidorHandler(activity));
 	}
 	
 	
@@ -279,22 +264,22 @@ public class GestorServer{
 		peticion.put("idPDI", String.valueOf( id));
 		peticion.put("marcado", String.valueOf( marcado));
 		System.out.println("Llego favorito antes server");
-		httpClient.post(direccionBase + "/geoAdds/favorito/marcar/", peticion, new ServidorHandler(activity));
+		httpClient.post(direccionBase + "/geoAdds/favorito/marcar/", peticion, new RespuestaServidorHandler(activity));
 	}
 	
 	public void obtenerListaMisFavoritosEnServer(Sesion sesion, RespuestaInterface activity){
 		AsyncHttpClient httpClient = new AsyncHttpClient();
 		RequestParams peticion = new RequestParams();
 		peticion.put("usuario", String.valueOf( sesion.getCorreo()));
-		httpClient.post(direccionBase + "/geoAdds/usuario/listafavoritos/", peticion, new ServidorHandler(activity));
+		httpClient.post(direccionBase + "/geoAdds/usuario/listafavoritos/", peticion, new RespuestaServidorHandler(activity));
 	}
 	
-	public void existeEnFavoritosEnServer(Sesion sesion,String id, ExisteFavoritoInterface activity){
+	public void existeEnFavoritosEnServer(Sesion sesion,String id, RespuestaAlternativaInterface activity){
 		AsyncHttpClient httpClient = new AsyncHttpClient();
 		RequestParams peticion = new RequestParams();
 		peticion.put("usuario", String.valueOf( sesion.getCorreo()));
 		peticion.put("idPDI", String.valueOf( id));
-		httpClient.post(direccionBase + "/geoAdds/favorito/esfavorito/", peticion, new ExisteFavoritoHandler(activity));
+		httpClient.post(direccionBase + "/geoAdds/favorito/esfavorito/", peticion, new RespuestaAlternativaServidorHandler(activity));
 	}
 	
 	

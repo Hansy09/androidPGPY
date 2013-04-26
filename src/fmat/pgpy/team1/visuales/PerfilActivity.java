@@ -1,15 +1,30 @@
 package fmat.pgpy.team1.visuales;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 import fmat.pgpy.team1.R;
 import fmat.pgpy.team1.controladores.ControladorSesion;
+import fmat.pgpy.team1.dominio.PuntoDeInteres;
 import fmat.pgpy.team1.dominio.Sesion;
+import fmat.pgpy.team1.interfaces.RespuestaInterface;
 import fmat.pgpy.team1.operadores.GestorServer;
+import fmat.pgpy.team1.visuales.resource.ImageLoader;
 
 /**
  * 
@@ -18,7 +33,7 @@ import fmat.pgpy.team1.operadores.GestorServer;
  * @Descripcion Clase encargada de la actividad del perfil
  *
  */
-public class PerfilActivity extends Activity {
+public class PerfilActivity extends Activity implements RespuestaInterface{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +92,59 @@ public class PerfilActivity extends Activity {
 		// intent.putStringArrayListExtra(LISTA_PDI, poiBeanList);
 		startActivity(intent);
 
+	}
+	
+	@Override
+    /**
+	 * Metodo que recibe el objeto json respuesta del servidor y realiza la correspondiente accion segun la respuesta
+	 */
+	public void procesarRespuestaServidor(JSONObject jObject) {
+		String tipoRespuesta;
+		try {
+			tipoRespuesta = jObject.get("codigo").toString();
+			if (tipoRespuesta.equals("100")) {			
+				
+				JSONObject objeto = (JSONObject) jObject.get("objeto");
+				
+				Sesion sesion = ControladorSesion.getInstance().getSesion();
+				sesion.setNombre(objeto.getString("nombre"));									
+				sesion.setApellido(objeto.getString("apellido"));
+				sesion.setCorreo(objeto.getString("correo electronico"));
+				sesion.setURLImagen(objeto.getString("URLimagen"));
+				
+				establecerDatosDePerfilEnLayout();
+			} else
+				Toast.makeText(this, jObject.getString("mensaje"), Toast.LENGTH_SHORT).show();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	private void establecerDatosDePerfilEnLayout(){
+			
+		
+		TextView elNombreDelUsuario = (TextView)findViewById(R.id.textView2);
+		TextView elApellidoDelUsuario = (TextView)findViewById(R.id.textView4);
+		TextView elCorreoDelUsuario = (TextView) findViewById(R.id.textView6);
+		ImageView imagenDePerfil = (ImageView)findViewById(R.id.imageView1);				
+		
+		Sesion sesion = ControladorSesion.getInstance().getSesion();
+		
+		elNombreDelUsuario.setText(sesion.getNombre());
+		
+		elApellidoDelUsuario.setText(sesion.getApellido());
+		
+		elCorreoDelUsuario.setText(sesion.getCorreo());
+		
+		int loader = R.drawable.images;			
+		String image_url = sesion.getURLImagenDelUsuario();
+		ImageLoader imgLoader = new ImageLoader(this.getApplicationContext());
+		imgLoader.DisplayImage(image_url, loader, imagenDePerfil);
+		imagenDePerfil.setMinimumHeight(243);
+		imagenDePerfil.setMinimumWidth(207);
+		imagenDePerfil.setMaxHeight(243);
+		imagenDePerfil.setMaxWidth(207);
 	}
 
 }

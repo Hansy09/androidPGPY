@@ -23,9 +23,9 @@ import fmat.pgpy.team1.controladores.ControladorAnuncio;
 import fmat.pgpy.team1.controladores.ControladorPDIs;
 import fmat.pgpy.team1.dominio.Anuncio;
 import fmat.pgpy.team1.dominio.PuntoDeInteres;
-import fmat.pgpy.team1.interfaces.ExisteFavoritoInterface;
+import fmat.pgpy.team1.interfaces.RespuestaAlternativaInterface;
 
-public class ListaAnunciosActivity extends ListActivity implements ExisteFavoritoInterface{
+public class ListaAnunciosActivity extends ListActivity implements RespuestaAlternativaInterface{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class ListaAnunciosActivity extends ListActivity implements ExisteFavorit
 	}
 
 	@Override
-	public void procesarExisteRespuestaServidor(JSONObject jObject) {
+	public void procesarRespuestaAlternativaServidor(JSONObject jObject) {
 		String tipoRespuesta;
 		try {
 			tipoRespuesta = jObject.get("codigo").toString();

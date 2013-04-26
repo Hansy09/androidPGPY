@@ -8,7 +8,6 @@ import fmat.pgpy.team1.dominio.Posicion;
 import fmat.pgpy.team1.dominio.PuntoDeInteres;
 import fmat.pgpy.team1.interfaces.RespuestaInterface;
 import fmat.pgpy.team1.interfaces.ToastInterface;
-import fmat.pgpy.team1.interfaces.VisorInterface;
 import fmat.pgpy.team1.operadores.GestorServer;
 
 /**
@@ -31,7 +30,7 @@ public class ControladorPDIs {
 	}
 
 	public void filtrarPDIsCercanos(Posicion posicion, double distanciaMax,
-			VisorInterface visor) {
+			RespuestaInterface visor) {
 		daoPDIs.buscarDentroDeRangoMax(posicion, distanciaMax, visor);
 	}
 	/**
@@ -50,7 +49,7 @@ public class ControladorPDIs {
 	 * @param pdi El punto de interes a actualizar
 	 * @param activity El activity tipo ToastInterface que maneja los mensajes del servidor
 	 */
-	public void actualizarPDI(String usuario, PuntoDeInteres pdi,ToastInterface activity) {
+	public void actualizarPDI(String usuario, PuntoDeInteres pdi,RespuestaInterface activity) {
 		
 		daoPDIs.actualizarPDIEnServidor(usuario, pdi,activity);
 	}
@@ -67,14 +66,14 @@ public class ControladorPDIs {
 
 	public void filtrarPDIsPorCategorias(Posicion posicion,
 			double distanciaMax, String clave, String categoria,
-			VisorInterface visor) {
+			RespuestaInterface visor) {
 		esBusquedaAvanzada = true;
 		daoPDIs.buscarPDIsPorCategoria(posicion, distanciaMax, clave,
 				categoria, visor);
 	}
 
 	public void filtrarPDIsPorNombre(Posicion posicion, double distanciaMax,
-			String clave, VisorInterface visor) {
+			String clave, RespuestaInterface visor) {
 		esBusquedaSimple = true;
 		daoPDIs.buscarPDIsPorCategoria(posicion, distanciaMax, clave,
 				"nombre", visor);

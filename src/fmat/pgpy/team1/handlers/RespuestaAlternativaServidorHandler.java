@@ -5,17 +5,17 @@ import org.json.JSONObject;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
-import fmat.pgpy.team1.interfaces.ExisteFavoritoInterface;
+import fmat.pgpy.team1.interfaces.RespuestaAlternativaInterface;
 import fmat.pgpy.team1.interfaces.ToastInterface;
 
-public class ExisteFavoritoHandler extends JsonHttpResponseHandler{
+public class RespuestaAlternativaServidorHandler extends JsonHttpResponseHandler{
 
 	
 	/**
 	 * Constructor de la clase
 	 * @param act Activity que manejara los mensajes del servidor
 	 */
-	public ExisteFavoritoHandler(ExisteFavoritoInterface act){
+	public RespuestaAlternativaServidorHandler(RespuestaAlternativaInterface act){
 		activity=act;
 	}
 	
@@ -25,7 +25,7 @@ public class ExisteFavoritoHandler extends JsonHttpResponseHandler{
 	  */
 	 public void onSuccess(JSONObject jObject) {
          // Pull out the first event on the public timeline
-		 activity.procesarExisteRespuestaServidor(jObject);
+		 activity.procesarRespuestaAlternativaServidor(jObject);
 		 
      }
 
@@ -39,5 +39,5 @@ public class ExisteFavoritoHandler extends JsonHttpResponseHandler{
 			toast.mostrarMensaje("Hubo un problema con el servidor");
 		}
     private ToastInterface toast;
-	private ExisteFavoritoInterface activity;
+	private RespuestaAlternativaInterface activity;
 }

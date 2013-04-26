@@ -4,7 +4,7 @@ package fmat.pgpy.team1.controladores;
 
 import fmat.pgpy.team1.dominio.PuntoDeInteres;
 import fmat.pgpy.team1.dominio.Sesion;
-import fmat.pgpy.team1.interfaces.ExisteFavoritoInterface;
+import fmat.pgpy.team1.interfaces.RespuestaAlternativaInterface;
 import fmat.pgpy.team1.interfaces.RespuestaInterface;
 import fmat.pgpy.team1.operadores.GestorServer;
 import fmat.pgpy.team1.visuales.IniciarSesionActivity;
@@ -43,12 +43,12 @@ public class ControladorSesion{
 		return sesionIniciada;
 	}
 	
-	public void registrarUsuario(Sesion sesion, RegistrarUsuarioActivity act){
+	public void registrarUsuario(Sesion sesion, RespuestaInterface act){
 		GestorServer gestor = new GestorServer();
 		gestor.registrarUsuarioEnServidor(sesion, act);
 	}
 	
-	public void iniciarSesion(Sesion sesion, IniciarSesionActivity act){
+	public void iniciarSesion(Sesion sesion, RespuestaInterface act){
 		this.sesion.setCorreo(sesion.getCorreo());
 		this.sesion.setContrasenia(sesion.getContrasenia());
 		GestorServer gestor = new GestorServer();
@@ -82,7 +82,7 @@ public class ControladorSesion{
 		gestor.marcarCheckBoxFavoritoEnServidor(sesion, id, marcado, act);
 	}
 	
-	public void esFavorito(String id, ExisteFavoritoInterface act){
+	public void esFavorito(String id, RespuestaAlternativaInterface act){
 		GestorServer gestor = new GestorServer();
 		gestor.existeEnFavoritosEnServer(sesion, id, act);
 	}

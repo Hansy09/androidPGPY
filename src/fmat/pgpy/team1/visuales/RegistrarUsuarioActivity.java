@@ -1,5 +1,14 @@
 package fmat.pgpy.team1.visuales;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,7 +17,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 import fmat.pgpy.team1.R;
 import fmat.pgpy.team1.controladores.ControladorSesion;
+import fmat.pgpy.team1.dominio.PuntoDeInteres;
 import fmat.pgpy.team1.dominio.Sesion;
+import fmat.pgpy.team1.interfaces.RespuestaInterface;
 
 /**
  * 
@@ -17,7 +28,7 @@ import fmat.pgpy.team1.dominio.Sesion;
  * @Descripcion Clase encargada de la actividad de Registrar usuario
  *
  */
-public class RegistrarUsuarioActivity extends Activity {
+public class RegistrarUsuarioActivity extends Activity implements RespuestaInterface{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +59,24 @@ public class RegistrarUsuarioActivity extends Activity {
 		
 		}else 
 			Toast.makeText(this, "Llene todos los campos", Toast.LENGTH_SHORT).show();
+	}
+	
+	@Override
+    /**
+	 * Metodo que recibe el objeto json respuesta del servidor y realiza la correspondiente accion segun la respuesta
+	 */
+	public void procesarRespuestaServidor(JSONObject jObject) {
+		String tipoRespuesta;
+		try {
+			tipoRespuesta = jObject.get("codigo").toString();
+		if(tipoRespuesta.equals("100")){
+			Toast.makeText(this, "Usuario Registrado",Toast.LENGTH_SHORT).show();
+		} else
+			Toast.makeText(this, jObject.getString("mensaje"),Toast.LENGTH_SHORT).show();
+		}catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 

@@ -20,7 +20,7 @@ import fmat.pgpy.team1.controladores.ControladorAnuncio;
 import fmat.pgpy.team1.controladores.ControladorPDIs;
 import fmat.pgpy.team1.dominio.Anuncio;
 import fmat.pgpy.team1.dominio.PuntoDeInteres;
-import fmat.pgpy.team1.interfaces.ExisteFavoritoInterface;
+import fmat.pgpy.team1.interfaces.RespuestaAlternativaInterface;
 import fmat.pgpy.team1.interfaces.RespuestaInterface;
 import fmat.pgpy.team1.interfaces.ToastInterface;
 import fmat.pgpy.team1.operadores.AdaptadorListAnuncios;
@@ -33,7 +33,7 @@ import fmat.pgpy.team1.operadores.AdaptadorListAnuncios;
  * los anuncios de PDI en forma de lista, para actualizarlos o borrarlos
  *
  */
-public class ListaMisAnunciosPDIActivity extends Activity implements RespuestaInterface, ToastInterface, ExisteFavoritoInterface{
+public class ListaMisAnunciosPDIActivity extends Activity implements RespuestaInterface, ToastInterface, RespuestaAlternativaInterface{
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +76,7 @@ public class ListaMisAnunciosPDIActivity extends Activity implements RespuestaIn
 	}
 	
 	@Override
-	public void procesarExisteRespuestaServidor(JSONObject jObject) {
+	public void procesarRespuestaAlternativaServidor(JSONObject jObject) {
 		String tipoRespuesta;
 		try {
 			tipoRespuesta = jObject.get("codigo").toString();

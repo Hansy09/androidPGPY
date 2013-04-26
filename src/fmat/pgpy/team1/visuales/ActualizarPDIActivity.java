@@ -3,6 +3,11 @@ package fmat.pgpy.team1.visuales;
 
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.google.gson.Gson;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,9 +21,10 @@ import fmat.pgpy.team1.R;
 import fmat.pgpy.team1.controladores.ControladorPDIs;
 import fmat.pgpy.team1.controladores.ControladorSesion;
 import fmat.pgpy.team1.dominio.PuntoDeInteres;
+import fmat.pgpy.team1.interfaces.RespuestaInterface;
 import fmat.pgpy.team1.interfaces.ToastInterface;
 
-public class ActualizarPDIActivity extends Activity implements ToastInterface {
+public class ActualizarPDIActivity extends Activity implements ToastInterface , RespuestaInterface{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -231,6 +237,25 @@ public class ActualizarPDIActivity extends Activity implements ToastInterface {
 			((EditText) this.findViewById(R.id.editText3)).setText(pdi
 					.getEmail());
 
+		}
+	}
+	
+	
+	@Override
+	/**
+	 * Metodo que recibe el objeto json respuesta del servidor y realiza la correspondiente accion segun la respuesta
+	 */
+	public void procesarRespuestaServidor(JSONObject jObject) {
+		try {
+			String tipoRespuesta=jObject.get("codigo").toString();
+			if(tipoRespuesta.equals("100")){
+				mostrarMensaje(jObject.get("mensaje").toString());
+			}else{
+				mostrarMensaje(jObject.get("mensaje").toString());
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

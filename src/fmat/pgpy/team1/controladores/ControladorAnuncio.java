@@ -12,7 +12,7 @@ import android.util.Log;
 import fmat.pgpy.team1.R;
 import fmat.pgpy.team1.dominio.Anuncio;
 import fmat.pgpy.team1.dominio.PuntoDeInteres;
-import fmat.pgpy.team1.interfaces.ExisteFavoritoInterface;
+import fmat.pgpy.team1.interfaces.RespuestaAlternativaInterface;
 import fmat.pgpy.team1.interfaces.RespuestaInterface;
 import fmat.pgpy.team1.operadores.GestorServer;
 import fmat.pgpy.team1.visuales.AnuncioActivity;
@@ -116,7 +116,7 @@ public class ControladorAnuncio {
 	 * @param idPDI
 	 * @param act
 	 */
-	public void obtenerAnunciosDePDI(int idPDI, ExisteFavoritoInterface act){
+	public void obtenerAnunciosDePDI(int idPDI, RespuestaAlternativaInterface act){
 		GestorServer gestorServer = new GestorServer();
 		gestorServer.obtenerAnunciosPDI(idPDI, act);
 	}

@@ -2,10 +2,13 @@ package fmat.pgpy.team1.visuales;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -28,6 +31,8 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.wikitude.architect.ArchitectUrlListener;
 import com.wikitude.architect.ArchitectView;
 
@@ -35,8 +40,10 @@ import fmat.pgpy.team1.R;
 import fmat.pgpy.team1.controladores.ControladorPDIs;
 import fmat.pgpy.team1.controladores.ControladorSesion;
 import fmat.pgpy.team1.dominio.Posicion;
+import fmat.pgpy.team1.dominio.PuntoDeInteres;
+import fmat.pgpy.team1.interfaces.RespuestaInterface;
 import fmat.pgpy.team1.interfaces.ToastInterface;
-import fmat.pgpy.team1.interfaces.VisorInterface;
+import fmat.pgpy.team1.operadores.CalculadoraGeografica;
 
 /**
  * 
@@ -60,7 +67,7 @@ import fmat.pgpy.team1.interfaces.VisorInterface;
  *        SDK has to possess. (REF: ARchitect Documentation)
  */
 public class SimpleARBrowserActivity extends Activity implements
-		ArchitectUrlListener, LocationListener, VisorInterface, ToastInterface {
+		ArchitectUrlListener, LocationListener, ToastInterface, RespuestaInterface {
 
 
 	private final static float TEST_LATITUDE = 47.77318f;
@@ -430,6 +437,41 @@ public class SimpleARBrowserActivity extends Activity implements
 	    });
 		
 		builder.create().show();
+	}
+	
+	@Override
+    /**
+	 * Metodo que recibe el objeto json respuesta del servidor y realiza la correspondiente accion segun la respuesta
+	 */
+	public void procesarRespuestaServidor(JSONObject jObject) {
+try {
+			
+			String tipoRespuesta=jObject.get("codigo").toString();
+			
+			if(tipoRespuesta.equals("100")){
+				Gson gson = new Gson();
+				ControladorPDIs controlador = ControladorPDIs.getInstance();
+				List<PuntoDeInteres> myTypes = null;
+				myTypes = gson.fromJson(jObject.getString("mensaje"),
+						new TypeToken<List<PuntoDeInteres>>() {
+						}.getType());
+				ArrayList<PuntoDeInteres> puntosDeInteres = (ArrayList<PuntoDeInteres>) myTypes;
+				CalculadoraGeografica calculadora= CalculadoraGeografica.getInstance();
+				calculadora.actualizarDistanciaLista(puntosDeInteres);
+				controlador.setPuntosDeInteres(puntosDeInteres);
+				controlador.actualizarJSONArrayPDIs();
+
+				if (controlador.esUnaBusquedaAvanzada() || controlador.esUnaBusquedaSimple()) {
+					visualizarLista();
+				}
+				
+			}						
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		loadSampleWorld();
 	}
 	
 	public static double getLatitudActual(){
