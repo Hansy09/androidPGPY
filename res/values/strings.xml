@@ -4,7 +4,7 @@
     <string name="app_name">PGPY</string>
     <string name="hello_world">Proximamente!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_pdidetalle">PDIDetalle</string>
+    <string name="title_activity_pdidetalle">Detalles del Punto de Interes</string>
     <string name="pdiTitle">Titulo</string>
     <string name="pdiCategoria">Categoria: </string>
     <string name="pdiDescripcion">Descripcion: </string>
