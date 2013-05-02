@@ -71,6 +71,10 @@ public class RegistrarUsuarioActivity extends Activity implements RespuestaInter
 			tipoRespuesta = jObject.get("codigo").toString();
 		if(tipoRespuesta.equals("100")){
 			Toast.makeText(this, "Usuario Registrado",Toast.LENGTH_SHORT).show();
+			controladorSesion.getSesion().setCorreo(sesion.getCorreo());
+			controladorSesion.getSesion().setContrasenia(sesion.getContrasenia());
+			controladorSesion.setSesionIniciada(true);
+			finish();
 		} else
 			Toast.makeText(this, jObject.getString("mensaje"),Toast.LENGTH_SHORT).show();
 		}catch (JSONException e) {

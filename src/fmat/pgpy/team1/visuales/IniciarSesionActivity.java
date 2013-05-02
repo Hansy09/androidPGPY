@@ -6,19 +6,16 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import fmat.pgpy.team1.R;
 import fmat.pgpy.team1.controladores.ControladorSesion;
 import fmat.pgpy.team1.dominio.PuntoDeInteres;
@@ -82,14 +79,13 @@ public class IniciarSesionActivity extends Activity implements RespuestaInterfac
 				ArrayList<PuntoDeInteres> puntosDeInteres = (ArrayList<PuntoDeInteres>) myTypes;
 				controlador.getSesion().setMisPDI(puntosDeInteres);
 				Toast.makeText(this, jObject.getString("mensaje"),Toast.LENGTH_SHORT).show();
+				finish();
 			} else {
 				Toast.makeText(this, jObject.getString("mensaje"),Toast.LENGTH_SHORT).show();
 			}
 			}catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}finally{
-				finish();
 			}
 		}
 	
