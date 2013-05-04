@@ -2,6 +2,8 @@ package fmat.pgpy.team1.visuales;
 
 import java.util.ArrayList;
 
+import org.json.JSONObject;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +11,11 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import fmat.pgpy.team1.R;
 import fmat.pgpy.team1.controladores.ControladorPDIs;
 import fmat.pgpy.team1.dominio.PuntoDeInteres;
+import fmat.pgpy.team1.interfaces.RespuestaInterface;
 
 /**
  * Nombre: Santiago Martin 
@@ -19,7 +23,7 @@ import fmat.pgpy.team1.dominio.PuntoDeInteres;
  * Descripcion: Actividad para
  * mostrar los PDI en forma de Lista
  */
-public class ListaPDIsActivity extends ListActivity {
+public class ListaPDIsActivity extends ListActivity implements RespuestaInterface{
 
 	
 
@@ -60,6 +64,18 @@ public class ListaPDIsActivity extends ListActivity {
 		getMenuInflater().inflate(R.menu.activity_visualizar_lista, menu);
 		return true;
 	}
+	
+	@Override
+	public void mostrarMensaje(String mensaje) {
+		Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+		
+	}
 
 	private ArrayList<PuntoDeInteres> pdiLista=null;
+
+	@Override
+	public void procesarRespuestaServidor(JSONObject jObject) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -2,6 +2,8 @@ package fmat.pgpy.team1.visuales;
 
 
 
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +11,11 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 import fmat.pgpy.team1.R;
 import fmat.pgpy.team1.controladores.ControladorPDIs;
 import fmat.pgpy.team1.dominio.Posicion;
+import fmat.pgpy.team1.interfaces.RespuestaInterface;
 
 /**
  * 
@@ -20,7 +24,7 @@ import fmat.pgpy.team1.dominio.Posicion;
  * Descripcion: Activity donde se obtiene un parametro de busqueda
  * para buscar entre los PDI cercanos
  */
-public class BusquedaSimpleActivity extends Activity {
+public class BusquedaSimpleActivity extends Activity implements RespuestaInterface {
 	
 	private static SimpleARBrowserActivity arBrowser;
 
@@ -69,6 +73,18 @@ public class BusquedaSimpleActivity extends Activity {
 	public static void setARBrowserBusquedaSimple(SimpleARBrowserActivity browserActivity){
 		System.out.println("setARBrowserBusquedaSimple");
 		arBrowser = browserActivity;
+	}
+	
+	@Override
+	public void mostrarMensaje(String mensaje) {
+		Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+		
+	}
+
+	@Override
+	public void procesarRespuestaServidor(JSONObject jObject) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

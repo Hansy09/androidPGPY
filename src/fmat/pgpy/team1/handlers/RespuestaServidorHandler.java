@@ -9,7 +9,6 @@ import android.content.Context;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import fmat.pgpy.team1.interfaces.RespuestaInterface;
-import fmat.pgpy.team1.interfaces.ToastInterface;
 
 public class RespuestaServidorHandler extends JsonHttpResponseHandler{
 
@@ -40,11 +39,11 @@ public class RespuestaServidorHandler extends JsonHttpResponseHandler{
 			public void onFailure(Throwable arg0) {
 			// TODO Auto-generated method stub
 			//super.onFailure(arg0, arg1);
-			toast.mostrarMensaje("Hubo un problema con el servidor");
+			activity.mostrarMensaje("Hubo un problema con el servidor");
 		}
 		
 		
-    @Override
+		@Override
 		public void onFinish() {
 			// TODO Auto-generated method stub
     	System.out.println("termino");
@@ -60,8 +59,6 @@ public class RespuestaServidorHandler extends JsonHttpResponseHandler{
 			super.onStart();
 		}
 
-
-	private ToastInterface toast;
 	private ProgressDialog progressDialog;
 	private RespuestaInterface activity;
 }

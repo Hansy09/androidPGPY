@@ -181,6 +181,12 @@ public class PDIDetalle extends Activity implements RespuestaInterface, Respuest
 		}
 	}
 	
+	@Override
+	public void mostrarMensaje(String mensaje) {
+		Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+		
+	}
+	
 	private ControladorSesion contSesion = ControladorSesion.getInstance();
 	private String idPdi=null;
 	

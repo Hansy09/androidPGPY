@@ -1,5 +1,7 @@
 package fmat.pgpy.team1.visuales;
 
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +12,9 @@ import android.widget.Toast;
 import fmat.pgpy.team1.R;
 import fmat.pgpy.team1.controladores.ControladorSesion;
 import fmat.pgpy.team1.dominio.Sesion;
+import fmat.pgpy.team1.interfaces.RespuestaInterface;
 
-public class CambiarContraseniaActivity extends Activity {
+public class CambiarContraseniaActivity extends Activity implements RespuestaInterface{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,18 @@ public class CambiarContraseniaActivity extends Activity {
 		else {
 			Toast.makeText(this, "Por favor llene todos los campos",Toast.LENGTH_SHORT).show();
 		}
+	}
+	
+	@Override
+	public void mostrarMensaje(String mensaje) {
+		Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+		
+	}
+
+	@Override
+	public void procesarRespuestaServidor(JSONObject jObject) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

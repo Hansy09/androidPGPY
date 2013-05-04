@@ -185,4 +185,14 @@ public class ActualizarPerfilActivity extends Activity implements RespuestaInter
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	/**
+	 * Metodo que muestra el mensaje en el activity
+	 */
+	public void mostrarMensaje(String mensaje) {
+		// TODO Auto-generated method stu
+	    Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+	    
+	}
 }

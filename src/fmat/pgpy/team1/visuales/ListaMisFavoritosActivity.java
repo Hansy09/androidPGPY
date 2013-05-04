@@ -102,7 +102,11 @@ public class ListaMisFavoritosActivity extends Activity implements RespuestaInte
 		}
 	}
     
-   
+    @Override
+	public void mostrarMensaje(String mensaje) {
+		Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+		
+	}
     
     private ArrayAdapter<PuntoDeInteres>  customAdapter=null;
 	private ControladorSesion contSesion = ControladorSesion.getInstance();

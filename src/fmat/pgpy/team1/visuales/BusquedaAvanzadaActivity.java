@@ -1,16 +1,20 @@
 package fmat.pgpy.team1.visuales;
 
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 import fmat.pgpy.team1.R;
 import fmat.pgpy.team1.controladores.ControladorPDIs;
 import fmat.pgpy.team1.dominio.Posicion;
+import fmat.pgpy.team1.interfaces.RespuestaInterface;
 
-public class BusquedaAvanzadaActivity extends Activity {
+public class BusquedaAvanzadaActivity extends Activity implements RespuestaInterface{
 			
 	private static SimpleARBrowserActivity arBrowser;			
 
@@ -65,6 +69,18 @@ public class BusquedaAvanzadaActivity extends Activity {
 	public static void setARBrowserBusquedaAvanzada(SimpleARBrowserActivity browserActivity){
 		arBrowser = browserActivity;		
 		System.out.println("setARBrowserBusquedaAvanzada");
+	}
+	
+	@Override
+	public void mostrarMensaje(String mensaje) {
+		Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+		
+	}
+
+	@Override
+	public void procesarRespuestaServidor(JSONObject jObject) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

@@ -93,6 +93,12 @@ public class ListaAnunciosActivity extends ListActivity implements RespuestaAlte
 		getMenuInflater().inflate(R.menu.activity_visualizar_lista, menu);
 		return true;
 	}
+	
+	@Override
+	public void mostrarMensaje(String mensaje) {
+		Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+		
+	}
 
 	private int idPDI = 0;
 	private PuntoDeInteres pdi = null;

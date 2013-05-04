@@ -88,6 +88,12 @@ public class IniciarSesionActivity extends Activity implements RespuestaInterfac
 				e.printStackTrace();
 			}
 		}
+	 
+	 @Override
+		public void mostrarMensaje(String mensaje) {
+			Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+			
+		}
 	
 	private ControladorSesion controladorSesion = ControladorSesion.getInstance();
 	private Sesion sesion = null;

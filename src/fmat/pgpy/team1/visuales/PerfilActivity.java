@@ -1,13 +1,10 @@
 package fmat.pgpy.team1.visuales;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import fmat.pgpy.team1.R;
 import fmat.pgpy.team1.controladores.ControladorSesion;
-import fmat.pgpy.team1.dominio.PuntoDeInteres;
 import fmat.pgpy.team1.dominio.Sesion;
 import fmat.pgpy.team1.interfaces.RespuestaInterface;
 import fmat.pgpy.team1.operadores.GestorServer;
@@ -145,6 +141,12 @@ public class PerfilActivity extends Activity implements RespuestaInterface{
 		imagenDePerfil.setMinimumWidth(207);
 		imagenDePerfil.setMaxHeight(243);
 		imagenDePerfil.setMaxWidth(207);
+	}
+	
+	@Override
+	public void mostrarMensaje(String mensaje) {
+		Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+		
 	}
 
 }

@@ -83,6 +83,12 @@ public class RegistrarUsuarioActivity extends Activity implements RespuestaInter
 		}
 	}
 	
+	@Override
+	public void mostrarMensaje(String mensaje) {
+		Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+		
+	}
+	
 
 	private ControladorSesion controladorSesion = ControladorSesion.getInstance();
 	private Sesion sesion;

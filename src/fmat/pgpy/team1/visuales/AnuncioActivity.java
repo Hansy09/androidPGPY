@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import fmat.pgpy.team1.R;
 import fmat.pgpy.team1.controladores.ControladorPDIs;
 import fmat.pgpy.team1.dominio.Anuncio;
@@ -67,6 +68,7 @@ public class AnuncioActivity extends Activity{
         imgLoader.DisplayImage(image_url, loader, image);
 	}
 	}
+	
 	
 	ControladorPDIs controlador = ControladorPDIs.getInstance();
 }
