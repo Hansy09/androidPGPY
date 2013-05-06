@@ -16,6 +16,7 @@ import fmat.pgpy.team1.dominio.PuntoDeInteres;
 import fmat.pgpy.team1.dominio.Sesion;
 import fmat.pgpy.team1.handlers.RespuestaAlternativaServidorHandler;
 import fmat.pgpy.team1.handlers.RespuestaServidorHandler;
+import fmat.pgpy.team1.handlers.RespuestaVisorHandler;
 import fmat.pgpy.team1.interfaces.RespuestaAlternativaInterface;
 import fmat.pgpy.team1.interfaces.RespuestaInterface;
 
@@ -44,7 +45,7 @@ public class GestorServer{
 		rp.put("latitud", String.valueOf(posicion.getLatitud()));
 		rp.put("rangoMaximoAlcance", String.valueOf(rangoMaximo));
 		client.post(direccionBase + "/geoAdds/pdi/lista/", rp,
-				new RespuestaServidorHandler(visor));
+				new RespuestaVisorHandler(visor));
 
 	}
 	/**
