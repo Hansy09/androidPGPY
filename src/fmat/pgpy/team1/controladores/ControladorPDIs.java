@@ -7,7 +7,6 @@ import org.json.JSONArray;
 import fmat.pgpy.team1.dominio.Posicion;
 import fmat.pgpy.team1.dominio.PuntoDeInteres;
 import fmat.pgpy.team1.interfaces.RespuestaInterface;
-import fmat.pgpy.team1.interfaces.ToastInterface;
 import fmat.pgpy.team1.operadores.GestorServer;
 
 /**

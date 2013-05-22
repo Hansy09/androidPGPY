@@ -72,7 +72,7 @@
             android:label="@string/title_activity_registrar_anuncio" >
         </activity>
         <activity
-            android:name="fmat.pgpy.team1.ActualizarAnuncioActivity"
+            android:name="fmat.pgpy.team1.visuales.ActualizarAnuncioActivity"
             android:label="@string/title_activity_actualizar_anuncio" >
         </activity>
         <activity

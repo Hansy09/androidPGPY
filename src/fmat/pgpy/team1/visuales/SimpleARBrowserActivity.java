@@ -307,6 +307,8 @@ public class SimpleARBrowserActivity extends Activity implements
 	 */
 	@Override
 	public void onLocationChanged(Location loc) {
+		
+		//this.mostrarMensaje("Mi localizacion es long:"+loc.getLongitude()+" lati: "+loc.getLatitude()+" alt: "+loc.getAltitude());
 		// IMPORTANT:
 		// use this method for informing the SDK about a location change by the
 		// user
